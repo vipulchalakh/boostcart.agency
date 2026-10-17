@@ -1,0 +1,14 @@
+export type Industry = { slug: string; label: string; icon: string; description: string; focus: [string, string, string] };
+
+export const industries: Industry[] = [
+  { slug: "fashion-apparel", label: "Fashion & apparel", icon: "shirt", description: "Seasonal ranges, endless size and colour variants and trend-driven search. We keep collections indexable and rankable all year.", focus: ["Variant handling", "Seasonal collections", "Lookbook content"] },
+  { slug: "beauty-skincare", label: "Beauty & skincare", icon: "sparkles", description: "Shoppers research ingredients before they buy. We build the guides and category pages that win that research traffic.", focus: ["Ingredient guides", "Routine content", "Review markup"] },
+  { slug: "health-supplements", label: "Health & supplements", icon: "heart-pulse", description: "Trust and compliance matter as much as rankings. We structure content that is credible, clear and safe to scale.", focus: ["E-E-A-T signals", "Benefit pages", "Compliant copy"] },
+  { slug: "home-furniture", label: "Home & furniture", icon: "sofa", description: "Big-ticket purchases with long research cycles. We target comparison and room-based searches across the whole journey.", focus: ["Room hubs", "Buying guides", "Product schema"] },
+  { slug: "electronics-gadgets", label: "Electronics & gadgets", icon: "smartphone", description: "Spec-heavy catalogues and fast product turnover. We tame duplicate content and capture model and comparison queries.", focus: ["Spec pages", "Comparison content", "Discontinued SKUs"] },
+  { slug: "jewelry-accessories", label: "Jewelry & accessories", icon: "gem", description: "High-intent, gift-led and brand-sensitive searches. We pair strong visuals with pages built to rank for them.", focus: ["Gift intent", "Image search", "Collection pages"] },
+  { slug: "food-beverage", label: "Food & beverage", icon: "coffee", description: "Subscriptions, repeat orders and recipe-led discovery. We grow organic reach beyond branded search.", focus: ["Recipe content", "Subscription pages", "Local intent"] },
+  { slug: "sports-outdoors", label: "Sports & outdoors", icon: "mountain", description: "Activity-based shoppers who search by use case. We organise gear around how people actually buy it.", focus: ["Activity hubs", "Gear guides", "Seasonal demand"] },
+  { slug: "pet-supplies", label: "Pet supplies", icon: "paw-print", description: "Loyal, repeat buyers searching by pet type, breed and need. We build topical authority that earns that loyalty.", focus: ["Pet-type categories", "Care guides", "Repeat buyers"] },
+  { slug: "baby-kids", label: "Baby & kids", icon: "baby", description: "Parents search by age, stage and safety. We create content and structure that match each stage of growing up.", focus: ["Age-stage hubs", "Safety content", "Gift lists"] },
+];

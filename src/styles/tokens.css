@@ -1,0 +1,68 @@
+/* Single source of truth for the design system (homepage.md §2). Components use tokens only. */
+:root {
+  --ink: #020617;
+  --ink-68: rgb(2 6 23 / 0.68);
+  --ink-50: rgb(2 6 23 / 0.5);
+  --ink-32: rgb(2 6 23 / 0.32);
+  --ink-20: rgb(2 6 23 / 0.2);
+  --ink-10: rgb(2 6 23 / 0.1);
+  --ink-05: rgb(2 6 23 / 0.05);
+  --ink-02: rgb(2 6 23 / 0.02);
+  --bg: #ffffff;
+  --accent: #df37a7;
+  --accent-strong: #b81d86;
+  --accent-soft: rgb(223 55 167 / 0.12);
+  --yellow: #f9f906;
+  --panel-dark: #222222;
+  --panel-navy: #020617;
+  --success-fg: #15803d;
+  --success-bg: #dcfce7;
+  --success-dot: #22c55e;
+  --danger-fg: #b91c1c;
+  --danger-bg: #fee2e2;
+  --danger-dot: #ef4444;
+  --warn-fg: #66660a;
+  --warn-bg: #fefec7;
+  --glass-05: rgb(255 255 255 / 0.05);
+  --glass-11: rgb(255 255 255 / 0.11);
+  --glass-50: rgb(255 255 255 / 0.5);
+
+  /* Platform accents (used for the platform cards' dashboard visuals only) */
+  --brand-shopify: #5e8e3e;
+  --brand-woocommerce: #7f54b3;
+  --brand-bigcommerce: #2f5bea;
+  --brand-magento: #f26322;
+  --brand-headless: #0f172a;
+
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --r-panel: 32px;
+  --r-pill: 999px;
+
+  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 12px -2px rgb(2 6 23 / 0.1);
+  --shadow-lg: 0 24px 48px -12px rgb(2 6 23 / 0.18);
+  --ring-inset: inset 0 0 0 1px var(--ink-20);
+
+  --container: 1344px;
+  --gutter: 16px;
+  --section-y: 72px;
+  --section-y-compact: 48px;
+
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-ui: ease-in-out;
+  --dur-fast: 200ms;
+  --dur-med: 400ms;
+  --dur-slow: 700ms;
+  --dur-draw: 1200ms;
+}
+
+@media (min-width: 768px) {
+  :root { --gutter: 20px; --section-y: 96px; --section-y-compact: 56px; }
+}
+@media (min-width: 1024px) {
+  :root { --gutter: 24px; --section-y: 128px; --section-y-compact: 64px; }
+}

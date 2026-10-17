@@ -1,0 +1,25 @@
+# BoostCart
+
+> BoostCart is an e-commerce SEO agency for Shopify, WooCommerce, BigCommerce, Magento and headless stores. One team handles technical SEO, category and product pages, content, links and revenue-tied reporting.
+
+Homepage: https://boostcart.agency/
+
+## What we do
+- Technical SEO: crawl, speed, indexation and structured data fixes.
+- Category and product page optimization.
+- Content and buying guides.
+- Link building and digital PR.
+- Conversion-focused SEO.
+- Reporting tied to organic revenue.
+
+## Platforms
+Shopify, WooCommerce, BigCommerce, Magento and headless storefronts.
+
+## Industries
+Fashion and apparel, beauty and skincare, health and supplements, home and furniture, electronics and gadgets, jewelry and accessories, food and beverage, sports and outdoors, pet supplies, baby and kids.
+
+## How we work
+Audit, keyword mapping, roadmap, technical fixes, category and product pages, buying guides, authority and links, then monthly reporting and iteration.
+
+## Contact
+Free SEO audit and calls are booked through the website.

@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { ArrowRight, Box, Code2, Hexagon, MessageSquare, ShoppingBag } from "lucide-react";
 import { platforms, type Platform } from "@content/data";
 import { AppLink } from "@/components/ui/AppLink";
@@ -74,19 +74,27 @@ function PlatformCard({ p, className, tall }: { p: Platform; className?: string;
   );
 }
 
-export function PlatformsSection() {
+type Props = { items?: Platform[]; eyebrow?: string; title?: ReactNode; lead?: string; linkLabel?: string };
+
+export function PlatformsSection({
+  items = platforms,
+  eyebrow = "Platforms we cover",
+  title = <>SEO built for your e‑commerce platform</>,
+  lead = "Every platform has its own quirks. We know them well, from theme code and plugins to URLs, faceted navigation and rendering.",
+  linkLabel = "View all platforms",
+}: Props = {}) {
   return (
     <section aria-labelledby="platforms-title" className="section-y">
       <div className="container-x">
         <Reveal className="mx-auto max-w-[720px] text-center">
-          <Eyebrow>Platforms we cover</Eyebrow>
-          <h2 id="platforms-title" className="h2 mt-4">SEO built for your e‑commerce platform</h2>
-          <p className="lead mt-4">Every platform has its own quirks. We know them well, from theme code and plugins to URLs, faceted navigation and rendering.</p>
+          <Eyebrow>{eyebrow}</Eyebrow>
+          <h2 id="platforms-title" className="h2 mt-4">{title}</h2>
+          <p className="lead mt-4">{lead}</p>
         </Reveal>
 
         <ul className="mt-14 grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-6">
-          {platforms.map((p, i) => (
-            <Reveal as="li" key={p.slug} delay={i * 80} className={cn(i < 2 ? "lg:col-span-3" : "lg:col-span-2", i === platforms.length - 1 && "md:col-span-2")}>
+          {items.map((p, i) => (
+            <Reveal as="li" key={p.slug} delay={i * 80} className={cn(i < 2 ? "lg:col-span-3" : "lg:col-span-2", i === items.length - 1 && "md:col-span-2")}>
               <PlatformCard p={p} tall={i < 2} />
             </Reveal>
           ))}
@@ -94,7 +102,7 @@ export function PlatformsSection() {
 
         <p className="mt-10 text-center">
           <AppLink href="/platforms/shopify" className="inline-flex items-center gap-1.5 text-sm font-medium text-accent-strong underline-offset-4 hover:underline">
-            View all platforms <ArrowRight aria-hidden className="size-3.5" />
+            {linkLabel} <ArrowRight aria-hidden className="size-3.5" />
           </AppLink>
         </p>
       </div>

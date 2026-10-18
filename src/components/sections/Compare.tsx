@@ -1,5 +1,6 @@
+import type { ReactNode } from "react";
 import { Check, Minus, X } from "lucide-react";
-import { criteria, type Cell, type Verdict } from "@content/data";
+import { criteria as homeCriteria, type Cell, type Criterion, type Verdict } from "@content/data";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { LogoMark } from "@/components/ui/Logo";
@@ -7,8 +8,6 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Tag } from "@/components/ui/Tag";
 import { cn } from "@/lib/cn";
 
-const N = criteria.length;
-const rows = `repeat(${N + 1}, auto)`;
 
 const verdictUi: Record<Verdict, { icon: typeof Check; cls: string; sr: string }> = {
   yes: { icon: Check, cls: "bg-success-dot text-white", sr: "Yes: " },
@@ -32,13 +31,14 @@ function Verdict({ cell, strong }: { cell: Cell; strong?: boolean }) {
 }
 
 type Col = { key: "boost" | "inHouse" | "agency"; title: string; sub: string };
-const cols: Col[] = [
+const homeCols: Col[] = [
   { key: "boost", title: "BoostCart", sub: "E-commerce SEO team" },
   { key: "inHouse", title: "In-house team", sub: "Hire and build it yourself" },
   { key: "agency", title: "Other agencies", sub: "Typical generalist SEO agency" },
 ];
 
-function Column({ col, i }: { col: Col; i: number }) {
+function Column({ col, i, criteria }: { col: Col; i: number; criteria: Criterion[] }) {
+  const N = criteria.length;
   const hero = col.key === "boost";
   return (
     <Reveal
@@ -71,14 +71,34 @@ function Column({ col, i }: { col: Col; i: number }) {
   );
 }
 
-export function Compare() {
+type Props = {
+  criteria?: Criterion[];
+  cols?: Col[];
+  eyebrow?: string;
+  title?: ReactNode;
+  lead?: string;
+  footnote?: string;
+  ctaLabel?: string;
+};
+
+export function Compare({
+  criteria = homeCriteria,
+  cols = homeCols,
+  eyebrow = "How we compare",
+  title = "Why brands choose BoostCart",
+  lead = "See how we stack up against building an in\u2011house team or hiring a typical agency.",
+  footnote = "Based on typical in-house and agency setups. Every business is different, and your free audit shows what fits yours.",
+  ctaLabel = "See how we\u2019d work for your store",
+}: Props = {}) {
+  const N = criteria.length;
+  const rows = `repeat(${N + 1}, auto)`;
   return (
     <section aria-labelledby="compare-title" className="section-y">
       <div className="container-x">
         <Reveal className="mx-auto max-w-[720px] text-center">
-          <Eyebrow>How we compare</Eyebrow>
-          <h2 id="compare-title" className="h2 mt-4">Why brands choose BoostCart</h2>
-          <p className="lead mt-4">See how we stack up against building an in&#8209;house team or hiring a typical agency.</p>
+          <Eyebrow>{eyebrow}</Eyebrow>
+          <h2 id="compare-title" className="h2 mt-4">{title}</h2>
+          <p className="lead mt-4">{lead}</p>
         </Reveal>
 
         <div
@@ -95,13 +115,13 @@ export function Compare() {
             ))}
           </div>
           {cols.map((col, i) => (
-            <Column key={col.key} col={col} i={i} />
+            <Column key={col.key} col={col} i={i} criteria={criteria} />
           ))}
         </div>
 
         <Reveal className="mt-12 flex flex-col items-center gap-4 text-center">
-          <p className="max-w-[560px] text-sm text-ink-68">Based on typical in-house and agency setups. Every business is different, and your free audit shows what fits yours.</p>
-          <Button href="/free-audit" arrow>See how we&rsquo;d work for your store</Button>
+          <p className="max-w-[560px] text-sm text-ink-68">{footnote}</p>
+          <Button href="/free-audit" arrow>{ctaLabel}</Button>
         </Reveal>
       </div>
     </section>

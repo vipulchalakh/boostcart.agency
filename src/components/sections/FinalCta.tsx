@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { auditHref, bookCallHref } from "@content/data";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
@@ -22,25 +23,40 @@ function Dashboard() {
   );
 }
 
-export function FinalCta() {
+type Props = { eyebrow?: string; title?: string; lead?: string; primaryLabel?: string; secondaryLabel?: string; visual?: ReactNode };
+
+export function FinalCta({
+  eyebrow = "Ready when you are",
+  title = "Get your free SEO audit",
+  lead = "We\u2019ll review your store and send a prioritized plan. No obligation.",
+  primaryLabel = "Get my free audit",
+  secondaryLabel = "Book a call",
+  visual = <Dashboard />,
+}: Props = {}) {
   return (
     <section aria-labelledby="cta-title" className="px-2 pb-2 pt-[var(--section-y)]">
       <div className="on-dark relative isolate min-h-[520px] overflow-hidden rounded-panel bg-panel-navy px-5 py-16 text-white md:px-10 lg:min-h-[560px] lg:px-16 lg:py-24">
-        <div aria-hidden className="dots-dark absolute inset-0 -z-10" />
-        <div aria-hidden className="absolute -right-20 top-1/3 -z-10 h-[520px] w-[620px] bg-[radial-gradient(closest-side,rgb(223_55_167/.25),transparent)]" />
-        <Reveal className="relative z-10 max-w-[520px]">
-          <Eyebrow>Ready when you are</Eyebrow>
-          <h2 id="cta-title" className="h2-xl mt-4 text-white">Get your free SEO audit</h2>
-          <p className="lead mt-5 text-[clamp(1.25rem,1.1rem+0.6vw,1.5rem)] [color:rgb(255_255_255/.7)]">We&rsquo;ll review your store and send a prioritized plan. No obligation.</p>
+        {/* Premium dark backdrop: dot grid, soft pink colour drops and a faint top sheen */}
+        <div aria-hidden className="absolute inset-0 -z-10 [background:radial-gradient(rgb(255_255_255/.14)_1px,transparent_1.3px)_0_0/22px_22px] [mask-image:radial-gradient(ellipse_80%_90%_at_60%_50%,#000_25%,transparent_85%)]" />
+        <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgb(255_255_255/.04),transparent_35%)]" />
+        <div aria-hidden className="pointer-events-none absolute -right-20 top-1/2 -z-10 h-[560px] w-[620px] -translate-y-1/2 bg-[radial-gradient(closest-side,rgb(223_55_167/.38),transparent)] blur-2xl" />
+        <div aria-hidden className="pointer-events-none absolute -left-24 -top-32 -z-10 h-[420px] w-[520px] bg-[radial-gradient(closest-side,rgb(223_55_167/.2),transparent)] blur-2xl" />
+        <div aria-hidden className="pointer-events-none absolute bottom-[-180px] left-[30%] -z-10 h-[360px] w-[520px] bg-[radial-gradient(closest-side,rgb(223_55_167/.16),transparent)] blur-2xl" />
+        <div aria-hidden className="pointer-events-none absolute right-[22%] top-[-120px] -z-10 size-[300px] rounded-full bg-[radial-gradient(closest-side,rgb(249_249_6/.07),transparent)] blur-2xl" />
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 rounded-panel ring-1 ring-inset ring-white/10" />
+        <Reveal className="relative z-10 max-w-[520px] lg:max-w-none lg:ml-[max(0px,calc((100%-var(--container))/2))] lg:w-[min(60%,calc(var(--container)*0.6))] lg:pr-10">
+          <Eyebrow>{eyebrow}</Eyebrow>
+          <h2 id="cta-title" className="h2-xl mt-4 text-white">{title}</h2>
+          <p className="lead mt-5 text-[clamp(1.25rem,1.1rem+0.6vw,1.5rem)] [color:rgb(255_255_255/.7)]">{lead}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button href={auditHref} size="lg" arrow>Get my free audit</Button>
-            <Button href={bookCallHref} variant="ghost-dark" size="lg">Book a call</Button>
+            <Button href={auditHref} size="lg" arrow>{primaryLabel}</Button>
+            <Button href={bookCallHref} variant="ghost-dark" size="lg">{secondaryLabel}</Button>
           </div>
         </Reveal>
-        <div aria-hidden className="relative mt-12 h-[300px] lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:h-auto lg:w-[58%]">
+        <div aria-hidden className="relative mt-12 h-[300px] lg:absolute lg:inset-y-0 lg:right-[max(0px,calc((100%-var(--container))/2))] lg:mt-0 lg:h-auto lg:w-[min(40%,calc(var(--container)*0.4))] lg:[&_.tilt]:!left-[2%] lg:[&_.tilt]:!top-[16%] lg:[&_.tilt]:!w-[92%]">
           <Tilt>
             <div className="cta-visual">
-              <Dashboard />
+              {visual}
             </div>
           </Tilt>
         </div>

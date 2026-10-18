@@ -1,4 +1,4 @@
-export type ProcessStep = { id: string; title: string; short: string; description: string; outputs: [string, string, string] };
+export type ProcessStep = { id: string; title: string; short: string; description: string; outputs: [string, string, string]; /** Four short bullets for the stacked process cards; falls back to `outputs` when absent. */ points?: string[] };
 
 export const processSteps: ProcessStep[] = [
   { id: "audit", title: "Audit", short: "We crawl your store and find what's holding rankings back.", description: "A full technical and content audit across collections, products, templates and filtered URLs, so we know exactly where crawl budget and rankings are leaking.", outputs: ["Crawl & index report", "Template issue log", "Quick-win list"] },

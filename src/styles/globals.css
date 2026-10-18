@@ -238,3 +238,75 @@
 .usp-tabs > input:nth-of-type(2):focus-visible ~ .usp-tablist > .usp-tab:nth-child(2),
 .usp-tabs > input:nth-of-type(3):focus-visible ~ .usp-tablist > .usp-tab:nth-child(3),
 .usp-tabs > input:nth-of-type(4):focus-visible ~ .usp-tablist > .usp-tab:nth-child(4) { outline: 2px solid #fff; outline-offset: 3px; }
+
+/* No-JS industries explorer: hovering/focusing a row shows its panel; the first panel is the default. */
+.ind-nojs .ind-pane { display: none; }
+.ind-nojs .ind-pane:nth-of-type(1) { display: grid; }
+.ind-nojs:has(.ind-rows li a:is(:hover, :focus-visible, :focus)) .ind-pane:nth-of-type(1) { display: none; }
+.ind-nojs:has(.ind-rows li:nth-child(2) a:is(:hover, :focus-visible, :focus)) .ind-pane:nth-of-type(2) { display: grid; }
+.ind-nojs:has(.ind-rows li:nth-child(3) a:is(:hover, :focus-visible, :focus)) .ind-pane:nth-of-type(3) { display: grid; }
+.ind-nojs:has(.ind-rows li:nth-child(4) a:is(:hover, :focus-visible, :focus)) .ind-pane:nth-of-type(4) { display: grid; }
+.ind-nojs:has(.ind-rows li:nth-child(5) a:is(:hover, :focus-visible, :focus)) .ind-pane:nth-of-type(5) { display: grid; }
+.ind-nojs:has(.ind-rows li:nth-child(6) a:is(:hover, :focus-visible, :focus)) .ind-pane:nth-of-type(6) { display: grid; }
+.ind-nojs:has(.ind-rows li:nth-child(7) a:is(:hover, :focus-visible, :focus)) .ind-pane:nth-of-type(7) { display: grid; }
+.ind-nojs:has(.ind-rows li:nth-child(8) a:is(:hover, :focus-visible, :focus)) .ind-pane:nth-of-type(8) { display: grid; }
+.ind-nojs:has(.ind-rows li:nth-child(9) a:is(:hover, :focus-visible, :focus)) .ind-pane:nth-of-type(9) { display: grid; }
+.ind-nojs:has(.ind-rows li:nth-child(10) a:is(:hover, :focus-visible, :focus)) .ind-pane:nth-of-type(10) { display: grid; }
+.ind-nojs:has(.ind-rows li:nth-child(1) a:is(:hover, :focus-visible, :focus)) .ind-pane:nth-of-type(1) { display: grid; }
+
+/* No-JS process stepper: hovering/focusing a step shows its card; the first card is the default. */
+.proc-nojs .proc-pane { display: none; }
+.proc-nojs .proc-pane:nth-of-type(1) { display: grid; }
+.proc-nojs:has(.proc-rail li a:is(:hover, :focus-visible, :focus)) .proc-pane:nth-of-type(1) { display: none; }
+.proc-nojs:has(.proc-rail li:nth-of-type(1) a:is(:hover, :focus-visible, :focus)) .proc-pane:nth-of-type(1) { display: grid; }
+.proc-nojs:has(.proc-rail li:nth-of-type(2) a:is(:hover, :focus-visible, :focus)) .proc-pane:nth-of-type(2) { display: grid; }
+.proc-nojs:has(.proc-rail li:nth-of-type(3) a:is(:hover, :focus-visible, :focus)) .proc-pane:nth-of-type(3) { display: grid; }
+.proc-nojs:has(.proc-rail li:nth-of-type(4) a:is(:hover, :focus-visible, :focus)) .proc-pane:nth-of-type(4) { display: grid; }
+.proc-nojs:has(.proc-rail li:nth-of-type(5) a:is(:hover, :focus-visible, :focus)) .proc-pane:nth-of-type(5) { display: grid; }
+.proc-nojs:has(.proc-rail li:nth-of-type(6) a:is(:hover, :focus-visible, :focus)) .proc-pane:nth-of-type(6) { display: grid; }
+.proc-nojs:has(.proc-rail li:nth-of-type(7) a:is(:hover, :focus-visible, :focus)) .proc-pane:nth-of-type(7) { display: grid; }
+.proc-nojs:has(.proc-rail li:nth-of-type(8) a:is(:hover, :focus-visible, :focus)) .proc-pane:nth-of-type(8) { display: grid; }
+
+/* AI orbit: rings revolve, tiles counter-rotate so logos stay upright */
+@keyframes orbit-spin { to { transform: rotate(360deg); } }
+@keyframes orbit-spin-rev { to { transform: rotate(-360deg); } }
+.orbit-ring { animation: orbit-spin var(--orbit-t, 60s) linear infinite; }
+.orbit-ring[data-dir="rev"] { animation-name: orbit-spin-rev; }
+.orbit-tile { animation: orbit-spin-rev var(--orbit-t, 60s) linear infinite; }
+.orbit-ring[data-dir="rev"] .orbit-tile { animation-name: orbit-spin; }
+.orbit:hover .orbit-ring, .orbit:hover .orbit-tile { animation-play-state: paused; }
+
+/* Train: spinning wheels and drifting smoke */
+@keyframes train-spin { to { transform: rotate(360deg); } }
+@keyframes train-smoke { 0% { opacity: 0.8; transform: translate(0, 0) scale(0.5); } 100% { opacity: 0; transform: translate(14px, -46px) scale(1.5); } }
+.train-wheel { animation: train-spin 1.4s linear infinite; }
+.train-smoke { animation: train-smoke 2.7s ease-out infinite; }
+
+/* Process workflow: input tiles light up in turn, the centre card breathes softly */
+@keyframes wf-tile { 0%, 14%, 100% { box-shadow: 0 0 0 0 rgb(223 55 167 / 0); color: var(--ink); } 4%, 9% { box-shadow: 0 0 0 2px var(--accent), 0 8px 18px -6px rgb(223 55 167 / .45); color: var(--accent-strong); } }
+@keyframes wf-center { 0%, 100% { box-shadow: 0 10px 24px -12px rgb(2 6 23 / .25); } 50% { box-shadow: 0 14px 34px -10px rgb(223 55 167 / .35); } }
+.wf-tile { animation: wf-tile 6s ease-in-out infinite; animation-delay: var(--d, 0s); }
+.wf-center { animation: wf-center 4s ease-in-out infinite; }
+
+@keyframes wf-scan { 0% { top: -16%; opacity: 0; } 8% { opacity: 1; } 80% { top: 100%; opacity: 1; } 100% { top: 100%; opacity: 0; } }
+.wf-scan { animation: wf-scan 5s linear infinite; }
+
+/* Tech SEO lead section: rocket + bars. Motion only when the visitor allows it. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes lead-rise { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+  @keyframes lead-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -12px; } }
+  @keyframes lead-flick { from { transform: scaleY(.82); } to { transform: scaleY(1.18); } }
+  @keyframes lead-trail { from { stroke-dashoffset: 520; } to { stroke-dashoffset: 0; } }
+  @keyframes lead-twinkle { 0%, 100% { opacity: .2; scale: .6; } 50% { opacity: 1; scale: 1; } }
+  .lead-bar { transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(0); }
+  .is-visible .lead-bar { animation: lead-rise .9s var(--ease-out-quart, cubic-bezier(.25,1,.5,1)) both; animation-delay: var(--d, 0s); }
+  .lead-float { animation: lead-float 4.5s ease-in-out infinite; }
+  .lead-flame { transform-box: fill-box; transform-origin: 50% 0; animation: lead-flick .16s ease-in-out infinite alternate; }
+  .lead-trail { stroke-dasharray: 520; stroke-dashoffset: 520; }
+  .is-visible .lead-trail { animation: lead-trail 1.4s .5s ease-out forwards; }
+  .lead-star { transform-box: fill-box; transform-origin: center; animation: lead-twinkle 2.6s ease-in-out infinite; animation-delay: var(--d, 0s); }
+  .lead-boost { transition: transform .7s var(--ease-out-quart, cubic-bezier(.25,1,.5,1)); }
+  .lead-section:has(form:focus-within) .lead-boost { transform: translate(14px, -30px); }
+  .lead-section:has(form:focus-within) .lead-flame { scale: 1 1.6; animation-duration: .09s; }
+}
+.lead-mouse { transition: transform .25s ease-out; }

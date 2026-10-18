@@ -48,7 +48,7 @@ function Card({ t, i }: { t: Testimonial; i: number }) {
 const starPath = "M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3 6.1 20.6l1.3-6.6L2.5 9.4l6.6-.8z";
 
 /** Five stars, filled to `rating / 5` (supports fractions like 4.9). */
-function Stars({ rating, size = 18 }: { rating: number; size?: number }) {
+export function Stars({ rating, size = 18 }: { rating: number; size?: number }) {
   const row = (fill: string) => (
     <span className="flex gap-0.5">
       {Array.from({ length: 5 }, (_, i) => (

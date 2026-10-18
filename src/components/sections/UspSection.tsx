@@ -1,11 +1,20 @@
+import type { ReactNode } from "react";
 import { Check } from "lucide-react";
-import { usps } from "@content/data";
+import { usps as homeUsps, type Usp } from "@content/data";
 import { Annotation } from "@/components/ui/Annotation";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { UspVisual } from "./UspMocks";
 
-export function UspSection() {
+type Props = { items?: Usp[]; eyebrow?: string; title?: ReactNode; lead?: string; annotation?: string };
+
+export function UspSection({
+  items: usps = homeUsps,
+  eyebrow = "Why BoostCart",
+  title = "Why stores choose BoostCart",
+  lead = "Four commitments we hold ourselves to on every account.",
+  annotation = "click through all four",
+}: Props = {}) {
   return (
     <section id="why-boostcart" aria-labelledby="usp-title" className="px-2 py-2">
       <div className="on-dark relative isolate overflow-hidden rounded-panel bg-panel-dark px-5 py-16 text-white md:px-10 lg:px-16 lg:py-32">
@@ -17,10 +26,10 @@ export function UspSection() {
             <path pathLength={1} className="draw-path" d="M60 62c4-6 12-4 12 3s-8 14-18 12-16-12-12-24 18-20 32-16 24 20 18 36-26 28-44 22S6 70 12 50" />
           </svg>
           <div className="relative mx-auto max-w-[760px] text-center">
-            <Eyebrow>Why BoostCart</Eyebrow>
-            <h2 id="usp-title" className="h2-xl mt-4 text-white">Why stores choose BoostCart</h2>
-            <p className="lead mx-auto mt-5 max-w-[620px]">Four commitments we hold ourselves to on every account.</p>
-            <Annotation dark arrow="curve-right" rotate={-4} className="absolute -right-44 top-0 hidden xl:flex">click through all four</Annotation>
+            <Eyebrow>{eyebrow}</Eyebrow>
+            <h2 id="usp-title" className="h2-xl mt-4 text-white">{title}</h2>
+            <p className="lead mx-auto mt-5 max-w-[620px]">{lead}</p>
+            <Annotation dark arrow="curve-right" rotate={-4} className="absolute -right-44 top-0 hidden xl:flex">{annotation}</Annotation>
           </div>
         </Reveal>
 

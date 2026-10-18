@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { Check, ShieldCheck, Slash, X } from "lucide-react";
 import { goodFit, notFit, type FitItem } from "@content/data";
 import { Button } from "@/components/ui/Button";
@@ -55,24 +56,42 @@ function Column({ kind, items, delay }: { kind: "good" | "bad"; items: FitItem[]
   );
 }
 
-export function WhoItsFor() {
+type Props = {
+  eyebrow?: string;
+  title?: ReactNode;
+  lead?: string;
+  good?: FitItem[];
+  notFit?: FitItem[];
+  prompt?: string;
+  ctaLabel?: string;
+};
+
+export function WhoItsFor({
+  eyebrow = "Honest fit check",
+  title = <>Who is e&#8209;commerce SEO for?</>,
+  lead = "SEO is a long game. Here\u2019s who gets the most from it, and who should wait.",
+  good = goodFit,
+  notFit: bad = notFit,
+  prompt = "Not sure which side you\u2019re on? We\u2019ll tell you honestly.",
+  ctaLabel = "Check if we\u2019re a fit",
+}: Props = {}) {
   return (
     <section id="fit" aria-labelledby="fit-title" className="section-y">
       <div className="container-x">
         <Reveal className="mx-auto max-w-[720px] text-center">
-          <Eyebrow>Honest fit check</Eyebrow>
-          <h2 id="fit-title" className="h2 mt-4">Who is e&#8209;commerce SEO for?</h2>
-          <p className="lead mt-4">SEO is a long game. Here&rsquo;s who gets the most from it, and who should wait.</p>
+          <Eyebrow>{eyebrow}</Eyebrow>
+          <h2 id="fit-title" className="h2 mt-4">{title}</h2>
+          <p className="lead mt-4">{lead}</p>
         </Reveal>
 
         <div className="mt-14 grid grid-cols-[minmax(0,1fr)] gap-6 md:grid-cols-2">
-          <Column kind="good" items={goodFit} delay={0} />
-          <Column kind="bad" items={notFit} delay={80} />
+          <Column kind="good" items={good} delay={0} />
+          <Column kind="bad" items={bad} delay={80} />
         </div>
 
         <Reveal className="mt-10 flex flex-col items-center gap-4 text-center">
-          <p className="text-base text-ink-68">Not sure which side you&rsquo;re on? We&rsquo;ll tell you honestly.</p>
-          <Button href="/free-audit" arrow>Check if we&rsquo;re a fit</Button>
+          <p className="text-base text-ink-68">{prompt}</p>
+          <Button href="/free-audit" arrow>{ctaLabel}</Button>
         </Reveal>
       </div>
     </section>

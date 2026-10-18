@@ -8,7 +8,7 @@ import { cn } from "@/lib/cn";
 
 /** Soft hero-style color drop behind a tile's content: which hue, and which corner it sits in. */
 type Glow = { hue: "yellow" | "pink"; pos: string };
-type Tile = { title: string; text: string; href: string; mock: ReactNode; glow: Glow; className?: string };
+export type Tile = { title: string; text: string; href: string; mock: ReactNode; glow: Glow; className?: string };
 
 const row1: Tile[] = [
   { title: "Technical SEO", text: "Crawl, speed, indexation and structured data fixed at the root so every page can rank.", href: "/services/technical-seo", mock: <AuditMock />, glow: { hue: "yellow", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
@@ -42,21 +42,28 @@ function BentoTile({ tile, delay }: { tile: Tile; delay: number }) {
   );
 }
 
-export function ServicesBento() {
+type Props = { rows?: [Tile[], Tile[]]; eyebrow?: string; title?: ReactNode; lead?: string };
+
+export function ServicesBento({
+  rows: [top, bottom] = [row1, row2],
+  eyebrow = "All-in-one SEO program",
+  title = <>Everything that moves your store&rsquo;s revenue</>,
+  lead = "One team. One roadmap. One report.",
+}: Props = {}) {
   return (
     <section aria-labelledby="bento-title" className="section-y">
       <div className="container-x">
         <Reveal className="mx-auto max-w-[720px] text-center">
-          <Eyebrow>All-in-one SEO program</Eyebrow>
-          <h2 id="bento-title" className="h2 mt-4">Everything that moves your store&rsquo;s revenue</h2>
-          <p className="lead mt-4">One team. One roadmap. One report.</p>
+          <Eyebrow>{eyebrow}</Eyebrow>
+          <h2 id="bento-title" className="h2 mt-4">{title}</h2>
+          <p className="lead mt-4">{lead}</p>
         </Reveal>
         <div className="mt-14 grid grid-cols-[minmax(0,1fr)] gap-4 md:gap-6">
           <div className="grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,3.5fr)_minmax(0,3.5fr)]">
-            {row1.map((t, i) => <BentoTile key={t.title} tile={t} delay={i * 80} />)}
+            {top.map((t, i) => <BentoTile key={t.title} tile={t} delay={i * 80} />)}
           </div>
           <div className={cn("grid grid-cols-[minmax(0,1fr)] gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3")}>
-            {row2.map((t, i) => <BentoTile key={t.title} tile={t} delay={i * 80} />)}
+            {bottom.map((t, i) => <BentoTile key={t.title} tile={t} delay={i * 80} />)}
           </div>
         </div>
       </div>

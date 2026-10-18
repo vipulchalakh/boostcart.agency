@@ -16,3 +16,4 @@ export { usps } from "./usps.sample";
 export { industries, type Industry } from "./industries";
 export { processSteps, type ProcessStep } from "./process";
 export { clientLogos } from "./client-logos.sample";
+export * from "./technical-seo";

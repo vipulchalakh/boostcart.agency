@@ -4,6 +4,11 @@
 
 Homepage: https://boostcart.agency/
 Ecommerce technical SEO service: https://boostcart.agency/services/technical-seo
+Category and product page service: https://boostcart.agency/services/category-product-pages
+Content and buying guides service: https://boostcart.agency/services/content
+Link building service: https://boostcart.agency/services/link-building
+Conversion-focused SEO service: https://boostcart.agency/services/conversion-seo
+Reporting service: https://boostcart.agency/services/reporting
 
 ## What we do
 - Technical SEO: crawl, speed, indexation and structured data fixes.

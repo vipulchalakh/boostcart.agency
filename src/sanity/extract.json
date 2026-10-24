@@ -605,67 +605,6 @@
         },
         "optional": true
       },
-      "clientName": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "clientLogo": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "object",
-          "attributes": {
-            "asset": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "inline",
-                "name": "sanity.imageAsset.reference"
-              },
-              "optional": true
-            },
-            "media": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "unknown"
-              },
-              "optional": true
-            },
-            "hotspot": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "inline",
-                "name": "sanity.imageHotspot"
-              },
-              "optional": true
-            },
-            "crop": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "inline",
-                "name": "sanity.imageCrop"
-              },
-              "optional": true
-            },
-            "alt": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "_type": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string",
-                "value": "image"
-              }
-            }
-          }
-        },
-        "optional": true
-      },
       "platform": {
         "type": "objectAttribute",
         "value": {
@@ -673,43 +612,33 @@
           "of": [
             {
               "type": "string",
-              "value": "shopify"
+              "value": "Shopify"
             },
             {
               "type": "string",
-              "value": "woocommerce"
+              "value": "WooCommerce"
             },
             {
               "type": "string",
-              "value": "bigcommerce"
+              "value": "BigCommerce"
             },
             {
               "type": "string",
-              "value": "magento"
+              "value": "Magento"
             },
             {
               "type": "string",
-              "value": "other"
+              "value": "Headless"
+            },
+            {
+              "type": "string",
+              "value": "Other"
             }
           ]
         },
         "optional": true
       },
       "industry": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "headlineResult": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
-      "headlineResultLabel": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
@@ -777,179 +706,214 @@
         },
         "optional": true
       },
-      "services": {
+      "organicRevenueGrowth": {
         "type": "objectAttribute",
         "value": {
-          "type": "array",
-          "of": {
-            "type": "string"
+          "type": "number"
+        },
+        "optional": true
+      },
+      "organicTrafficGrowth": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
+      "timelineMonths": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
+      },
+      "beforeAfter": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "object",
+          "attributes": {
+            "organicKeywords": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "object",
+                "attributes": {
+                  "before": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "number"
+                    },
+                    "optional": true
+                  },
+                  "after": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "number"
+                    },
+                    "optional": true
+                  }
+                }
+              },
+              "optional": true
+            },
+            "organicTraffic": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "object",
+                "attributes": {
+                  "before": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "number"
+                    },
+                    "optional": true
+                  },
+                  "after": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "number"
+                    },
+                    "optional": true
+                  }
+                }
+              },
+              "optional": true
+            },
+            "organicRevenue": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "object",
+                "attributes": {
+                  "before": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "number"
+                    },
+                    "optional": true
+                  },
+                  "after": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "number"
+                    },
+                    "optional": true
+                  }
+                }
+              },
+              "optional": true
+            },
+            "revenueCurrency": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "union",
+                "of": [
+                  {
+                    "type": "string",
+                    "value": "USD"
+                  },
+                  {
+                    "type": "string",
+                    "value": "CAD"
+                  },
+                  {
+                    "type": "string",
+                    "value": "GBP"
+                  },
+                  {
+                    "type": "string",
+                    "value": "EUR"
+                  },
+                  {
+                    "type": "string",
+                    "value": "AUD"
+                  }
+                ]
+              },
+              "optional": true
+            }
           }
         },
         "optional": true
       },
-      "duration": {
+      "clientName": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
         "optional": true
       },
-      "metrics": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "array",
-          "of": {
-            "type": "object",
-            "attributes": {
-              "value": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                },
-                "optional": true
-              },
-              "label": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                },
-                "optional": true
-              },
-              "detail": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string"
-                },
-                "optional": true
-              },
-              "_type": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "string",
-                  "value": "metric"
-                }
-              }
-            },
-            "rest": {
-              "type": "object",
-              "attributes": {
-                "_key": {
-                  "type": "objectAttribute",
-                  "value": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "optional": true
-      },
-      "challenge": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "blockContent"
-        },
-        "optional": true
-      },
-      "approach": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "blockContent"
-        },
-        "optional": true
-      },
-      "outcome": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "inline",
-          "name": "blockContent"
-        },
-        "optional": true
-      },
-      "testimonial": {
+      "clientLogo": {
         "type": "objectAttribute",
         "value": {
           "type": "object",
           "attributes": {
-            "quote": {
+            "asset": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "inline",
+                "name": "sanity.imageAsset.reference"
+              },
+              "optional": true
+            },
+            "media": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "unknown"
+              },
+              "optional": true
+            },
+            "hotspot": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "inline",
+                "name": "sanity.imageHotspot"
+              },
+              "optional": true
+            },
+            "crop": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "inline",
+                "name": "sanity.imageCrop"
+              },
+              "optional": true
+            },
+            "alt": {
               "type": "objectAttribute",
               "value": {
                 "type": "string"
               },
               "optional": true
             },
-            "personName": {
+            "_type": {
               "type": "objectAttribute",
               "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "personRole": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "string"
-              },
-              "optional": true
-            },
-            "personPhoto": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "object",
-                "attributes": {
-                  "asset": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "inline",
-                      "name": "sanity.imageAsset.reference"
-                    },
-                    "optional": true
-                  },
-                  "media": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "unknown"
-                    },
-                    "optional": true
-                  },
-                  "hotspot": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "inline",
-                      "name": "sanity.imageHotspot"
-                    },
-                    "optional": true
-                  },
-                  "crop": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "inline",
-                      "name": "sanity.imageCrop"
-                    },
-                    "optional": true
-                  },
-                  "alt": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string"
-                    },
-                    "optional": true
-                  },
-                  "_type": {
-                    "type": "objectAttribute",
-                    "value": {
-                      "type": "string",
-                      "value": "image"
-                    }
-                  }
-                }
-              },
-              "optional": true
+                "type": "string",
+                "value": "image"
+              }
             }
           }
+        },
+        "optional": true
+      },
+      "clientDescription": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "clientWebsite": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
+      "body": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "inline",
+          "name": "blockContent"
         },
         "optional": true
       },

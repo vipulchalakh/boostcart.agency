@@ -106,19 +106,14 @@ export type CaseStudy = {
   _rev: string;
   title?: string;
   slug?: Slug;
-  clientName?: string;
-  clientLogo?: {
-    asset?: SanityImageAssetReference;
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-  platform?: "shopify" | "woocommerce" | "bigcommerce" | "magento" | "other";
+  platform?:
+    | "Shopify"
+    | "WooCommerce"
+    | "BigCommerce"
+    | "Magento"
+    | "Headless"
+    | "Other";
   industry?: string;
-  headlineResult?: string;
-  headlineResultLabel?: string;
   summary?: string;
   coverImage?: {
     asset?: SanityImageAssetReference;
@@ -128,31 +123,36 @@ export type CaseStudy = {
     alt?: string;
     _type: "image";
   };
-  services?: Array<string>;
-  duration?: string;
-  metrics?: Array<{
-    value?: string;
-    label?: string;
-    detail?: string;
-    _type: "metric";
-    _key: string;
-  }>;
-  challenge?: BlockContent;
-  approach?: BlockContent;
-  outcome?: BlockContent;
-  testimonial?: {
-    quote?: string;
-    personName?: string;
-    personRole?: string;
-    personPhoto?: {
-      asset?: SanityImageAssetReference;
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt?: string;
-      _type: "image";
+  organicRevenueGrowth?: number;
+  organicTrafficGrowth?: number;
+  timelineMonths?: number;
+  beforeAfter?: {
+    organicKeywords?: {
+      before?: number;
+      after?: number;
     };
+    organicTraffic?: {
+      before?: number;
+      after?: number;
+    };
+    organicRevenue?: {
+      before?: number;
+      after?: number;
+    };
+    revenueCurrency?: "USD" | "CAD" | "GBP" | "EUR" | "AUD";
   };
+  clientName?: string;
+  clientLogo?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  clientDescription?: string;
+  clientWebsite?: string;
+  body?: BlockContent;
   publishedAt?: string;
   relatedCaseStudies?: Array<
     {
@@ -600,29 +600,25 @@ export type POST_QUERY_RESULT = {
 
 // Source: ../src/sanity/lib/queries.ts
 // Variable: CASE_STUDIES_QUERY
-// Query: *[_type == "caseStudy" && defined(slug.current)] | order(publishedAt desc) {  _id,  title,  "slug": slug.current,  clientName,  clientLogo { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },  platform,  industry,  headlineResult,  headlineResultLabel,  summary,  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } }}
+// Query: *[_type == "caseStudy" && defined(slug.current)] | order(publishedAt desc) {  _id,  title,  "slug": slug.current,  clientName,  platform,  industry,  summary,  organicRevenueGrowth,  organicTrafficGrowth,  timelineMonths,  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } }}
 export type CASE_STUDIES_QUERY_RESULT = Array<{
   _id: string;
   title: string | null;
   slug: string | null;
   clientName: string | null;
-  clientLogo: {
-    asset: SanityImageAssetReference | null;
-    hotspot: SanityImageHotspot | null;
-    crop: SanityImageCrop | null;
-    alt: string | "";
-    lqip: string | null;
-    dimensions: {
-      width: number | null;
-      height: number | null;
-    } | null;
-  } | null;
   platform:
-    "bigcommerce" | "magento" | "other" | "shopify" | "woocommerce" | null;
+    | "BigCommerce"
+    | "Headless"
+    | "Magento"
+    | "Other"
+    | "Shopify"
+    | "WooCommerce"
+    | null;
   industry: string | null;
-  headlineResult: string | null;
-  headlineResultLabel: string | null;
   summary: string | null;
+  organicRevenueGrowth: number | null;
+  organicTrafficGrowth: number | null;
+  timelineMonths: number | null;
   coverImage: {
     asset: SanityImageAssetReference | null;
     hotspot: SanityImageHotspot | null;
@@ -644,12 +640,86 @@ export type CASE_STUDY_SLUGS_QUERY_RESULT = Array<{
 }>;
 
 // Source: ../src/sanity/lib/queries.ts
+// Variable: RELATED_CASE_STUDIES_FALLBACK_QUERY
+// Query: *[_type == "caseStudy" && defined(slug.current) && _id != $caseStudyId && !(_id in $excludeIds)]  | order(select(industry == $industry => 0, platform == $platform => 1, 2), publishedAt desc)[0...$limit] {  _id,  title,  "slug": slug.current,  clientName,  platform,  industry,  summary,  organicRevenueGrowth,  organicTrafficGrowth,  timelineMonths,  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } }}
+export type RELATED_CASE_STUDIES_FALLBACK_QUERY_RESULT = Array<{
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  clientName: string | null;
+  platform:
+    | "BigCommerce"
+    | "Headless"
+    | "Magento"
+    | "Other"
+    | "Shopify"
+    | "WooCommerce"
+    | null;
+  industry: string | null;
+  summary: string | null;
+  organicRevenueGrowth: number | null;
+  organicTrafficGrowth: number | null;
+  timelineMonths: number | null;
+  coverImage: {
+    asset: SanityImageAssetReference | null;
+    hotspot: SanityImageHotspot | null;
+    crop: SanityImageCrop | null;
+    alt: string | "";
+    lqip: string | null;
+    dimensions: {
+      width: number | null;
+      height: number | null;
+    } | null;
+  } | null;
+}>;
+
+// Source: ../src/sanity/lib/queries.ts
 // Variable: CASE_STUDY_QUERY
-// Query: *[_type == "caseStudy" && slug.current == $slug][0] {  _id,  title,  "slug": slug.current,  clientName,  clientLogo { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },  platform,  industry,  headlineResult,  headlineResultLabel,  summary,  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },  services,  duration,  metrics[]{ _key, value, label, detail },  challenge[]{ ..., _type == "image" => { _key, _type, asset, hotspot, crop, "alt": coalesce(alt, ""), caption, "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },  approach[]{ ..., _type == "image" => { _key, _type, asset, hotspot, crop, "alt": coalesce(alt, ""), caption, "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },  outcome[]{ ..., _type == "image" => { _key, _type, asset, hotspot, crop, "alt": coalesce(alt, ""), caption, "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },  testimonial { quote, personName, personRole, personPhoto { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },  publishedAt,  "relatedCaseStudies": relatedCaseStudies[]->{    _id, title, "slug": slug.current, clientName, platform, industry, headlineResult, summary, coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } }  },  seo { metaTitle, metaDescription, noIndex, shareImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } }}
+// Query: *[_type == "caseStudy" && slug.current == $slug][0] {  _id,  title,  "slug": slug.current,  platform,  industry,  summary,  publishedAt,  organicRevenueGrowth,  organicTrafficGrowth,  timelineMonths,  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },  beforeAfter {    revenueCurrency,    organicKeywords { before, after },    organicTraffic { before, after },    organicRevenue { before, after }  },  clientName,  clientLogo { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },  clientDescription,  clientWebsite,  body[]{ ..., _type == "image" => { _key, _type, asset, hotspot, crop, "alt": coalesce(alt, ""), caption, "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },  "relatedCaseStudies": relatedCaseStudies[defined(@->slug.current)]->{  _id,  title,  "slug": slug.current,  clientName,  platform,  industry,  summary,  organicRevenueGrowth,  organicTrafficGrowth,  timelineMonths,  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } }},  seo { metaTitle, metaDescription, noIndex, shareImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } }}
 export type CASE_STUDY_QUERY_RESULT = {
   _id: string;
   title: string | null;
   slug: string | null;
+  platform:
+    | "BigCommerce"
+    | "Headless"
+    | "Magento"
+    | "Other"
+    | "Shopify"
+    | "WooCommerce"
+    | null;
+  industry: string | null;
+  summary: string | null;
+  publishedAt: string | null;
+  organicRevenueGrowth: number | null;
+  organicTrafficGrowth: number | null;
+  timelineMonths: number | null;
+  coverImage: {
+    asset: SanityImageAssetReference | null;
+    hotspot: SanityImageHotspot | null;
+    crop: SanityImageCrop | null;
+    alt: string | "";
+    lqip: string | null;
+    dimensions: {
+      width: number | null;
+      height: number | null;
+    } | null;
+  } | null;
+  beforeAfter: {
+    revenueCurrency: "AUD" | "CAD" | "EUR" | "GBP" | "USD" | null;
+    organicKeywords: {
+      before: number | null;
+      after: number | null;
+    } | null;
+    organicTraffic: {
+      before: number | null;
+      after: number | null;
+    } | null;
+    organicRevenue: {
+      before: number | null;
+      after: number | null;
+    } | null;
+  } | null;
   clientName: string | null;
   clientLogo: {
     asset: SanityImageAssetReference | null;
@@ -662,32 +732,9 @@ export type CASE_STUDY_QUERY_RESULT = {
       height: number | null;
     } | null;
   } | null;
-  platform:
-    "bigcommerce" | "magento" | "other" | "shopify" | "woocommerce" | null;
-  industry: string | null;
-  headlineResult: string | null;
-  headlineResultLabel: string | null;
-  summary: string | null;
-  coverImage: {
-    asset: SanityImageAssetReference | null;
-    hotspot: SanityImageHotspot | null;
-    crop: SanityImageCrop | null;
-    alt: string | "";
-    lqip: string | null;
-    dimensions: {
-      width: number | null;
-      height: number | null;
-    } | null;
-  } | null;
-  services: Array<string> | null;
-  duration: string | null;
-  metrics: Array<{
-    _key: string;
-    value: string | null;
-    label: string | null;
-    detail: string | null;
-  }> | null;
-  challenge: Array<
+  clientDescription: string | null;
+  clientWebsite: string | null;
+  body: Array<
     | {
         children?: Array<{
           marks?: Array<string>;
@@ -746,151 +793,24 @@ export type CASE_STUDY_QUERY_RESULT = {
         _key: string;
       }
   > | null;
-  approach: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-        listItem?: "bullet" | "number";
-        markDefs?: Array<{
-          href?: string;
-          openInNewTab?: boolean;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }
-    | {
-        tone?: "note" | "tip" | "warning";
-        text?: string;
-        _type: "callout";
-        _key: string;
-      }
-    | {
-        asset: SanityImageAssetReference | null;
-        media?: unknown;
-        hotspot: SanityImageHotspot | null;
-        crop: SanityImageCrop | null;
-        alt: string | "";
-        caption: string | null;
-        _type: "image";
-        _key: string;
-        lqip: string | null;
-        dimensions: {
-          width: number | null;
-          height: number | null;
-        } | null;
-      }
-    | {
-        text?: string;
-        attribution?: string;
-        _type: "pullQuote";
-        _key: string;
-      }
-    | {
-        caption?: string;
-        hasHeaderRow?: boolean;
-        rows?: Array<{
-          cells?: Array<string>;
-          _type: "tableRow";
-          _key: string;
-        }>;
-        _type: "table";
-        _key: string;
-      }
-  > | null;
-  outcome: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
-        listItem?: "bullet" | "number";
-        markDefs?: Array<{
-          href?: string;
-          openInNewTab?: boolean;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }
-    | {
-        tone?: "note" | "tip" | "warning";
-        text?: string;
-        _type: "callout";
-        _key: string;
-      }
-    | {
-        asset: SanityImageAssetReference | null;
-        media?: unknown;
-        hotspot: SanityImageHotspot | null;
-        crop: SanityImageCrop | null;
-        alt: string | "";
-        caption: string | null;
-        _type: "image";
-        _key: string;
-        lqip: string | null;
-        dimensions: {
-          width: number | null;
-          height: number | null;
-        } | null;
-      }
-    | {
-        text?: string;
-        attribution?: string;
-        _type: "pullQuote";
-        _key: string;
-      }
-    | {
-        caption?: string;
-        hasHeaderRow?: boolean;
-        rows?: Array<{
-          cells?: Array<string>;
-          _type: "tableRow";
-          _key: string;
-        }>;
-        _type: "table";
-        _key: string;
-      }
-  > | null;
-  testimonial: {
-    quote: string | null;
-    personName: string | null;
-    personRole: string | null;
-    personPhoto: {
-      asset: SanityImageAssetReference | null;
-      hotspot: SanityImageHotspot | null;
-      crop: SanityImageCrop | null;
-      alt: string | "";
-      lqip: string | null;
-      dimensions: {
-        width: number | null;
-        height: number | null;
-      } | null;
-    } | null;
-  } | null;
-  publishedAt: string | null;
   relatedCaseStudies: Array<{
     _id: string;
     title: string | null;
     slug: string | null;
     clientName: string | null;
     platform:
-      "bigcommerce" | "magento" | "other" | "shopify" | "woocommerce" | null;
+      | "BigCommerce"
+      | "Headless"
+      | "Magento"
+      | "Other"
+      | "Shopify"
+      | "WooCommerce"
+      | null;
     industry: string | null;
-    headlineResult: string | null;
     summary: string | null;
+    organicRevenueGrowth: number | null;
+    organicTrafficGrowth: number | null;
+    timelineMonths: number | null;
     coverImage: {
       asset: SanityImageAssetReference | null;
       hotspot: SanityImageHotspot | null;
@@ -928,9 +848,10 @@ declare global {
     '*[_type == "post" && defined(slug.current)]{ "slug": slug.current }': POST_SLUGS_QUERY_RESULT;
     '*[_type == "post" && defined(slug.current) && _id != $postId && !(_id in $excludeIds)]\n  | order(select(category._ref == $categoryId => 0, 1), publishedAt desc)[0...$limit] {\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  readTime,\n  publishedAt,\n  "category": category->{ title }\n}': RELATED_POSTS_FALLBACK_QUERY_RESULT;
     '*[_type == "post" && slug.current == $slug][0] {\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  updatedAt,\n  readTime,\n  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },\n  body[]{ ..., _type == "image" => { _key, _type, asset, hotspot, crop, "alt": coalesce(alt, ""), caption, "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },\n  faqs[]{ _key, question, answer },\n  "category": category->{ _id, title, "slug": slug.current },\n  "author": author->{ name, "slug": slug.current, role, bio, linkedinUrl, photo { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },\n  "relatedPosts": relatedPosts[defined(@->slug.current)]->{\n    _id, title, "slug": slug.current, excerpt, readTime, publishedAt,\n    "category": category->{ title }\n  },\n  seo { metaTitle, metaDescription, noIndex, shareImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } }\n}': POST_QUERY_RESULT;
-    '*[_type == "caseStudy" && defined(slug.current)] | order(publishedAt desc) {\n  _id,\n  title,\n  "slug": slug.current,\n  clientName,\n  clientLogo { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },\n  platform,\n  industry,\n  headlineResult,\n  headlineResultLabel,\n  summary,\n  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } }\n}': CASE_STUDIES_QUERY_RESULT;
+    '*[_type == "caseStudy" && defined(slug.current)] | order(publishedAt desc) {\n  _id,\n  title,\n  "slug": slug.current,\n  clientName,\n  platform,\n  industry,\n  summary,\n  organicRevenueGrowth,\n  organicTrafficGrowth,\n  timelineMonths,\n  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } }\n}': CASE_STUDIES_QUERY_RESULT;
     '*[_type == "caseStudy" && defined(slug.current)]{ "slug": slug.current }': CASE_STUDY_SLUGS_QUERY_RESULT;
-    '*[_type == "caseStudy" && slug.current == $slug][0] {\n  _id,\n  title,\n  "slug": slug.current,\n  clientName,\n  clientLogo { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },\n  platform,\n  industry,\n  headlineResult,\n  headlineResultLabel,\n  summary,\n  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },\n  services,\n  duration,\n  metrics[]{ _key, value, label, detail },\n  challenge[]{ ..., _type == "image" => { _key, _type, asset, hotspot, crop, "alt": coalesce(alt, ""), caption, "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },\n  approach[]{ ..., _type == "image" => { _key, _type, asset, hotspot, crop, "alt": coalesce(alt, ""), caption, "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },\n  outcome[]{ ..., _type == "image" => { _key, _type, asset, hotspot, crop, "alt": coalesce(alt, ""), caption, "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },\n  testimonial { quote, personName, personRole, personPhoto { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },\n  publishedAt,\n  "relatedCaseStudies": relatedCaseStudies[]->{\n    _id, title, "slug": slug.current, clientName, platform, industry, headlineResult, summary, coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } }\n  },\n  seo { metaTitle, metaDescription, noIndex, shareImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } }\n}': CASE_STUDY_QUERY_RESULT;
+    '*[_type == "caseStudy" && defined(slug.current) && _id != $caseStudyId && !(_id in $excludeIds)]\n  | order(select(industry == $industry => 0, platform == $platform => 1, 2), publishedAt desc)[0...$limit] {\n  _id,\n  title,\n  "slug": slug.current,\n  clientName,\n  platform,\n  industry,\n  summary,\n  organicRevenueGrowth,\n  organicTrafficGrowth,\n  timelineMonths,\n  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } }\n}': RELATED_CASE_STUDIES_FALLBACK_QUERY_RESULT;
+    '*[_type == "caseStudy" && slug.current == $slug][0] {\n  _id,\n  title,\n  "slug": slug.current,\n  platform,\n  industry,\n  summary,\n  publishedAt,\n  organicRevenueGrowth,\n  organicTrafficGrowth,\n  timelineMonths,\n  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },\n  beforeAfter {\n    revenueCurrency,\n    organicKeywords { before, after },\n    organicTraffic { before, after },\n    organicRevenue { before, after }\n  },\n  clientName,\n  clientLogo { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },\n  clientDescription,\n  clientWebsite,\n  body[]{ ..., _type == "image" => { _key, _type, asset, hotspot, crop, "alt": coalesce(alt, ""), caption, "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },\n  "relatedCaseStudies": relatedCaseStudies[defined(@->slug.current)]->{\n  _id,\n  title,\n  "slug": slug.current,\n  clientName,\n  platform,\n  industry,\n  summary,\n  organicRevenueGrowth,\n  organicTrafficGrowth,\n  timelineMonths,\n  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } }\n},\n  seo { metaTitle, metaDescription, noIndex, shareImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } }\n}': CASE_STUDY_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too

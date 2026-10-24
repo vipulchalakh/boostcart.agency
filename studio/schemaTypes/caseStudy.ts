@@ -1,41 +1,62 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { TrendUpwardIcon } from "@sanity/icons/TrendUpward";
 
+/** Two numbers: where the client started and where they ended up. */
+const beforeAfter = (name: string, title: string, description: string) =>
+  defineField({
+    name,
+    title,
+    description,
+    type: "object",
+    options: { columns: 2 },
+    fields: [
+      defineField({ name: "before", type: "number", validation: (rule) => rule.required().min(0) }),
+      defineField({ name: "after", type: "number", validation: (rule) => rule.required().min(0) }),
+    ],
+    validation: (rule) => rule.required(),
+  });
+
 export const caseStudy = defineType({
   name: "caseStudy",
   title: "Case study",
   type: "document",
   icon: TrendUpwardIcon,
+  groups: [
+    { name: "overview", title: "Overview", default: true },
+    { name: "results", title: "Results" },
+    { name: "client", title: "Client" },
+    { name: "content", title: "Content" },
+    { name: "seo", title: "SEO & related" },
+  ],
   fields: [
+    /* ---------- Overview ---------- */
     defineField({
       name: "title",
       type: "string",
+      group: "overview",
       description: "Page headline, e.g. “How Acme grew organic revenue 142% in 6 months”.",
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: "slug",
       type: "slug",
+      group: "overview",
       description: "The page address: boostcart.agency/case-studies/<slug>",
       options: { source: "title", maxLength: 96 },
       validation: (rule) => rule.required(),
     }),
-    defineField({ name: "clientName", title: "Client name", type: "string", validation: (rule) => rule.required() }),
-    defineField({
-      name: "clientLogo",
-      type: "image",
-      fields: [defineField({ name: "alt", title: "Alt text", type: "string" })],
-    }),
     defineField({
       name: "platform",
       type: "string",
+      group: "overview",
       options: {
         list: [
-          { title: "Shopify", value: "shopify" },
-          { title: "WooCommerce", value: "woocommerce" },
-          { title: "BigCommerce", value: "bigcommerce" },
-          { title: "Magento", value: "magento" },
-          { title: "Other", value: "other" },
+          { title: "Shopify", value: "Shopify" },
+          { title: "WooCommerce", value: "WooCommerce" },
+          { title: "BigCommerce", value: "BigCommerce" },
+          { title: "Magento", value: "Magento" },
+          { title: "Headless", value: "Headless" },
+          { title: "Other", value: "Other" },
         ],
       },
       validation: (rule) => rule.required(),
@@ -43,110 +64,141 @@ export const caseStudy = defineType({
     defineField({
       name: "industry",
       type: "string",
+      group: "overview",
       description: "e.g. Pet supplies, Beauty, Apparel",
       validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "headlineResult",
-      title: "Headline result",
-      type: "string",
-      description: "The one big number shown on cards, e.g. +142%",
-      validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: "headlineResultLabel",
-      title: "Headline result label",
-      type: "string",
-      description: "What the number means, e.g. organic revenue",
     }),
     defineField({
       name: "summary",
       type: "text",
       rows: 3,
-      description: "Short summary shown on cards and used for SEO.",
+      group: "overview",
+      description: "Short summary shown on case study cards and used for SEO.",
       validation: (rule) => rule.required().max(240).warning("Keep it under 240 characters"),
     }),
     defineField({
       name: "coverImage",
+      title: "Featured image",
       type: "image",
+      group: "overview",
+      description: "A performance screenshot (Google Search Console, Ahrefs, analytics). Shown beside the title and on cards.",
       options: { hotspot: true },
       fields: [
         defineField({
           name: "alt",
           title: "Alt text",
           type: "string",
+          description: "Describe what the screenshot shows.",
           validation: (rule) => rule.required(),
         }),
       ],
       validation: (rule) => rule.required(),
     }),
+
+    /* ---------- Results ---------- */
     defineField({
-      name: "services",
-      title: "Services provided",
-      type: "array",
-      of: [defineArrayMember({ type: "string" })],
-      options: { layout: "tags" },
+      name: "organicRevenueGrowth",
+      title: "Organic revenue growth (%)",
+      type: "number",
+      group: "results",
+      description: "Whole number, e.g. 142 for +142%.",
+      validation: (rule) => rule.required().min(0),
     }),
     defineField({
-      name: "duration",
-      title: "Engagement length",
-      type: "string",
-      description: "e.g. 6 months",
+      name: "organicTrafficGrowth",
+      title: "Organic traffic growth (%)",
+      type: "number",
+      group: "results",
+      description: "Whole number, e.g. 96 for +96%.",
+      validation: (rule) => rule.required().min(0),
     }),
     defineField({
-      name: "metrics",
-      title: "Result metrics",
-      description: "Numbers shown in the results band. Add 2 to 4.",
-      type: "array",
-      of: [
-        defineArrayMember({
-          type: "object",
-          name: "metric",
-          fields: [
-            defineField({ name: "value", type: "string", description: "e.g. +142%", validation: (rule) => rule.required() }),
-            defineField({ name: "label", type: "string", description: "e.g. Organic revenue", validation: (rule) => rule.required() }),
-            defineField({ name: "detail", type: "string", description: "Optional, e.g. vs. previous 6 months" }),
-          ],
-          preview: { select: { title: "value", subtitle: "label" } },
-        }),
-      ],
-      validation: (rule) => rule.min(2).max(4),
+      name: "timelineMonths",
+      title: "Timeline (months)",
+      type: "number",
+      group: "results",
+      validation: (rule) => rule.required().integer().min(1).max(60),
     }),
-    defineField({ name: "challenge", type: "blockContent" }),
-    defineField({ name: "approach", type: "blockContent" }),
-    defineField({ name: "outcome", type: "blockContent" }),
     defineField({
-      name: "testimonial",
+      name: "beforeAfter",
+      title: "Before vs. after",
       type: "object",
+      group: "results",
+      description: "Numbers at the start of the engagement versus the end.",
       fields: [
-        defineField({ name: "quote", type: "text", rows: 3 }),
-        defineField({ name: "personName", title: "Person name", type: "string" }),
-        defineField({ name: "personRole", title: "Person role", type: "string" }),
+        beforeAfter("organicKeywords", "Organic keywords", "Keywords ranking in the top 100."),
+        beforeAfter("organicTraffic", "Organic traffic", "Monthly organic visits."),
+        beforeAfter("organicRevenue", "Organic revenue", "Monthly organic revenue, as a plain number (no currency symbol)."),
         defineField({
-          name: "personPhoto",
-          type: "image",
-          fields: [defineField({ name: "alt", title: "Alt text", type: "string" })],
+          name: "revenueCurrency",
+          title: "Revenue currency",
+          type: "string",
+          options: {
+            list: [
+              { title: "US dollar ($)", value: "USD" },
+              { title: "Canadian dollar (CA$)", value: "CAD" },
+              { title: "British pound (£)", value: "GBP" },
+              { title: "Euro (€)", value: "EUR" },
+              { title: "Australian dollar (A$)", value: "AUD" },
+            ],
+            layout: "radio",
+          },
+          initialValue: "USD",
+          validation: (rule) => rule.required(),
         }),
       ],
+      validation: (rule) => rule.required(),
     }),
+
+    /* ---------- Client ---------- */
+    defineField({ name: "clientName", title: "Client name", type: "string", group: "client", validation: (rule) => rule.required() }),
+    defineField({
+      name: "clientLogo",
+      title: "Client logo",
+      type: "image",
+      group: "client",
+      fields: [defineField({ name: "alt", title: "Alt text", type: "string" })],
+    }),
+    defineField({
+      name: "clientDescription",
+      title: "Client description",
+      type: "text",
+      rows: 2,
+      group: "client",
+      description: "Two short lines about the company.",
+      validation: (rule) => rule.required().max(160).warning("Keep it under 160 characters so it fits on two lines"),
+    }),
+    defineField({
+      name: "clientWebsite",
+      title: "Client website",
+      type: "url",
+      group: "client",
+      validation: (rule) => rule.required().uri({ scheme: ["http", "https"] }),
+    }),
+
+    /* ---------- Content ---------- */
+    defineField({ name: "body", title: "Case study body", type: "blockContent", group: "content", validation: (rule) => rule.required() }),
     defineField({
       name: "publishedAt",
       title: "Published date",
       type: "datetime",
+      group: "content",
       initialValue: () => new Date().toISOString(),
       validation: (rule) => rule.required(),
     }),
+
+    /* ---------- SEO & related ---------- */
     defineField({
       name: "relatedCaseStudies",
       type: "array",
+      group: "seo",
+      description: "Up to 3. If you leave this empty, similar case studies (same industry or platform) are shown.",
       of: [defineArrayMember({ type: "reference", to: [{ type: "caseStudy" }] })],
       validation: (rule) => rule.max(3),
     }),
-    defineField({ name: "seo", type: "seo" }),
+    defineField({ name: "seo", type: "seo", group: "seo" }),
   ],
-  orderings: [
-    { title: "Newest first", name: "publishedAtDesc", by: [{ field: "publishedAt", direction: "desc" }] },
-  ],
+  orderings: [{ title: "Newest first", name: "publishedAtDesc", by: [{ field: "publishedAt", direction: "desc" }] }],
   preview: {
     select: { title: "title", subtitle: "clientName", media: "coverImage" },
   },

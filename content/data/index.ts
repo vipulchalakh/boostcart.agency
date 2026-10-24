@@ -23,3 +23,4 @@ export * from "./link-building";
 export * from "./conversion-seo";
 export * from "./reporting";
 export * from "./pet-industry";
+export * from "./industry-pages";

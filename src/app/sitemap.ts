@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { industries } from "@content/data";
 
 /** Only live pages belong here. Add each route as its page ships. */
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -10,6 +11,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "https://boostcart.agency/services/link-building", changeFrequency: "monthly", priority: 0.8 },
     { url: "https://boostcart.agency/services/conversion-seo", changeFrequency: "monthly", priority: 0.8 },
     { url: "https://boostcart.agency/services/reporting", changeFrequency: "monthly", priority: 0.8 },
-    { url: "https://boostcart.agency/industries/pet-supplies", changeFrequency: "monthly", priority: 0.7 },
+    ...industries.map((i) => ({ url: `https://boostcart.agency/industries/${i.slug}`, changeFrequency: "monthly" as const, priority: 0.7 })),
   ];
 }

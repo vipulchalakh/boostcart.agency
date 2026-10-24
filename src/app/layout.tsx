@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { fontVariables } from "@/lib/fonts";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
+import { NoJsNav } from "@/components/layout/NoJsNav";
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import { SpotlightProvider } from "@/components/ui/SpotlightProvider";
 import "@/styles/globals.css";
@@ -24,11 +25,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={fontVariables}>
       <body>
         <noscript>
-          <style>{`.reveal,.si,.hero-line>span,.hero-fade{opacity:1!important;transform:none!important;animation:none!important}.marquee{overflow-x:auto}.draw-path{stroke-dashoffset:0}.grow-x{transform:none}.type{max-width:100%}`}</style>
+          <style>{`.reveal,.si,.hero-line>span,.hero-fade{opacity:1!important;transform:none!important;animation:none!important}.marquee{overflow-x:auto}.draw-path{stroke-dashoffset:0}.grow-x{transform:none}.type{max-width:100%}.gauge{stroke-dashoffset:0}.lead-bar{transform:none}.lead-trail{stroke-dashoffset:0}header [aria-label="Main"],header [aria-label="Open menu"]{display:none!important}`}</style>
         </noscript>
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-ink focus:px-4 focus:py-2 focus:text-white">
           Skip to content
         </a>
+        <NoJsNav />
         <Navbar />
         <main id="main">{children}</main>
         <Footer />

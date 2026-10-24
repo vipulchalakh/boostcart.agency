@@ -9,6 +9,7 @@ Content and buying guides service: https://boostcart.agency/services/content
 Link building service: https://boostcart.agency/services/link-building
 Conversion-focused SEO service: https://boostcart.agency/services/conversion-seo
 Reporting service: https://boostcart.agency/services/reporting
+Pet supplies ecommerce SEO: https://boostcart.agency/industries/pet-supplies
 
 ## What we do
 - Technical SEO: crawl, speed, indexation and structured data fixes.

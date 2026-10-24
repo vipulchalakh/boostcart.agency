@@ -10,5 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "https://boostcart.agency/services/link-building", changeFrequency: "monthly", priority: 0.8 },
     { url: "https://boostcart.agency/services/conversion-seo", changeFrequency: "monthly", priority: 0.8 },
     { url: "https://boostcart.agency/services/reporting", changeFrequency: "monthly", priority: 0.8 },
+    { url: "https://boostcart.agency/industries/pet-supplies", changeFrequency: "monthly", priority: 0.7 },
   ];
 }

@@ -1,4 +1,4 @@
-import { WhoItsFor } from "@/components/sections/WhoItsFor";
+    import { WhoItsFor } from "@/components/sections/WhoItsFor";
 import { Guides } from "@/components/sections/Guides";
 import { Industries } from "@/components/sections/Industries";
 import { Faq } from "@/components/sections/Faq";

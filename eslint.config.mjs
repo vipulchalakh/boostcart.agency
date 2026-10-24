@@ -1,6 +1,6 @@
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 
-const config = [...nextVitals, ...nextTs, { ignores: [".next/**", "node_modules/**", "**/._*"] }];
+const config = [...nextVitals, ...nextTs, { ignores: [".next/**", "node_modules/**", "**/._*", "studio/**", "src/sanity/types.ts"] }];
 
 export default config;

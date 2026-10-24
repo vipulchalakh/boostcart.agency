@@ -1,0 +1,1 @@
+export{t as TrendUpwardIcon,t as default}from"./TrendUpward-DGNPfzoC.js";

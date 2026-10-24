@@ -108,6 +108,27 @@
   }
   .spotlight:hover::before { opacity: 1; }
 
+  /* Blog post: in-article links are pink; hovering sweeps a yellow highlight behind the text. */
+  .post-link {
+    color: var(--accent-strong);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--accent) 45%, transparent);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 4px;
+    background-image: linear-gradient(var(--yellow), var(--yellow));
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0% 100%;
+    padding-inline: 0.12em;
+    margin-inline: -0.12em;
+    border-radius: 3px;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    transition: background-size var(--dur-med) var(--ease-out-quart), color var(--dur-fast) var(--ease-ui), text-decoration-color var(--dur-fast) var(--ease-ui);
+  }
+  .post-link:hover, .post-link:focus-visible { background-size: 100% 100%; color: var(--ink); text-decoration-color: transparent; }
+
   .lift { transition: transform var(--dur-med) var(--ease-out-quart), box-shadow var(--dur-med) var(--ease-out-quart); }
   .lift:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
 }

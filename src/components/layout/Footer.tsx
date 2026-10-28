@@ -42,7 +42,18 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-ink-05 py-6 sm:flex-row sm:items-center sm:justify-between">
+        <address className="mt-12 flex flex-col items-center gap-3 text-center text-[13px] not-italic leading-[19px] text-ink-68 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-10 sm:text-sm">
+          <p className="flex items-start justify-center gap-2">
+            <span role="img" aria-label="USA" className="text-base leading-[19px]">🇺🇸</span>
+            5830 E 2nd St, Casper, WY, United States, 82609
+          </p>
+          <p className="flex items-start justify-center gap-2">
+            <span role="img" aria-label="India" className="text-base leading-[19px]">🇮🇳</span>
+            29, Nagpur, Maharashtra, India - 440034
+          </p>
+        </address>
+
+        <div className="mt-6 flex flex-col gap-4 border-t border-ink-05 py-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[13px] text-ink-68">© 2026 BoostCart. All rights reserved.</p>
           {/* TODO-REAL: add trust badges (e.g. GDPR, status page) here only when they are true. */}
         </div>

@@ -51,9 +51,8 @@ export const footerColumns: Array<{ title: string; links: NavLink[] }> = [
 ];
 
 /** TODO-REAL: only list profiles that actually exist. */
-export const socials: Array<{ label: "X" | "LinkedIn" | "YouTube" | "Instagram"; href: string }> = [
-  { label: "X", href: "https://x.com/" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/" },
-  { label: "YouTube", href: "https://www.youtube.com/" },
-  { label: "Instagram", href: "https://www.instagram.com/" },
+export const socials: Array<{ label: "Facebook" | "LinkedIn" | "Instagram"; href: string }> = [
+  { label: "Facebook", href: "https://www.facebook.com/boostcart" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/boostcart/" },
+  { label: "Instagram", href: "https://www.instagram.com/boostcart.agency/" },
 ];

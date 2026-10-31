@@ -16,6 +16,9 @@ const beforeAfter = (name: string, title: string, description: string) =>
     validation: (rule) => rule.required(),
   });
 
+/** Every case study body follows this outline (each is a Heading 2, so it feeds the table of contents). */
+const BODY_SECTIONS = ["Executive summary", "Challenges", "Our approach", "Executive roadmap", "Results"];
+
 export const caseStudy = defineType({
   name: "caseStudy",
   title: "Case study",
@@ -177,7 +180,28 @@ export const caseStudy = defineType({
     }),
 
     /* ---------- Content ---------- */
-    defineField({ name: "body", title: "Case study body", type: "blockContent", group: "content", validation: (rule) => rule.required() }),
+    defineField({
+      name: "body",
+      title: "Case study body",
+      type: "blockContent",
+      group: "content",
+      description: "Write under each heading: Executive summary, Challenges, Our approach, Executive roadmap, Results. Keep them as Heading 2 so they appear in the table of contents.",
+      initialValue: () =>
+        BODY_SECTIONS.flatMap((heading, i) => [
+          { _type: "block", _key: `h${i}`, style: "h2", markDefs: [], children: [{ _type: "span", _key: `h${i}s`, text: heading, marks: [] }] },
+          { _type: "block", _key: `p${i}`, style: "normal", markDefs: [], children: [{ _type: "span", _key: `p${i}s`, text: "", marks: [] }] },
+        ]),
+      validation: (rule) =>
+        rule.required().custom((blocks) => {
+          const found = new Set(
+            ((blocks as { style?: string; children?: { text?: string }[] }[] | undefined) ?? [])
+              .filter((b) => b.style === "h2")
+              .map((b) => (b.children ?? []).map((c) => c.text ?? "").join("").trim().toLowerCase()),
+          );
+          const missing = BODY_SECTIONS.filter((h) => !found.has(h.toLowerCase()));
+          return missing.length ? { message: `Missing Heading 2 section: ${missing.join(", ")}`, level: "warning" } : true;
+        }),
+    }),
     defineField({
       name: "publishedAt",
       title: "Published date",

@@ -16,7 +16,7 @@ const siteUrl = "https://boostcart.agency";
 const RELATED_COUNT = 3;
 
 /** Sidebar only sticks on screens tall enough to show all three cards at once. */
-const STICKY = "[@media(min-width:1024px)_and_(min-height:860px)]:sticky [@media(min-width:1024px)_and_(min-height:860px)]:top-28";
+const STICKY = "[@media(min-width:1024px)_and_(min-height:800px)]:sticky [@media(min-width:1024px)_and_(min-height:800px)]:top-28";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -118,7 +118,9 @@ export default async function CaseStudyPage({ params }: Props) {
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-14 xl:gap-20">
           <article className="min-w-0 max-w-[760px]">{study.body && <CaseStudyBody value={study.body} headingIds={ids} />}</article>
 
-          <aside aria-label="Case study details" className="min-w-0">
+          <aside aria-label="Case study details" className="min-w-0 space-y-5">
+            <ClientCard name={clientName} logo={study.clientLogo} description={study.clientDescription} industry={study.industry} website={study.clientWebsite} />
+            {/* The results and the CTA stay in view while the article scrolls; the client card scrolls away above them. Direct child of the aside so it can travel the full article height. */}
             <div className={`space-y-5 ${STICKY}`}>
               <BeforeAfterCard
                 organicKeywords={study.beforeAfter?.organicKeywords ?? null}
@@ -126,7 +128,6 @@ export default async function CaseStudyPage({ params }: Props) {
                 organicRevenue={study.beforeAfter?.organicRevenue ?? null}
                 currency={study.beforeAfter?.revenueCurrency ?? null}
               />
-              <ClientCard name={clientName} logo={study.clientLogo} description={study.clientDescription} industry={study.industry} website={study.clientWebsite} />
               <CaseStudyCta />
             </div>
           </aside>

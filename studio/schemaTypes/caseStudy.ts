@@ -187,22 +187,14 @@ export const caseStudy = defineType({
       type: "blockContent",
       group: "content",
       components: { input: MarkdownImportInput },
-      description: "Write under each heading: Executive summary, Challenges, Our approach, Executive roadmap, Results. Keep them as Heading 2 so they appear in the table of contents.",
+      description: "Suggested sections: Executive summary, Challenges, Our approach, Executive roadmap, Results. Use Heading 2 for each section title. You can also import a Markdown file.",
       initialValue: () =>
         BODY_SECTIONS.flatMap((heading, i) => [
           { _type: "block", _key: `h${i}`, style: "h2", markDefs: [], children: [{ _type: "span", _key: `h${i}s`, text: heading, marks: [] }] },
           { _type: "block", _key: `p${i}`, style: "normal", markDefs: [], children: [{ _type: "span", _key: `p${i}s`, text: "", marks: [] }] },
         ]),
-      validation: (rule) =>
-        rule.required().custom((blocks) => {
-          const found = new Set(
-            ((blocks as { style?: string; children?: { text?: string }[] }[] | undefined) ?? [])
-              .filter((b) => b.style === "h2")
-              .map((b) => (b.children ?? []).map((c) => c.text ?? "").join("").trim().toLowerCase()),
-          );
-          const missing = BODY_SECTIONS.filter((h) => !found.has(h.toLowerCase()));
-          return missing.length ? { message: `Missing Heading 2 section: ${missing.join(", ")}`, level: "warning" } : true;
-        }),
+      validation: (rule) => rule.required(),
+    }),
     }),
     defineField({
       name: "publishedAt",

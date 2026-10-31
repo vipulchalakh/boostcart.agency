@@ -195,7 +195,6 @@ export const caseStudy = defineType({
         ]),
       validation: (rule) => rule.required(),
     }),
-    }),
     defineField({
       name: "publishedAt",
       title: "Published date",

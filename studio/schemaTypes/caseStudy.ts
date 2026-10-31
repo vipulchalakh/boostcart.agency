@@ -1,5 +1,6 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { TrendUpwardIcon } from "@sanity/icons/TrendUpward";
+import { MarkdownImportInput } from "../components/MarkdownImportInput";
 
 /** Two numbers: where the client started and where they ended up. */
 const beforeAfter = (name: string, title: string, description: string) =>
@@ -185,6 +186,7 @@ export const caseStudy = defineType({
       title: "Case study body",
       type: "blockContent",
       group: "content",
+      components: { input: MarkdownImportInput },
       description: "Write under each heading: Executive summary, Challenges, Our approach, Executive roadmap, Results. Keep them as Heading 2 so they appear in the table of contents.",
       initialValue: () =>
         BODY_SECTIONS.flatMap((heading, i) => [

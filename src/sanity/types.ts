@@ -128,16 +128,16 @@ export type CaseStudy = {
   timelineMonths?: number;
   beforeAfter?: {
     organicKeywords?: {
-      before?: number;
-      after?: number;
+      before?: string;
+      after?: string;
     };
     organicTraffic?: {
-      before?: number;
-      after?: number;
+      before?: string;
+      after?: string;
     };
     organicRevenue?: {
-      before?: number;
-      after?: number;
+      before?: string;
+      after?: string;
     };
     revenueCurrency?: "USD" | "CAD" | "GBP" | "EUR" | "AUD";
   };
@@ -708,16 +708,16 @@ export type CASE_STUDY_QUERY_RESULT = {
   beforeAfter: {
     revenueCurrency: "AUD" | "CAD" | "EUR" | "GBP" | "USD" | null;
     organicKeywords: {
-      before: number | null;
-      after: number | null;
+      before: string | null;
+      after: string | null;
     } | null;
     organicTraffic: {
-      before: number | null;
-      after: number | null;
+      before: string | null;
+      after: string | null;
     } | null;
     organicRevenue: {
-      before: number | null;
-      after: number | null;
+      before: string | null;
+      after: string | null;
     } | null;
   } | null;
   clientName: string | null;

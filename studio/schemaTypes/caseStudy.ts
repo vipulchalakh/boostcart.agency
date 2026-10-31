@@ -2,7 +2,17 @@ import { defineArrayMember, defineField, defineType } from "sanity";
 import { TrendUpwardIcon } from "@sanity/icons/TrendUpward";
 import { MarkdownImportInput } from "../components/MarkdownImportInput";
 
-/** Two numbers: where the client started and where they ended up. */
+/** Typed as text so editors can write what they see in their report: 35k, 72.8k, 1.2M, 1,145. */
+const AMOUNT = /^\d[\d,]*(\.\d+)?\s?[kKmMbB]?$/;
+const amount = (name: string) =>
+  defineField({
+    name,
+    type: "string",
+    validation: (rule) =>
+      rule.required().custom((value) => (!value || AMOUNT.test(value.trim()) ? true : "Use a number with an optional k, M or B, e.g. 35k, 72.8k, 1.2M or 1,145. No currency symbol.")),
+  });
+
+/** Two values: where the client started and where they ended up. */
 const beforeAfter = (name: string, title: string, description: string) =>
   defineField({
     name,
@@ -10,10 +20,7 @@ const beforeAfter = (name: string, title: string, description: string) =>
     description,
     type: "object",
     options: { columns: 2 },
-    fields: [
-      defineField({ name: "before", type: "number", validation: (rule) => rule.required().min(0) }),
-      defineField({ name: "after", type: "number", validation: (rule) => rule.required().min(0) }),
-    ],
+    fields: [amount("before"), amount("after")],
     validation: (rule) => rule.required(),
   });
 
@@ -131,8 +138,8 @@ export const caseStudy = defineType({
       description: "Numbers at the start of the engagement versus the end.",
       fields: [
         beforeAfter("organicKeywords", "Organic keywords", "Keywords ranking in the top 100."),
-        beforeAfter("organicTraffic", "Organic traffic", "Monthly organic visits."),
-        beforeAfter("organicRevenue", "Organic revenue", "Monthly organic revenue, as a plain number (no currency symbol)."),
+        beforeAfter("organicTraffic", "Organic traffic", "Monthly organic visits, e.g. 35k and 72.8k. Shown with “/month”."),
+        beforeAfter("organicRevenue", "Organic revenue", "Monthly organic revenue, e.g. 30.5k and 63.3k. No currency symbol (it comes from the currency below). Shown with “/month”."),
         defineField({
           name: "revenueCurrency",
           title: "Revenue currency",

@@ -740,14 +740,14 @@
                   "before": {
                     "type": "objectAttribute",
                     "value": {
-                      "type": "number"
+                      "type": "string"
                     },
                     "optional": true
                   },
                   "after": {
                     "type": "objectAttribute",
                     "value": {
-                      "type": "number"
+                      "type": "string"
                     },
                     "optional": true
                   }
@@ -763,14 +763,14 @@
                   "before": {
                     "type": "objectAttribute",
                     "value": {
-                      "type": "number"
+                      "type": "string"
                     },
                     "optional": true
                   },
                   "after": {
                     "type": "objectAttribute",
                     "value": {
-                      "type": "number"
+                      "type": "string"
                     },
                     "optional": true
                   }
@@ -786,14 +786,14 @@
                   "before": {
                     "type": "objectAttribute",
                     "value": {
-                      "type": "number"
+                      "type": "string"
                     },
                     "optional": true
                   },
                   "after": {
                     "type": "objectAttribute",
                     "value": {
-                      "type": "number"
+                      "type": "string"
                     },
                     "optional": true
                   }

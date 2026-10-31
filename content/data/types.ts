@@ -18,6 +18,8 @@ export type Testimonial = {
   company: string;
   /** Path to the real brand logo (e.g. "/logos/acme.svg"). Falls back to a placeholder mark. */
   logo?: string;
+  /** Path to the person's photo. Falls back to an initials avatar. */
+  avatar?: string;
   sample: boolean;
 };
 

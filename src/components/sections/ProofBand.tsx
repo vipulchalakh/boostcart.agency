@@ -7,7 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 
 /** Real logo when supplied, otherwise a neutral placeholder mark (initial + company name). */
 function BrandLogo({ t }: { t: Testimonial }) {
-  if (t.logo) return <Image src={t.logo} alt={t.company} width={96} height={28} className="h-6 w-auto max-w-[96px] object-contain" />;
+  if (t.logo) return <Image src={t.logo} alt={t.company} width={96} height={28} className="h-10 w-auto max-w-[96px] object-contain" />;
   return (
     <span role="img" aria-label={t.company} className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap text-ink-50">
       <span aria-hidden className="grid size-6 place-items-center rounded-md bg-ink-05 font-display text-xs font-bold text-ink-68">
@@ -30,7 +30,11 @@ function Card({ t, i }: { t: Testimonial; i: number }) {
         ))}
       </blockquote>
       <figcaption className="mt-6 flex items-center gap-3">
-        <Avatar initials={t.name.split(" ").map((w) => w[0]).join("")} index={i} />
+        {t.avatar ? (
+          <Image src={t.avatar} alt={t.name} width={32} height={32} className="size-8 shrink-0 rounded-full object-cover ring-2 ring-white" />
+        ) : (
+          <Avatar initials={t.name.split(" ").map((w) => w[0]).join("")} index={i} />
+        )}
         <span className="min-w-0">
           <span className="block text-sm font-medium leading-[21px]">{t.name}</span>
           <span className="block truncate text-xs leading-[18px] text-ink-68">

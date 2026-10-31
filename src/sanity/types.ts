@@ -128,8 +128,8 @@ export type CaseStudy = {
   timelineMonths?: number;
   beforeAfter?: {
     organicKeywords?: {
-      before?: string;
-      after?: string;
+      before?: number;
+      after?: number;
     };
     organicTraffic?: {
       before?: string;
@@ -708,8 +708,8 @@ export type CASE_STUDY_QUERY_RESULT = {
   beforeAfter: {
     revenueCurrency: "AUD" | "CAD" | "EUR" | "GBP" | "USD" | null;
     organicKeywords: {
-      before: string | null;
-      after: string | null;
+      before: number | null;
+      after: number | null;
     } | null;
     organicTraffic: {
       before: string | null;

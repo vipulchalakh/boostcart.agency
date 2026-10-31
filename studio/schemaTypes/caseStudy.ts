@@ -2,25 +2,28 @@ import { defineArrayMember, defineField, defineType } from "sanity";
 import { TrendUpwardIcon } from "@sanity/icons/TrendUpward";
 import { MarkdownImportInput } from "../components/MarkdownImportInput";
 
-/** Typed as text so editors can write what they see in their report: 35k, 72.8k, 1.2M, 1,145. */
+/** Traffic and revenue are typed as text so editors can write what they see in their report: 35k (thousands), 72.8k, 1.2M (millions). */
 const AMOUNT = /^\d[\d,]*(\.\d+)?\s?[kKmMbB]?$/;
 const amount = (name: string) =>
   defineField({
     name,
     type: "string",
     validation: (rule) =>
-      rule.required().custom((value) => (!value || AMOUNT.test(value.trim()) ? true : "Use a number with an optional k, M or B, e.g. 35k, 72.8k, 1.2M or 1,145. No currency symbol.")),
+      rule.required().custom((value) => (!value || AMOUNT.test(value.trim()) ? true : "Use a number with an optional k, M or B, e.g. 35k (thousands), 72.8k or 1.2M (millions). No currency symbol.")),
   });
 
+/** Keywords are always whole numbers (1,145), never abbreviated. */
+const count = (name: string) => defineField({ name, type: "number", validation: (rule) => rule.required().integer().min(0) });
+
 /** Two values: where the client started and where they ended up. */
-const beforeAfter = (name: string, title: string, description: string) =>
+const beforeAfter = (name: string, title: string, description: string, field: (name: string) => ReturnType<typeof defineField> = amount) =>
   defineField({
     name,
     title,
     description,
     type: "object",
     options: { columns: 2 },
-    fields: [amount("before"), amount("after")],
+    fields: [field("before"), field("after")],
     validation: (rule) => rule.required(),
   });
 
@@ -137,7 +140,7 @@ export const caseStudy = defineType({
       group: "results",
       description: "Numbers at the start of the engagement versus the end.",
       fields: [
-        beforeAfter("organicKeywords", "Organic keywords", "Keywords ranking in the top 100."),
+        beforeAfter("organicKeywords", "Organic keywords", "Keywords ranking in the top 100. Whole numbers only, e.g. 1145 (no k or M).", count),
         beforeAfter("organicTraffic", "Organic traffic", "Monthly organic visits, e.g. 35k and 72.8k. Shown with “/month”."),
         beforeAfter("organicRevenue", "Organic revenue", "Monthly organic revenue, e.g. 30.5k and 63.3k. No currency symbol (it comes from the currency below). Shown with “/month”."),
         defineField({

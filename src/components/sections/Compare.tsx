@@ -32,7 +32,7 @@ function Verdict({ cell, strong }: { cell: Cell; strong?: boolean }) {
 
 type Col = { key: "boost" | "inHouse" | "agency"; title: string; sub: string };
 const homeCols: Col[] = [
-  { key: "boost", title: "BoostCart", sub: "E-commerce SEO team" },
+  { key: "boost", title: "BoostCart", sub: "E-commerce SEO and AI SEO team" },
   { key: "inHouse", title: "In-house team", sub: "Hire and build it yourself" },
   { key: "agency", title: "Other agencies", sub: "Typical generalist SEO agency" },
 ];

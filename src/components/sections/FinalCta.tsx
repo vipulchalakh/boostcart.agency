@@ -27,8 +27,8 @@ type Props = { eyebrow?: string; title?: string; lead?: string; primaryLabel?: s
 
 export function FinalCta({
   eyebrow = "Ready when you are",
-  title = "Get your free SEO audit",
-  lead = "We\u2019ll review your store and send a prioritized plan. No obligation.",
+  title = "Get your free SEO and AI SEO audit",
+  lead = "We\u2019ll review your store, in Google and in AI answers, and send a prioritized plan. No obligation.",
   primaryLabel = "Get my free audit",
   secondaryLabel = "Book a call",
   visual = <Dashboard />,

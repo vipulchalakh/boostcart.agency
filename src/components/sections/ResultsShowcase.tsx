@@ -114,7 +114,7 @@ export async function ResultsShowcase() {
       </div>
 
       {/* One slow auto-sliding row; pauses on hover/focus, static under reduced motion. */}
-      <MarqueeLoop className="px-1 py-4" duration="100s" label="Case studies">
+      <MarqueeLoop className="px-1 py-4" duration="100s" label="Case studies" draggable>
         <ul className="flex shrink-0 gap-6 pr-6">
           {cards.map((c) => (
             <li key={c.slug} className="w-[300px] shrink-0 sm:w-[380px] lg:w-[440px]">

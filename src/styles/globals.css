@@ -331,3 +331,40 @@
   .lead-section:has(form:focus-within) .lead-flame { scale: 1 1.6; animation-duration: .09s; }
 }
 .lead-mouse { transition: transform .25s ease-out; }
+
+/* Search shift section: mock browser + AI chat transitions (keyed remounts replay these) */
+@keyframes ss-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes ss-shimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+@keyframes ss-ring { 0% { box-shadow: 0 0 0 0 rgb(223 55 167 / .45); } 100% { box-shadow: 0 0 0 14px rgb(223 55 167 / 0); } }
+@keyframes ss-dot { 0%, 80%, 100% { opacity: .25; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-2px); } }
+@keyframes ss-caret { 50% { opacity: 0; } }
+@keyframes ss-tap { 0% { transform: scale(1); } 45% { transform: scale(.86); } 100% { transform: scale(1); } }
+.ss-in { animation: ss-in 520ms var(--ease-out-quart) both; animation-delay: var(--d, 0ms); }
+.ss-shimmer { background: linear-gradient(100deg, var(--ink-10) 30%, rgb(223 55 167 / .35) 50%, var(--ink-10) 70%); background-size: 200% 100%; animation: ss-shimmer 1.6s linear infinite; }
+.ss-ring { animation: ss-ring 1.6s ease-out infinite; animation-delay: var(--d, 0ms); }
+.ss-dot { animation: ss-dot 1s ease-in-out infinite; }
+.ss-caret { animation: ss-caret 1s steps(1) infinite; }
+.ss-tap { animation: ss-tap 380ms ease-out both; animation-delay: var(--d, 0ms); }
+.ss-cursor { transition: left 900ms var(--ease-out-quart), top 900ms var(--ease-out-quart); }
+@media (prefers-reduced-motion: reduce) {
+  .ss-in, .ss-tap { animation: none; opacity: 1; transform: none; }
+  .ss-shimmer, .ss-ring, .ss-dot, .ss-caret { animation: none; }
+  .ss-cursor { transition: none; }
+}
+
+/* Hero half-orbits: rings spin slowly, tiles counter-spin so logos stay upright */
+@keyframes orbit-spin { to { transform: rotate(360deg); } }
+@keyframes orbit-in { from { opacity: 0; } to { opacity: 1; } }
+.orbit-ring { animation: orbit-spin var(--dur) linear infinite; }
+.orbit-ring-rev { animation: orbit-spin var(--dur) linear infinite reverse; }
+.orbit-fade { animation: orbit-in 1.4s ease-out 0.4s both; }
+@media (prefers-reduced-motion: reduce) {
+  .orbit-ring, .orbit-ring-rev { animation: none; }
+  .orbit-fade { animation: none; }
+}
+
+/* Draggable marquee: grab cursor, no text/image selection while dragging, vertical page scroll still works on touch */
+.marquee-drag { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.marquee-drag.is-dragging { cursor: grabbing; }
+.marquee-drag img { -webkit-user-drag: none; }
+@media (prefers-reduced-motion: reduce) { .marquee-drag { cursor: auto; touch-action: auto; } }

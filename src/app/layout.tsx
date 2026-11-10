@@ -23,7 +23,8 @@ export const viewport: Viewport = { themeColor: "#ffffff", width: "device-width"
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={fontVariables}>
-      <body>
+      {/* Browser extensions (e.g. ColorZilla) inject attributes onto <body> before React hydrates; ignore those mismatches. */}
+      <body suppressHydrationWarning>
         <noscript>
           <style>{`.reveal,.si,.hero-line>span,.hero-fade{opacity:1!important;transform:none!important;animation:none!important}.marquee{overflow-x:auto}.draw-path{stroke-dashoffset:0}.grow-x{transform:none}.type{max-width:100%}.gauge{stroke-dashoffset:0}.lead-bar{transform:none}.lead-trail{stroke-dashoffset:0}header [aria-label="Main"],header [aria-label="Open menu"]{display:none!important}`}</style>
         </noscript>

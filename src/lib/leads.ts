@@ -1,3 +1,5 @@
+import { getSupabase } from "@/lib/supabase";
+
 /**
  * Server-side storage for every form submission on the site: one `leads` table in Supabase.
  * Row level security lets the publishable key INSERT only, so visitors can never read leads back.
@@ -74,10 +76,9 @@ const cut = (v: string | null | undefined, n: number) => (typeof v === "string" 
  * Callers decide whether a failed save should block the visitor.
  */
 export async function insertLead(row: LeadRow): Promise<boolean> {
-  const base = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_PUBLISHABLE_KEY;
-  if (!base || !key) {
-    console.error("[leads] SUPABASE_URL or SUPABASE_PUBLISHABLE_KEY is not set");
+  const db = getSupabase();
+  if (!db) {
+    console.error("[leads] Supabase URL or key is not set");
     return false;
   }
   const body = {
@@ -97,15 +98,9 @@ export async function insertLead(row: LeadRow): Promise<boolean> {
     extra: row.extra ?? {},
   };
   try {
-    const res = await fetch(`${base}/rest/v1/leads`, {
-      method: "POST",
-      headers: { apikey: key, "content-type": "application/json", prefer: "return=minimal" },
-      body: JSON.stringify(body),
-      signal: AbortSignal.timeout(8000),
-      cache: "no-store",
-    });
-    if (!res.ok) {
-      console.error("[leads] insert failed", res.status, (await res.text().catch(() => "")).slice(0, 300));
+    const { error } = await db.from("leads").insert(body);
+    if (error) {
+      console.error("[leads] insert failed", error.code, error.message.slice(0, 300));
       return false;
     }
     return true;

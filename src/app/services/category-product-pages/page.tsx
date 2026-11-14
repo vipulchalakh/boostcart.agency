@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { bookCallHref, categoryFaqs, categoryGoodFit, categoryNotFit, categoryPlatforms, categorySteps, categoryUsps } from "@content/data";
+import { MockImage } from "@/components/mocks/MockImage";
+import { categoryFaqs, categoryGoodFit, categoryNotFit, categoryPlatforms, categorySteps, categoryUsps } from "@content/data";
 import { Faq } from "@/components/sections/Faq";
 import { Hero } from "@/components/sections/Hero";
 import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
@@ -16,7 +17,6 @@ import { CategoryFinalCta } from "@/components/category-product-pages/CategoryFi
 import { CategoryLeadSection } from "@/components/category-product-pages/CategoryLeadSection";
 import { CategoryCompare } from "@/components/category-product-pages/CategoryCompare";
 import { CategoryWorkflow } from "@/components/category-product-pages/CategoryWorkflow";
-import { KeywordMock, LayoutMock, LinkMock, ProductMock, SchemaMock, TitleMock } from "@/components/category-product-pages/Mocks";
 
 const siteUrl = "https://boostcart.agency";
 const path = "/services/category-product-pages";
@@ -24,7 +24,7 @@ const path = "/services/category-product-pages";
 /** Drives both the visible breadcrumb and its BreadcrumbList schema. /services has no page yet, so it points at the homepage services section. */
 const breadcrumb = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/#services" },
+  { name: "Services", href: "/" },
   { name: "Category & Product Pages", href: path },
 ];
 const title = "Ecommerce Category and Product Page SEO";
@@ -57,14 +57,14 @@ const jsonLd = [
 ];
 
 const row1: Tile[] = [
-  { title: "Keyword-to-page mapping", text: "Each search matched to one collection or product, so pages stop competing.", href: path, mock: <KeywordMock />, glow: { hue: "yellow", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
-  { title: "Titles and meta descriptions", text: "Written for the search and the shopper, not copied from a template.", href: path, mock: <TitleMock />, glow: { hue: "pink", pos: "-right-16 -top-20" } },
-  { title: "Collection page structure", text: "Headings, intro copy, filters and guides arranged to help people choose.", href: path, mock: <LayoutMock />, glow: { hue: "yellow", pos: "-right-14 -top-20" } },
+  { title: "Keyword-to-page mapping", text: "Each search matched to one collection or product, so pages stop competing.", href: path, mock: <MockImage id="services/category-product-pages/1" alt="Animated preview: Keyword-to-page mapping" />, glow: { hue: "yellow", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
+  { title: "Titles and meta descriptions", text: "Written for the search and the shopper, not copied from a template.", href: path, mock: <MockImage id="services/category-product-pages/2" alt="Animated preview: Titles and meta descriptions" />, glow: { hue: "pink", pos: "-right-16 -top-20" } },
+  { title: "Collection page structure", text: "Headings, intro copy, filters and guides arranged to help people choose.", href: path, mock: <MockImage id="services/category-product-pages/3" alt="Animated preview: Collection page structure" />, glow: { hue: "yellow", pos: "-right-14 -top-20" } },
 ];
 const row2: Tile[] = [
-  { title: "Product descriptions", text: "Specs, sizing and buying answers, written for your products.", href: path, mock: <ProductMock />, glow: { hue: "pink", pos: "-left-14 -top-20" } },
-  { title: "Internal linking", text: "Links between collections, products and guides that pass the right signals.", href: path, mock: <LinkMock />, glow: { hue: "yellow", pos: "-right-16 -top-20" } },
-  { title: "Structured data", text: "Product, offer and review markup matched to what the page shows.", href: path, mock: <SchemaMock />, glow: { hue: "pink", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
+  { title: "Product descriptions", text: "Specs, sizing and buying answers, written for your products.", href: path, mock: <MockImage id="services/category-product-pages/4" alt="Animated preview: Product descriptions" />, glow: { hue: "pink", pos: "-left-14 -top-20" } },
+  { title: "Internal linking", text: "Links between collections, products and guides that pass the right signals.", href: path, mock: <MockImage id="services/category-product-pages/5" alt="Animated preview: Internal linking" />, glow: { hue: "yellow", pos: "-right-16 -top-20" } },
+  { title: "Structured data", text: "Product, offer and review markup matched to what the page shows.", href: path, mock: <MockImage id="services/category-product-pages/6" alt="Animated preview: Structured data" />, glow: { hue: "pink", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
 ];
 
 export default function CategoryProductPagesPage() {
@@ -78,9 +78,6 @@ export default function CategoryProductPagesPage() {
           breadcrumb={breadcrumb}
           lines={["Category Pages That", "Rank and Sell"]}
           lead="Turn your collections and product pages into pages that match what shoppers search for and help them buy."
-          primaryLabel="Get a page review"
-          secondaryLabel="Book a call"
-          secondaryHref={bookCallHref}
           note="Shopify · WooCommerce · BigCommerce · Magento · Headless"
           visual={<HeroVisual />}
         />

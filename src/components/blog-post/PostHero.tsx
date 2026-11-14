@@ -19,7 +19,7 @@ export function PostHero({ title, categoryTitle, author, modifiedAt, readTime }:
     { name: "Blog", href: "/blog" },
   ];
   return (
-    <header className="relative isolate z-20 pb-10 pt-28 text-center md:pb-14 md:pt-32 lg:pt-36">
+    <header className="relative isolate -mt-12 z-20 pb-10 pt-[10rem] text-center md:pb-14 md:pt-[11rem] lg:pt-[12rem]">
       <PostHeroBackdrop />
       <div className="container-x">
         <div className="hero-fade mx-auto max-w-[920px]">

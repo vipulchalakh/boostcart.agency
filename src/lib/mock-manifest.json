@@ -1,0 +1,410 @@
+{
+  "industries/jewelry-accessories/1": {
+    "w": 490,
+    "h": 153
+  },
+  "industries/jewelry-accessories/2": {
+    "w": 328,
+    "h": 225
+  },
+  "industries/jewelry-accessories/3": {
+    "w": 328,
+    "h": 209
+  },
+  "industries/jewelry-accessories/4": {
+    "w": 382,
+    "h": 199
+  },
+  "industries/jewelry-accessories/5": {
+    "w": 382,
+    "h": 204
+  },
+  "industries/jewelry-accessories/6": {
+    "w": 382,
+    "h": 206
+  },
+  "home/1": {
+    "w": 490,
+    "h": 153
+  },
+  "home/2": {
+    "w": 328,
+    "h": 208
+  },
+  "home/3": {
+    "w": 328,
+    "h": 209
+  },
+  "home/4": {
+    "w": 382,
+    "h": 199
+  },
+  "home/5": {
+    "w": 382,
+    "h": 204
+  },
+  "home/6": {
+    "w": 382,
+    "h": 206
+  },
+  "services/technical-seo/1": {
+    "w": 490,
+    "h": 236
+  },
+  "services/technical-seo/2": {
+    "w": 328,
+    "h": 180
+  },
+  "services/technical-seo/3": {
+    "w": 328,
+    "h": 129
+  },
+  "services/technical-seo/4": {
+    "w": 382,
+    "h": 140
+  },
+  "services/technical-seo/5": {
+    "w": 382,
+    "h": 163
+  },
+  "services/technical-seo/6": {
+    "w": 382,
+    "h": 190
+  },
+  "services/category-product-pages/1": {
+    "w": 490,
+    "h": 190
+  },
+  "services/content/1": {
+    "w": 490,
+    "h": 190
+  },
+  "services/link-building/1": {
+    "w": 490,
+    "h": 190
+  },
+  "services/conversion-seo/1": {
+    "w": 490,
+    "h": 190
+  },
+  "services/conversion-seo/2": {
+    "w": 328,
+    "h": 109
+  },
+  "services/conversion-seo/3": {
+    "w": 328,
+    "h": 124
+  },
+  "services/reporting/1": {
+    "w": 490,
+    "h": 236
+  },
+  "industries/fashion-apparel/1": {
+    "w": 490,
+    "h": 153
+  },
+  "industries/fashion-apparel/2": {
+    "w": 328,
+    "h": 208
+  },
+  "industries/fashion-apparel/3": {
+    "w": 328,
+    "h": 209
+  },
+  "industries/fashion-apparel/4": {
+    "w": 382,
+    "h": 199
+  },
+  "industries/fashion-apparel/5": {
+    "w": 382,
+    "h": 204
+  },
+  "industries/fashion-apparel/6": {
+    "w": 382,
+    "h": 206
+  },
+  "industries/beauty-skincare/1": {
+    "w": 490,
+    "h": 153
+  },
+  "industries/beauty-skincare/2": {
+    "w": 328,
+    "h": 225
+  },
+  "industries/beauty-skincare/3": {
+    "w": 328,
+    "h": 209
+  },
+  "industries/beauty-skincare/4": {
+    "w": 382,
+    "h": 199
+  },
+  "industries/beauty-skincare/5": {
+    "w": 382,
+    "h": 204
+  },
+  "industries/beauty-skincare/6": {
+    "w": 382,
+    "h": 206
+  },
+  "industries/health-supplements/1": {
+    "w": 490,
+    "h": 153
+  },
+  "industries/health-supplements/2": {
+    "w": 328,
+    "h": 208
+  },
+  "industries/health-supplements/3": {
+    "w": 328,
+    "h": 209
+  },
+  "industries/health-supplements/4": {
+    "w": 382,
+    "h": 199
+  },
+  "industries/health-supplements/5": {
+    "w": 382,
+    "h": 204
+  },
+  "industries/health-supplements/6": {
+    "w": 382,
+    "h": 206
+  },
+  "industries/home-furniture/1": {
+    "w": 490,
+    "h": 153
+  },
+  "industries/home-furniture/2": {
+    "w": 328,
+    "h": 225
+  },
+  "industries/home-furniture/3": {
+    "w": 328,
+    "h": 209
+  },
+  "industries/home-furniture/4": {
+    "w": 382,
+    "h": 199
+  },
+  "industries/home-furniture/5": {
+    "w": 382,
+    "h": 204
+  },
+  "industries/home-furniture/6": {
+    "w": 382,
+    "h": 206
+  },
+  "industries/electronics-gadgets/1": {
+    "w": 490,
+    "h": 153
+  },
+  "industries/electronics-gadgets/2": {
+    "w": 328,
+    "h": 225
+  },
+  "industries/electronics-gadgets/3": {
+    "w": 328,
+    "h": 209
+  },
+  "industries/electronics-gadgets/4": {
+    "w": 382,
+    "h": 199
+  },
+  "industries/electronics-gadgets/5": {
+    "w": 382,
+    "h": 204
+  },
+  "industries/electronics-gadgets/6": {
+    "w": 382,
+    "h": 206
+  },
+  "industries/food-beverage/1": {
+    "w": 490,
+    "h": 153
+  },
+  "industries/food-beverage/2": {
+    "w": 328,
+    "h": 225
+  },
+  "industries/food-beverage/3": {
+    "w": 328,
+    "h": 209
+  },
+  "industries/food-beverage/4": {
+    "w": 382,
+    "h": 199
+  },
+  "industries/food-beverage/5": {
+    "w": 382,
+    "h": 204
+  },
+  "industries/food-beverage/6": {
+    "w": 382,
+    "h": 206
+  },
+  "industries/sports-outdoors/1": {
+    "w": 490,
+    "h": 153
+  },
+  "industries/sports-outdoors/2": {
+    "w": 328,
+    "h": 208
+  },
+  "industries/sports-outdoors/3": {
+    "w": 328,
+    "h": 209
+  },
+  "industries/sports-outdoors/4": {
+    "w": 382,
+    "h": 199
+  },
+  "industries/sports-outdoors/5": {
+    "w": 382,
+    "h": 204
+  },
+  "industries/sports-outdoors/6": {
+    "w": 382,
+    "h": 206
+  },
+  "industries/baby-kids/1": {
+    "w": 490,
+    "h": 153
+  },
+  "industries/baby-kids/2": {
+    "w": 328,
+    "h": 225
+  },
+  "industries/baby-kids/3": {
+    "w": 328,
+    "h": 209
+  },
+  "industries/baby-kids/4": {
+    "w": 382,
+    "h": 199
+  },
+  "industries/baby-kids/5": {
+    "w": 382,
+    "h": 204
+  },
+  "industries/baby-kids/6": {
+    "w": 382,
+    "h": 206
+  },
+  "industries/pet-supplies/1": {
+    "w": 490,
+    "h": 153
+  },
+  "industries/pet-supplies/2": {
+    "w": 328,
+    "h": 225
+  },
+  "industries/pet-supplies/3": {
+    "w": 328,
+    "h": 209
+  },
+  "industries/pet-supplies/4": {
+    "w": 382,
+    "h": 199
+  },
+  "industries/pet-supplies/5": {
+    "w": 382,
+    "h": 204
+  },
+  "industries/pet-supplies/6": {
+    "w": 382,
+    "h": 206
+  },
+  "services/category-product-pages/2": {
+    "w": 328,
+    "h": 178
+  },
+  "services/category-product-pages/3": {
+    "w": 328,
+    "h": 180
+  },
+  "services/category-product-pages/4": {
+    "w": 382,
+    "h": 226
+  },
+  "services/category-product-pages/5": {
+    "w": 382,
+    "h": 180
+  },
+  "services/category-product-pages/6": {
+    "w": 382,
+    "h": 139
+  },
+  "services/content/2": {
+    "w": 328,
+    "h": 203
+  },
+  "services/content/3": {
+    "w": 328,
+    "h": 156
+  },
+  "services/content/4": {
+    "w": 382,
+    "h": 110
+  },
+  "services/content/5": {
+    "w": 382,
+    "h": 86
+  },
+  "services/content/6": {
+    "w": 382,
+    "h": 163
+  },
+  "services/link-building/2": {
+    "w": 328,
+    "h": 156
+  },
+  "services/link-building/3": {
+    "w": 328,
+    "h": 157
+  },
+  "services/link-building/4": {
+    "w": 382,
+    "h": 134
+  },
+  "services/link-building/5": {
+    "w": 382,
+    "h": 86
+  },
+  "services/link-building/6": {
+    "w": 382,
+    "h": 190
+  },
+  "services/conversion-seo/4": {
+    "w": 382,
+    "h": 129
+  },
+  "services/conversion-seo/5": {
+    "w": 382,
+    "h": 62
+  },
+  "services/conversion-seo/6": {
+    "w": 382,
+    "h": 190
+  },
+  "services/reporting/2": {
+    "w": 328,
+    "h": 164
+  },
+  "services/reporting/3": {
+    "w": 328,
+    "h": 134
+  },
+  "services/reporting/4": {
+    "w": 382,
+    "h": 193
+  },
+  "services/reporting/5": {
+    "w": 382,
+    "h": 144
+  },
+  "services/reporting/6": {
+    "w": 382,
+    "h": 178
+  }
+}

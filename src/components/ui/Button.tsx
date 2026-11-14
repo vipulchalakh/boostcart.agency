@@ -30,9 +30,11 @@ type Props = {
   arrow?: boolean;
   sheen?: boolean;
   className?: string;
+  /** Extra attributes for the button form, e.g. data-cal-* for the booking pop-up. */
+  attrs?: Record<string, string>;
 } & ({ href: string; onClick?: never; type?: never } | { href?: never; onClick?: () => void; type?: "button" | "submit" });
 
-export function Button({ children, variant = "primary", size = "md", arrow, sheen, className, ...rest }: Props) {
+export function Button({ children, variant = "primary", size = "md", arrow, sheen, className, attrs, ...rest }: Props) {
   const cls = cn(base, variants[variant], sizes[size], className);
   const inner = (
     <>
@@ -54,7 +56,7 @@ export function Button({ children, variant = "primary", size = "md", arrow, shee
     );
   }
   return (
-    <button type={(rest as { type?: "button" | "submit" }).type ?? "button"} onClick={(rest as { onClick?: () => void }).onClick} className={cls}>
+    <button {...attrs} type={(rest as { type?: "button" | "submit" }).type ?? "button"} onClick={(rest as { onClick?: () => void }).onClick} className={cls}>
       {inner}
     </button>
   );

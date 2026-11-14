@@ -25,8 +25,8 @@ export const footerColumns: Array<{ title: string; links: NavLink[] }> = [
     title: "Company",
     links: [
       { label: "About", href: "/about" },
+      { label: "Contact", href: "/contact" },
       { label: "Case Studies", href: "/case-studies" },
-      { label: "Blog", href: "/blog" },
       { label: "Privacy policy", href: "/privacy" },
       { label: "Terms of service", href: "/terms" },
     ],
@@ -43,9 +43,9 @@ export const footerColumns: Array<{ title: string; links: NavLink[] }> = [
     title: "Resources",
     links: [
       { label: "Free audit", href: "/free-audit" },
-      { label: "E-commerce SEO guides", href: "/resources/guides" },
-      { label: "Checklists", href: "/resources/checklists" },
-      { label: "Contact", href: "/contact" },
+      { label: "Blog", href: "/blog" },
+      { label: "Research", href: "/research" },
+      { label: "Checklists", href: "/e-commerce-seo-checklists" },
     ],
   },
 ];

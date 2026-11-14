@@ -55,6 +55,10 @@ export function Footer() {
 
         <div className="mt-6 flex flex-col gap-4 border-t border-ink-05 py-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-[13px] text-ink-68">© 2026 BoostCart. All rights reserved.</p>
+          <ul className="flex gap-5 text-[13px]">
+            <li><AppLink href="/privacy" className="text-ink-68 underline decoration-transparent underline-offset-4 transition-[color,text-decoration-color] hover:text-ink hover:decoration-ink-32">Privacy policy</AppLink></li>
+            <li><AppLink href="/terms" className="text-ink-68 underline decoration-transparent underline-offset-4 transition-[color,text-decoration-color] hover:text-ink hover:decoration-ink-32">Terms of service</AppLink></li>
+          </ul>
           {/* TODO-REAL: add trust badges (e.g. GDPR, status page) here only when they are true. */}
         </div>
       </div>

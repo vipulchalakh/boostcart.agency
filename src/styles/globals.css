@@ -368,3 +368,18 @@
 .marquee-drag.is-dragging { cursor: grabbing; }
 .marquee-drag img { -webkit-user-drag: none; }
 @media (prefers-reduced-motion: reduce) { .marquee-drag { cursor: auto; touch-action: auto; } }
+
+/* Homepage section rhythm. Scoped to the homepage wrapper so other pages keep the default spacing.
+   Goal: about 2 x --section-y of visible space between any two sections, whether plain, dark panel or tinted band. */
+.home-rhythm { --section-y: 36px; --section-y-compact: 32px; }
+@media (min-width: 768px) { .home-rhythm { --section-y: 44px; --section-y-compact: 36px; } }
+@media (min-width: 1024px) { .home-rhythm { --section-y: 50px; --section-y-compact: 40px; } }
+/* Dark panels sit in a slim frame, so they get a full step of air on each side. */
+.home-rhythm section[aria-labelledby="shift-title"],
+.home-rhythm section[aria-labelledby="usp-title"] { padding-block: var(--section-y); }
+/* The first panel follows the hero, which already ends with its own space. */
+.home-rhythm section[aria-labelledby="shift-title"] { margin-top: calc(var(--section-y) * -0.9); }
+/* Tinted bands keep a roomy inside and a full step of air outside. */
+.home-rhythm section[aria-labelledby="process-title"],
+.home-rhythm section[aria-labelledby="faq-title"] { padding-block: calc(var(--section-y) * 1.5); margin-block: var(--section-y); }
+.home-rhythm section[aria-labelledby="industries-title"] { padding-bottom: var(--section-y); }

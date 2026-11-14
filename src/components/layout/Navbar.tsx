@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import * as Dialog from "@radix-ui/react-dialog";
-import { BarChart3, Baby, BookOpen, Boxes, ChevronDown, Coffee, Gem, HeartPulse, Mountain, PawPrint, Shirt, Smartphone, Sofa, Sparkles, Code2, FileSearch, Layers, LayoutGrid, Link2, ListChecks, Menu, PenLine, ShoppingBag, Store, TrendingUp, Wrench, X, type LucideIcon } from "lucide-react";
-import { auditHref, bookCallHref, navItems, type NavItem } from "@content/data";
+import { BarChart3, Baby, BookOpen, Mail, Users, Boxes, ChevronDown, Coffee, Gem, HeartPulse, Mountain, PawPrint, Shirt, Smartphone, Sofa, Sparkles, Video, Code2, FileSearch, Layers, LayoutGrid, Link2, ListChecks, PenLine, ShoppingBag, Store, TrendingUp, Wrench, X, type LucideIcon } from "lucide-react";
+import { auditHref, navItems, type NavItem } from "@content/data";
 import { cn } from "@/lib/cn";
+import { calAttrs } from "@/lib/cal";
 import { AppLink } from "@/components/ui/AppLink";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "@/components/ui/Logo";
-import { AnnouncementChip } from "./AnnouncementChip";
 
 const linkCls =
   "inline-flex items-center gap-1 whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium leading-[21px] text-ink-68 transition-colors duration-200 ease-[var(--ease-ui)] hover:bg-ink-05 hover:text-ink data-[state=open]:bg-ink-05 data-[state=open]:text-ink";
@@ -19,9 +19,45 @@ const icons: Record<string, LucideIcon> = {
   shopify: ShoppingBag, woocommerce: Store, bigcommerce: Boxes, magento: Layers, headless: Code2,
   "fashion-apparel": Shirt, "beauty-skincare": Sparkles, "health-supplements": HeartPulse, "home-furniture": Sofa, "electronics-gadgets": Smartphone,
   "jewelry-accessories": Gem, "food-beverage": Coffee, "sports-outdoors": Mountain, "pet-supplies": PawPrint, "baby-kids": Baby,
-  guides: BookOpen, checklists: ListChecks, "free-audit": FileSearch,
+  guides: BookOpen, checklists: ListChecks, "free-audit": FileSearch, about: Users, contact: Mail, blog: BookOpen,
 };
 const iconFor = (href: string) => icons[href.split("/").pop() ?? ""] ?? LayoutGrid;
+
+/** "Oreo" menu icon: three fat pill bars stacked with hairline gaps, so the whole icon reads as a near-square block. */
+function MenuIcon({ className }: { className?: string }) {
+  return (
+    <svg aria-hidden viewBox="0 0 24 24" fill="currentColor" className={className}>
+      <rect x="1.5" y="1" width="21" height="6.2" rx="3.1" />
+      <rect x="1.5" y="8.9" width="21" height="6.2" rx="3.1" />
+      <rect x="1.5" y="16.8" width="21" height="6.2" rx="3.1" />
+    </svg>
+  );
+}
+
+/**
+ * "Book a call": opens the Cal.com booking pop-up right on the page (month calendar first, slots view on phones),
+ * so a visitor can pick a time and confirm without leaving the site. CalLoader (root layout) loads Cal's script.
+ * Pass onOpen to close another layer, like the mobile menu, first.
+ */
+function BookCallButton({ size, onOpen }: { size: "sm" | "lg"; onOpen?: () => void }) {
+  const lg = size === "lg";
+  return (
+    <Button
+      onClick={onOpen ? () => setTimeout(onOpen, 0) : undefined}
+      attrs={calAttrs}
+      variant="primary"
+      size={size}
+      className={cn("group/call", lg ? "!pl-3" : "!pl-1.5 !pr-2.5 sm:!pr-3")}>
+      <span className={cn("inline-flex items-center", lg ? "gap-2.5" : "gap-2")}>
+        <span className={cn("relative grid shrink-0 place-items-center bg-white/20 text-white transition-transform duration-200 ease-[var(--ease-out-quart)] group-hover/call:-rotate-6 group-hover/call:scale-110 motion-reduce:transform-none", lg ? "size-7 rounded-md" : "size-5 rounded-[5px]")}>
+          <Video aria-hidden className={lg ? "size-4" : "size-3"} />
+          <span aria-hidden className={cn("absolute rounded-full bg-success-dot ring-2 ring-accent motion-safe:animate-pulse-dot", lg ? "-right-1 -top-1 size-2.5" : "-right-0.5 -top-0.5 size-1.5")} />
+        </span>
+        Book a call
+      </span>
+    </Button>
+  );
+}
 
 function Dropdown({ item }: { item: NavItem }) {
   const kids = item.children ?? [];
@@ -54,7 +90,7 @@ function Dropdown({ item }: { item: NavItem }) {
           <p className="eyebrow text-[11px]">Free audit</p>
           <p className="mt-2 text-sm font-medium leading-[21px]">Get a prioritized plan for your store.</p>
         </div>
-        <Button href={auditHref} size="sm" arrow className="relative mt-6 self-start">
+        <Button href={auditHref} variant="secondary" size="sm" arrow className="relative mt-6 self-start">
           Get my audit
         </Button>
       </div>
@@ -77,7 +113,7 @@ export function Navbar() {
     <header className="sticky top-2 z-50 px-2">
       <div
         className={cn(
-          "relative mx-auto flex h-[51px] max-w-[var(--container)] items-center justify-between gap-4 rounded-lg border border-ink-05 pl-4 pr-2 backdrop-blur-[12px] backdrop-saturate-[1.2] transition-[box-shadow,background-color] duration-200 ease-[var(--ease-ui)]",
+          "relative mx-auto flex h-[51px] max-w-[var(--container)] items-center justify-between gap-2 rounded-lg border border-ink-05 pl-3 pr-1.5 sm:gap-4 sm:pl-4 sm:pr-2 backdrop-blur-[12px] backdrop-saturate-[1.2] transition-[box-shadow,background-color] duration-200 ease-[var(--ease-ui)]",
           scrolled ? "bg-white/90 shadow-md" : "bg-white/85 shadow-xs",
         )}
       >
@@ -116,17 +152,15 @@ export function Navbar() {
 
         <div className="flex items-center gap-1">
           <span className="hidden xl:inline-flex">
-            <Button href={bookCallHref} variant="secondary" size="sm">
-              Book a call
+            <Button href={auditHref} variant="secondary" size="sm">
+              Get a free audit
             </Button>
           </span>
-          <Button href={auditHref} size="sm">
-            Get a free audit
-          </Button>
+          <BookCallButton size="sm" />
 
           <Dialog.Root open={open} onOpenChange={setOpen}>
             <Dialog.Trigger aria-label="Open menu" className="grid size-9 place-items-center rounded-md text-ink hover:bg-ink-05 lg:hidden">
-              <Menu aria-hidden className="size-5" />
+              <MenuIcon className="size-5" />
             </Dialog.Trigger>
             <Dialog.Portal>
               <Dialog.Overlay className="fixed inset-0 z-[60] bg-ink/30 backdrop-blur-sm" />
@@ -167,11 +201,9 @@ export function Navbar() {
                   )}
                 </nav>
                 <div className="mt-6 grid gap-3">
-                  <Button href={auditHref} size="lg">
+                  <BookCallButton size="lg" onOpen={() => setOpen(false)} />
+                  <Button href={auditHref} variant="secondary" size="lg">
                     Get a free audit
-                  </Button>
-                  <Button href={bookCallHref} variant="secondary" size="lg">
-                    Book a call
                   </Button>
                 </div>
               </Dialog.Content>
@@ -179,7 +211,6 @@ export function Navbar() {
           </Dialog.Root>
         </div>
 
-        <AnnouncementChip />
       </div>
     </header>
   );

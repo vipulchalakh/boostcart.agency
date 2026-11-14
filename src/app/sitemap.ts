@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
 import { industries } from "@content/data";
 import { client } from "@/sanity/lib/client";
-import { CASE_STUDY_SLUGS_QUERY, POST_SLUGS_QUERY } from "@/sanity/lib/queries";
+import { CASE_STUDY_SLUGS_QUERY, POST_SLUGS_QUERY, RESEARCH_SLUGS_QUERY } from "@/sanity/lib/queries";
 
 /** Only live pages belong here. Add each route as its page ships. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [posts, caseStudies] = await Promise.all([client.fetch(POST_SLUGS_QUERY), client.fetch(CASE_STUDY_SLUGS_QUERY)]);
+  const [posts, research, caseStudies] = await Promise.all([client.fetch(POST_SLUGS_QUERY), client.fetch(RESEARCH_SLUGS_QUERY), client.fetch(CASE_STUDY_SLUGS_QUERY)]);
   return [
     { url: "https://boostcart.agency/", changeFrequency: "monthly", priority: 1 },
     { url: "https://boostcart.agency/services/technical-seo", changeFrequency: "monthly", priority: 0.8 },
@@ -14,8 +14,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: "https://boostcart.agency/services/link-building", changeFrequency: "monthly", priority: 0.8 },
     { url: "https://boostcart.agency/services/conversion-seo", changeFrequency: "monthly", priority: 0.8 },
     { url: "https://boostcart.agency/services/reporting", changeFrequency: "monthly", priority: 0.8 },
+    { url: "https://boostcart.agency/about", changeFrequency: "monthly", priority: 0.6 },
+    { url: "https://boostcart.agency/contact", changeFrequency: "monthly", priority: 0.6 },
+    { url: "https://boostcart.agency/privacy", changeFrequency: "yearly", priority: 0.3 },
+    { url: "https://boostcart.agency/terms", changeFrequency: "yearly", priority: 0.3 },
+    { url: "https://boostcart.agency/free-audit", changeFrequency: "monthly", priority: 0.8 },
+    { url: "https://boostcart.agency/e-commerce-seo-checklists", changeFrequency: "monthly", priority: 0.8 },
     { url: "https://boostcart.agency/blog", changeFrequency: "weekly", priority: 0.7 },
     ...posts.flatMap((p) => (p.slug ? [{ url: `https://boostcart.agency/blog/${p.slug}`, changeFrequency: "monthly" as const, priority: 0.6 }] : [])),
+    { url: "https://boostcart.agency/research", changeFrequency: "weekly", priority: 0.7 },
+    ...research.flatMap((r) => (r.slug ? [{ url: `https://boostcart.agency/research/${r.slug}`, changeFrequency: "monthly" as const, priority: 0.6 }] : [])),
     { url: "https://boostcart.agency/case-studies", changeFrequency: "weekly", priority: 0.7 },
     ...caseStudies.flatMap((c) => (c.slug ? [{ url: `https://boostcart.agency/case-studies/${c.slug}`, changeFrequency: "monthly" as const, priority: 0.6 }] : [])),
     ...industries.map((i) => ({ url: `https://boostcart.agency/industries/${i.slug}`, changeFrequency: "monthly" as const, priority: 0.7 })),

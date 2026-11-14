@@ -2,6 +2,7 @@
 
 import { ArrowRight, Check } from "lucide-react";
 import type { IndustryPage } from "@content/data";
+import { submitLead } from "@/lib/submit-lead";
 import { useId, useState, useSyncExternalStore, type FormEvent, type ReactNode } from "react";
 
 const subscribe = () => () => {};
@@ -36,6 +37,7 @@ export function IndustryLeadForm({ page }: { page: IndustryPage }) {
   const ready = useSyncExternalStore(subscribe, () => true, () => false);
   const [errors, setErrors] = useState<Errors>({});
   const [state, setState] = useState<"idle" | "sending" | "done">("idle");
+  const [formError, setFormError] = useState("");
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -53,8 +55,13 @@ export function IndustryLeadForm({ page }: { page: IndustryPage }) {
       return;
     }
     setState("sending");
-    // TODO-REAL: POST { industry, name, email, url, sells, platform } to the CRM or form endpoint. Nothing is sent yet.
-    await new Promise((r) => setTimeout(r, 700));
+    setFormError("");
+    const res = await submitLead({ form: `industry-${page.slug}`, name, email, url, company: String(f.get("company") ?? ""), sells: String(f.get("sells") ?? ""), platform: String(f.get("platform") ?? "") });
+    if (!res.ok) {
+      setFormError(res.error);
+      setState("idle");
+      return;
+    }
     setState("done");
   }
 
@@ -99,6 +106,11 @@ export function IndustryLeadForm({ page }: { page: IndustryPage }) {
           </select>
         </Field>
       </div>
+
+      <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label>Company<input name="company" tabIndex={-1} autoComplete="off" /></label>
+      </div>
+      {formError && <p role="alert" className="text-[13px] text-danger-fg">{formError}</p>}
 
       <button
         type="submit"

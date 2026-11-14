@@ -49,7 +49,7 @@ export default async function BlogPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
 
-      <header className="relative isolate pb-12 pt-28 text-center md:pb-16 md:pt-32 lg:pt-36">
+      <header className="relative isolate -mt-12 pb-12 pt-[10rem] text-center md:pb-16 md:pt-[11rem] lg:pt-[12rem]">
         <BlogIndexBackdrop />
         <div className="container-x">
           <div className="hero-fade mx-auto max-w-[860px]">

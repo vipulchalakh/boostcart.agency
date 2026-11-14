@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
+import { useEffect, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from "react";
 import { ArrowUpRight, Check, Lock, MousePointer2, RotateCw, Search, ShoppingBag, Sparkles, Star } from "lucide-react";
 import { cn } from "@/lib/cn";
 
@@ -12,9 +12,15 @@ const PROMPT = "I need waterproof trail running shoes for wide feet, under $150.
 const d = (ms: number) => ({ ["--d" as string]: `${ms}ms` }) as CSSProperties;
 
 function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches), []);
-  return reduced;
+  return useSyncExternalStore(
+    (cb) => {
+      const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+      mq.addEventListener("change", cb);
+      return () => mq.removeEventListener("change", cb);
+    },
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => false,
+  );
 }
 
 /** Types `text` out once on mount (remount with a new `key` to replay). */
@@ -22,7 +28,7 @@ function Typed({ text, speed = 30, delay = 0, caret = true, className }: { text:
   const reduced = usePrefersReducedMotion();
   const [n, setN] = useState(0);
   useEffect(() => {
-    if (reduced) return setN(text.length);
+    if (reduced) return;
     let i = 0;
     let iv: ReturnType<typeof setInterval> | undefined;
     const t = setTimeout(() => {
@@ -39,8 +45,8 @@ function Typed({ text, speed = 30, delay = 0, caret = true, className }: { text:
   }, [text, speed, delay, reduced]);
   return (
     <span className={className}>
-      {text.slice(0, n)}
-      {caret && n < text.length && <span aria-hidden className="ss-caret ml-px inline-block h-[1.05em] w-[2px] translate-y-[2px] bg-current" />}
+      {text.slice(0, reduced ? text.length : n)}
+      {caret && !reduced && n < text.length && <span aria-hidden className="ss-caret ml-px inline-block h-[1.05em] w-[2px] translate-y-[2px] bg-current" />}
     </span>
   );
 }

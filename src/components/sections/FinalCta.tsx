@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
-import { auditHref, bookCallHref } from "@content/data";
-import { Button } from "@/components/ui/Button";
+import { } from "@content/data";
+import { CtaPair } from "@/components/ui/CtaPair";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Tilt } from "./Tilt";
@@ -23,14 +23,12 @@ function Dashboard() {
   );
 }
 
-type Props = { eyebrow?: string; title?: string; lead?: string; primaryLabel?: string; secondaryLabel?: string; visual?: ReactNode };
+type Props = { eyebrow?: string; title?: string; lead?: string; visual?: ReactNode };
 
 export function FinalCta({
   eyebrow = "Ready when you are",
   title = "Get your free SEO and AI SEO audit",
   lead = "We\u2019ll review your store, in Google and in AI answers, and send a prioritized plan. No obligation.",
-  primaryLabel = "Get my free audit",
-  secondaryLabel = "Book a call",
   visual = <Dashboard />,
 }: Props = {}) {
   return (
@@ -49,8 +47,7 @@ export function FinalCta({
           <h2 id="cta-title" className="h2-xl mt-4 text-white">{title}</h2>
           <p className="lead mt-5 text-[clamp(1.25rem,1.1rem+0.6vw,1.5rem)] [color:rgb(255_255_255/.7)]">{lead}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button href={auditHref} size="lg" arrow>{primaryLabel}</Button>
-            <Button href={bookCallHref} variant="ghost-dark" size="lg">{secondaryLabel}</Button>
+            <CtaPair dark />
           </div>
         </Reveal>
         <div aria-hidden className="relative mt-12 h-[300px] lg:absolute lg:inset-y-0 lg:right-[max(0px,calc((100%-var(--container))/2))] lg:mt-0 lg:h-auto lg:w-[min(40%,calc(var(--container)*0.4))] lg:[&_.tilt]:!left-[2%] lg:[&_.tilt]:!top-[16%] lg:[&_.tilt]:!w-[92%]">

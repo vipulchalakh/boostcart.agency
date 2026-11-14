@@ -198,6 +198,50 @@ export type AuthorReference = {
   [internalGroqTypeReferenceTo]?: "author";
 };
 
+export type ResearchReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "research";
+};
+
+export type Research = {
+  _id: string;
+  _type: "research";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  excerpt?: string;
+  coverImage?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  category?: CategoryReference;
+  author?: AuthorReference;
+  publishedAt?: string;
+  updatedAt?: string;
+  readTime?: number;
+  body?: BlockContent;
+  faqs?: Array<{
+    question?: string;
+    answer?: string;
+    _type: "faq";
+    _key: string;
+  }>;
+  relatedResearch?: Array<
+    {
+      _key: string;
+    } & ResearchReference
+  >;
+  seo?: Seo;
+};
+
 export type PostReference = {
   _ref: string;
   _type: "reference";
@@ -382,6 +426,8 @@ export type AllSanitySchemaTypes =
   | Slug
   | CategoryReference
   | AuthorReference
+  | ResearchReference
+  | Research
   | PostReference
   | Post
   | Author
@@ -570,6 +616,209 @@ export type POST_QUERY_RESULT = {
     } | null;
   } | null;
   relatedPosts: Array<{
+    _id: string;
+    title: string | null;
+    slug: string | null;
+    excerpt: string | null;
+    readTime: number | null;
+    publishedAt: string | null;
+    category: {
+      title: string | null;
+    } | null;
+  }> | null;
+  seo: {
+    metaTitle: string | null;
+    metaDescription: string | null;
+    noIndex: boolean | null;
+    shareImage: {
+      asset: SanityImageAssetReference | null;
+      hotspot: SanityImageHotspot | null;
+      crop: SanityImageCrop | null;
+      alt: "";
+      lqip: string | null;
+      dimensions: {
+        width: number | null;
+        height: number | null;
+      } | null;
+    } | null;
+  } | null;
+} | null;
+
+// Source: ../src/sanity/lib/queries.ts
+// Variable: RESEARCH_LIST_QUERY
+// Query: *[_type == "research" && defined(slug.current)] | order(publishedAt desc) {  _id,  title,  "slug": slug.current,  excerpt,  publishedAt,  readTime,  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },  "category": category->{ title, "slug": slug.current },  "author": author->{ name, "slug": slug.current, role, photo { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } }}
+export type RESEARCH_LIST_QUERY_RESULT = Array<{
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  excerpt: string | null;
+  publishedAt: string | null;
+  readTime: number | null;
+  coverImage: {
+    asset: SanityImageAssetReference | null;
+    hotspot: SanityImageHotspot | null;
+    crop: SanityImageCrop | null;
+    alt: string | "";
+    lqip: string | null;
+    dimensions: {
+      width: number | null;
+      height: number | null;
+    } | null;
+  } | null;
+  category: {
+    title: string | null;
+    slug: string | null;
+  } | null;
+  author: {
+    name: string | null;
+    slug: string | null;
+    role: string | null;
+    photo: {
+      asset: SanityImageAssetReference | null;
+      hotspot: SanityImageHotspot | null;
+      crop: SanityImageCrop | null;
+      alt: string | "";
+      lqip: string | null;
+      dimensions: {
+        width: number | null;
+        height: number | null;
+      } | null;
+    } | null;
+  } | null;
+}>;
+
+// Source: ../src/sanity/lib/queries.ts
+// Variable: RESEARCH_SLUGS_QUERY
+// Query: *[_type == "research" && defined(slug.current)]{ "slug": slug.current }
+export type RESEARCH_SLUGS_QUERY_RESULT = Array<{
+  slug: string | null;
+}>;
+
+// Source: ../src/sanity/lib/queries.ts
+// Variable: RELATED_RESEARCH_FALLBACK_QUERY
+// Query: *[_type == "research" && defined(slug.current) && _id != $researchId && !(_id in $excludeIds)]  | order(select(category._ref == $categoryId => 0, 1), publishedAt desc)[0...$limit] {  _id,  title,  "slug": slug.current,  excerpt,  readTime,  publishedAt,  "category": category->{ title }}
+export type RELATED_RESEARCH_FALLBACK_QUERY_RESULT = Array<{
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  excerpt: string | null;
+  readTime: number | null;
+  publishedAt: string | null;
+  category: {
+    title: string | null;
+  } | null;
+}>;
+
+// Source: ../src/sanity/lib/queries.ts
+// Variable: RESEARCH_QUERY
+// Query: *[_type == "research" && slug.current == $slug][0] {  _id,  title,  "slug": slug.current,  excerpt,  publishedAt,  updatedAt,  readTime,  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },  body[]{ ..., _type == "image" => { _key, _type, asset, hotspot, crop, "alt": coalesce(alt, ""), caption, "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },  faqs[]{ _key, question, answer },  "category": category->{ _id, title, "slug": slug.current },  "author": author->{ name, "slug": slug.current, role, bio, linkedinUrl, photo { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },  "relatedResearch": relatedResearch[defined(@->slug.current)]->{    _id, title, "slug": slug.current, excerpt, readTime, publishedAt,    "category": category->{ title }  },  seo { metaTitle, metaDescription, noIndex, shareImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } }}
+export type RESEARCH_QUERY_RESULT = {
+  _id: string;
+  title: string | null;
+  slug: string | null;
+  excerpt: string | null;
+  publishedAt: string | null;
+  updatedAt: string | null;
+  readTime: number | null;
+  coverImage: {
+    asset: SanityImageAssetReference | null;
+    hotspot: SanityImageHotspot | null;
+    crop: SanityImageCrop | null;
+    alt: string | "";
+    lqip: string | null;
+    dimensions: {
+      width: number | null;
+      height: number | null;
+    } | null;
+  } | null;
+  body: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "blockquote" | "h2" | "h3" | "h4" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          openInNewTab?: boolean;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        tone?: "note" | "tip" | "warning";
+        text?: string;
+        _type: "callout";
+        _key: string;
+      }
+    | {
+        asset: SanityImageAssetReference | null;
+        media?: unknown;
+        hotspot: SanityImageHotspot | null;
+        crop: SanityImageCrop | null;
+        alt: string | "";
+        caption: string | null;
+        _type: "image";
+        _key: string;
+        lqip: string | null;
+        dimensions: {
+          width: number | null;
+          height: number | null;
+        } | null;
+      }
+    | {
+        text?: string;
+        attribution?: string;
+        _type: "pullQuote";
+        _key: string;
+      }
+    | {
+        caption?: string;
+        hasHeaderRow?: boolean;
+        rows?: Array<{
+          cells?: Array<string>;
+          _type: "tableRow";
+          _key: string;
+        }>;
+        _type: "table";
+        _key: string;
+      }
+  > | null;
+  faqs: Array<{
+    _key: string;
+    question: string | null;
+    answer: string | null;
+  }> | null;
+  category: {
+    _id: string;
+    title: string | null;
+    slug: string | null;
+  } | null;
+  author: {
+    name: string | null;
+    slug: string | null;
+    role: string | null;
+    bio: string | null;
+    linkedinUrl: string | null;
+    photo: {
+      asset: SanityImageAssetReference | null;
+      hotspot: SanityImageHotspot | null;
+      crop: SanityImageCrop | null;
+      alt: string | "";
+      lqip: string | null;
+      dimensions: {
+        width: number | null;
+        height: number | null;
+      } | null;
+    } | null;
+  } | null;
+  relatedResearch: Array<{
     _id: string;
     title: string | null;
     slug: string | null;
@@ -848,6 +1097,10 @@ declare global {
     '*[_type == "post" && defined(slug.current)]{ "slug": slug.current }': POST_SLUGS_QUERY_RESULT;
     '*[_type == "post" && defined(slug.current) && _id != $postId && !(_id in $excludeIds)]\n  | order(select(category._ref == $categoryId => 0, 1), publishedAt desc)[0...$limit] {\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  readTime,\n  publishedAt,\n  "category": category->{ title }\n}': RELATED_POSTS_FALLBACK_QUERY_RESULT;
     '*[_type == "post" && slug.current == $slug][0] {\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  updatedAt,\n  readTime,\n  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },\n  body[]{ ..., _type == "image" => { _key, _type, asset, hotspot, crop, "alt": coalesce(alt, ""), caption, "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },\n  faqs[]{ _key, question, answer },\n  "category": category->{ _id, title, "slug": slug.current },\n  "author": author->{ name, "slug": slug.current, role, bio, linkedinUrl, photo { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },\n  "relatedPosts": relatedPosts[defined(@->slug.current)]->{\n    _id, title, "slug": slug.current, excerpt, readTime, publishedAt,\n    "category": category->{ title }\n  },\n  seo { metaTitle, metaDescription, noIndex, shareImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } }\n}': POST_QUERY_RESULT;
+    '*[_type == "research" && defined(slug.current)] | order(publishedAt desc) {\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  readTime,\n  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },\n  "category": category->{ title, "slug": slug.current },\n  "author": author->{ name, "slug": slug.current, role, photo { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } }\n}': RESEARCH_LIST_QUERY_RESULT;
+    '*[_type == "research" && defined(slug.current)]{ "slug": slug.current }': RESEARCH_SLUGS_QUERY_RESULT;
+    '*[_type == "research" && defined(slug.current) && _id != $researchId && !(_id in $excludeIds)]\n  | order(select(category._ref == $categoryId => 0, 1), publishedAt desc)[0...$limit] {\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  readTime,\n  publishedAt,\n  "category": category->{ title }\n}': RELATED_RESEARCH_FALLBACK_QUERY_RESULT;
+    '*[_type == "research" && slug.current == $slug][0] {\n  _id,\n  title,\n  "slug": slug.current,\n  excerpt,\n  publishedAt,\n  updatedAt,\n  readTime,\n  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } },\n  body[]{ ..., _type == "image" => { _key, _type, asset, hotspot, crop, "alt": coalesce(alt, ""), caption, "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },\n  faqs[]{ _key, question, answer },\n  "category": category->{ _id, title, "slug": slug.current },\n  "author": author->{ name, "slug": slug.current, role, bio, linkedinUrl, photo { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } },\n  "relatedResearch": relatedResearch[defined(@->slug.current)]->{\n    _id, title, "slug": slug.current, excerpt, readTime, publishedAt,\n    "category": category->{ title }\n  },\n  seo { metaTitle, metaDescription, noIndex, shareImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } } }\n}': RESEARCH_QUERY_RESULT;
     '*[_type == "caseStudy" && defined(slug.current)] | order(publishedAt desc) {\n  _id,\n  title,\n  "slug": slug.current,\n  clientName,\n  platform,\n  industry,\n  summary,\n  organicRevenueGrowth,\n  organicTrafficGrowth,\n  timelineMonths,\n  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } }\n}': CASE_STUDIES_QUERY_RESULT;
     '*[_type == "caseStudy" && defined(slug.current)]{ "slug": slug.current }': CASE_STUDY_SLUGS_QUERY_RESULT;
     '*[_type == "caseStudy" && defined(slug.current) && _id != $caseStudyId && !(_id in $excludeIds)]\n  | order(select(industry == $industry => 0, platform == $platform => 1, 2), publishedAt desc)[0...$limit] {\n  _id,\n  title,\n  "slug": slug.current,\n  clientName,\n  platform,\n  industry,\n  summary,\n  organicRevenueGrowth,\n  organicTrafficGrowth,\n  timelineMonths,\n  coverImage { asset, hotspot, crop, "alt": coalesce(alt, ""), "lqip": asset->metadata.lqip, "dimensions": asset->metadata.dimensions{ width, height } }\n}': RELATED_CASE_STUDIES_FALLBACK_QUERY_RESULT;

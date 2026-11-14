@@ -1,5 +1,5 @@
-import { auditHref, bookCallHref } from "@content/data";
-import { Button } from "@/components/ui/Button";
+import { } from "@content/data";
+import { CtaPair } from "@/components/ui/CtaPair";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { CtaVisual } from "./CtaVisual";
@@ -26,8 +26,7 @@ export function ConversionFinalCta() {
               Tell us your platform and your top landing pages. We&rsquo;ll point out where organic visitors are likely leaving before they buy.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button href={auditHref} size="lg" arrow>Get a conversion review</Button>
-              <Button href={bookCallHref} variant="ghost-dark" size="lg">Book a conversion SEO call</Button>
+              <CtaPair dark />
             </div>
           </Reveal>
 

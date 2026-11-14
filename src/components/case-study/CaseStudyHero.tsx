@@ -27,7 +27,7 @@ function Metric({ label, children }: { label: string; children: React.ReactNode 
 
 export function CaseStudyHero({ title, clientName, platform, industry, organicRevenueGrowth, organicTrafficGrowth, timelineMonths, coverImage }: Props) {
   return (
-    <header className="relative isolate pb-12 pt-28 md:pb-16 md:pt-32 lg:pt-36">
+    <header className="relative isolate -mt-12 pb-12 pt-[10rem] md:pb-16 md:pt-[11rem] lg:pt-[12rem]">
       <CaseStudyBackdrop />
       <div className="container-x grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-14 xl:gap-20">
         <div className="hero-fade min-w-0">

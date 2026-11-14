@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { Check } from "lucide-react";
-import { auditHref } from "@content/data";
 import { Annotation } from "@/components/ui/Annotation";
 import { Button } from "@/components/ui/Button";
+import { bookCallHref } from "@content/data";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/cn";
@@ -73,7 +73,7 @@ export function SearchShift() {
               ))}
             </ul>
             <div className="mt-8 flex justify-center">
-              <Button href={auditHref} size="lg" arrow>Get my free SEO and AI SEO audit</Button>
+              <Button href={bookCallHref} size="lg" arrow>Book a call</Button>
             </div>
           </Reveal>
         </div>

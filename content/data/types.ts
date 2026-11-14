@@ -46,3 +46,8 @@ export type Post = { slug: string; title: string; category: string; readTime: nu
 export type Usp = { id: string; tab: string; title: string; description: string; points: [string, string, string, string]; visual: "store" | "report" | "platforms" | "terms"; sample: boolean };
 
 export type ClientLogo = { name: string; mark: "sun" | "leaf" | "bars" | "cube" | "flower" | "house" | "wave" | "diamond" | "bolt" | "hex"; style: "display" | "serif" | "wide" | "sans" | "mono"; sample: boolean };
+
+export type Impact = "high" | "medium" | "low";
+export type Priority = "P1" | "P2" | "P3";
+export type ChecklistItem = { id: string; title: string; detail: string; impact: Impact; priority: Priority; tools: string[]; manual: boolean };
+export type ChecklistCategory = { slug: string; title: string; blurb: string; items: ChecklistItem[] };

@@ -1,12 +1,12 @@
 import type { ReactNode } from "react";
 import { ChevronRight, ShoppingCart } from "lucide-react";
-import { auditHref } from "@content/data";
+import { } from "@content/data";
 import { reviewSummary } from "@content/data";
 import { Stars } from "./ProofBand";
 import { AvatarStack } from "@/components/ui/Avatar";
 import { Annotation } from "@/components/ui/Annotation";
 import { AppLink } from "@/components/ui/AppLink";
-import { Button } from "@/components/ui/Button";
+import { CtaPair } from "@/components/ui/CtaPair";
 import { cn } from "@/lib/cn";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { LogoMarquee } from "@/components/ui/LogoMarquee";
@@ -20,9 +20,6 @@ type HeroProps = {
   /** Make the large two-line headline the page's h1 (the eyebrow becomes a plain paragraph). */
   bigIsH1?: boolean;
   lead?: ReactNode;
-  primaryLabel?: string;
-  secondaryLabel?: string;
-  secondaryHref?: string;
   note?: string;
   /** Split layout: text and buttons on the left, `visual` on the right. */
   visual?: ReactNode;
@@ -46,8 +43,8 @@ const homeBelow = (
       <LogoMarquee />
     </div>
     <Reveal bare className="relative mx-auto mt-4 hidden h-28 max-w-[1100px] md:block">
-      <Annotation arrow="down" rotate={-6} className="absolute left-[2%] top-2">see what we&rsquo;ve grown</Annotation>
-      <Annotation arrow="down-left" arrowSide="before" rotate={5} className="absolute right-[2%] top-2">real stores, real revenue</Annotation>
+      <Annotation arrow="down" rotate={-6} className="absolute left-[5%] top-[4.5rem]">see what we&rsquo;ve grown</Annotation>
+      <Annotation arrow="up-left" arrowSide="before" rotate={5} className="absolute right-[2%] top-2">clients we worked with</Annotation>
     </Reveal>
   </>
 );
@@ -58,9 +55,6 @@ export function Hero({
   lines = ["Grow Your Store\u2019s", "Organic Revenue"],
   bigIsH1 = false,
   lead = homeLead,
-  primaryLabel = "Get a free audit",
-  secondaryLabel = "Is BoostCart for me?",
-  secondaryHref = "#fit",
   note = "No long contracts \u00b7 Monthly reporting \u00b7 North America focus",
   visual,
   below = visual ? null : homeBelow,
@@ -119,12 +113,7 @@ export function Hero({
           </p>
 
           <div className={cn("hero-fade mt-10 flex flex-col items-stretch gap-4 sm:flex-row sm:items-center", !split && "justify-center")} style={{ ["--d" as string]: "420ms" }}>
-            <Button href={auditHref} size="lg" arrow sheen>
-              {primaryLabel}
-            </Button>
-            <Button href={secondaryHref} variant="secondary" size="lg">
-              {secondaryLabel}
-            </Button>
+            <CtaPair sheen />
           </div>
 
           {split && (

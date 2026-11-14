@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, Check } from "lucide-react";
+import { submitLead } from "@/lib/submit-lead";
 import { useId, useState, type FormEvent, type ReactNode } from "react";
 
 type Errors = Partial<Record<"name" | "email" | "url", string>>;
@@ -25,6 +26,7 @@ export function ReportingLeadForm() {
   const uid = useId();
   const [errors, setErrors] = useState<Errors>({});
   const [state, setState] = useState<"idle" | "sending" | "done">("idle");
+  const [formError, setFormError] = useState("");
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -42,8 +44,13 @@ export function ReportingLeadForm() {
       return;
     }
     setState("sending");
-    // TODO-REAL: POST { name, email, url } to the CRM or form endpoint. Nothing is sent yet.
-    await new Promise((r) => setTimeout(r, 700));
+    setFormError("");
+    const res = await submitLead({ form: "service-reporting", name, email, url, company: String(f.get("company") ?? "") });
+    if (!res.ok) {
+      setFormError(res.error);
+      setState("idle");
+      return;
+    }
     setState("done");
   }
 
@@ -72,6 +79,11 @@ export function ReportingLeadForm() {
       <Field id={`${uid}-url`} label="Website URL" error={errors.url}>
         <input id={`${uid}-url`} name="url" inputMode="url" autoComplete="url" placeholder="https://yourstore.com" aria-invalid={!!errors.url} aria-describedby={errors.url ? `${uid}-url-err` : undefined} className={field} />
       </Field>
+
+      <div aria-hidden className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label>Company<input name="company" tabIndex={-1} autoComplete="off" /></label>
+      </div>
+      {formError && <p role="alert" className="text-[13px] text-danger-fg">{formError}</p>}
 
       <button
         type="submit"

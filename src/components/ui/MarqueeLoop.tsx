@@ -33,6 +33,7 @@ export function MarqueeLoop({ children, className, duration, label, reverse, dra
     let x = 0; // current offset, kept within (-half, 0]
     let vel = 0; // px/ms flick velocity
     let dragging = false;
+    let captured = false;
     let moved = 0;
     let hover = false;
     let startX = 0;
@@ -68,13 +69,18 @@ export function MarqueeLoop({ children, className, duration, label, reverse, dra
       startX = lastX = e.clientX;
       startOffset = x;
       lastT = performance.now();
-      el.setPointerCapture(e.pointerId);
-      el.classList.add("is-dragging");
+      captured = false;
     };
     const move = (e: PointerEvent) => {
       if (!dragging) return;
       const dx = e.clientX - startX;
       moved = Math.max(moved, Math.abs(dx));
+      // Only take over the pointer once it is a real drag, so a plain click still reaches the card link.
+      if (!captured && moved > 5) {
+        captured = true;
+        el.setPointerCapture(e.pointerId);
+        el.classList.add("is-dragging");
+      }
       x = startOffset + dx;
       const now = performance.now();
       const dt = now - lastT;
@@ -88,6 +94,7 @@ export function MarqueeLoop({ children, className, duration, label, reverse, dra
       if (performance.now() - lastT > 80) vel = 0; // held still before release: no flick
       vel = Math.max(Math.min(vel, 3), -3);
       el.classList.remove("is-dragging");
+      captured = false;
       if (el.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId);
     };
     // A drag must not count as a click on the card underneath.

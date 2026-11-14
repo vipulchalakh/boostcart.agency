@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { bookCallHref, reportingFaqs, reportingGoodFit, reportingNotFit, reportingPlatforms, reportingSteps, reportingUsps } from "@content/data";
+import { MockImage } from "@/components/mocks/MockImage";
+import { reportingFaqs, reportingGoodFit, reportingNotFit, reportingPlatforms, reportingSteps, reportingUsps } from "@content/data";
 import { Faq } from "@/components/sections/Faq";
 import { Hero } from "@/components/sections/Hero";
 import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
@@ -16,7 +17,6 @@ import { ReportingFinalCta } from "@/components/reporting/ReportingFinalCta";
 import { ReportingLeadSection } from "@/components/reporting/ReportingLeadSection";
 import { ReportingCompare } from "@/components/reporting/ReportingCompare";
 import { ReportingWorkflow } from "@/components/reporting/ReportingWorkflow";
-import { SourceMock, TrendMock, RevenueGroupMock, MoverMock, SummaryMock, AiVisibilityMock } from "@/components/reporting/Mocks";
 
 const siteUrl = "https://boostcart.agency";
 const path = "/services/reporting";
@@ -24,7 +24,7 @@ const path = "/services/reporting";
 /** Drives both the visible breadcrumb and its BreadcrumbList schema. /services has no page yet, so it points at the homepage services section. */
 const breadcrumb = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/#services" },
+  { name: "Services", href: "/" },
   { name: "Reporting", href: path },
 ];
 const title = "Ecommerce SEO Reporting";
@@ -57,14 +57,14 @@ const jsonLd = [
 ];
 
 const row1: Tile[] = [
-  { title: "Tracking audit", text: "Analytics and ecommerce tracking checked before reporting.", href: path, mock: <SourceMock />, glow: { hue: "yellow", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
-  { title: "Organic performance", text: "Clicks, searches and trends from Search Console and analytics.", href: path, mock: <TrendMock />, glow: { hue: "pink", pos: "-right-16 -top-20" } },
-  { title: "Revenue by page group", text: "Orders from organic search grouped by page type.", href: path, mock: <RevenueGroupMock />, glow: { hue: "yellow", pos: "-right-14 -top-20" } },
+  { title: "Tracking audit", text: "Analytics and ecommerce tracking checked before reporting.", href: path, mock: <MockImage id="services/reporting/1" alt="Animated preview: Tracking audit" />, glow: { hue: "yellow", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
+  { title: "Organic performance", text: "Clicks, searches and trends from Search Console and analytics.", href: path, mock: <MockImage id="services/reporting/2" alt="Animated preview: Organic performance" />, glow: { hue: "pink", pos: "-right-16 -top-20" } },
+  { title: "Revenue by page group", text: "Orders from organic search grouped by page type.", href: path, mock: <MockImage id="services/reporting/3" alt="Animated preview: Revenue by page group" />, glow: { hue: "yellow", pos: "-right-14 -top-20" } },
 ];
 const row2: Tile[] = [
-  { title: "Winners and decliners", text: "Pages that moved, and why we think they moved.", href: path, mock: <MoverMock />, glow: { hue: "pink", pos: "-left-14 -top-20" } },
-  { title: "Plain-language summary", text: "What changed, why and what we do next.", href: path, mock: <SummaryMock />, glow: { hue: "yellow", pos: "-right-16 -top-20" } },
-  { title: "AI visibility", text: "Sample questions checked for mentions of your store.", href: path, mock: <AiVisibilityMock />, glow: { hue: "pink", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
+  { title: "Winners and decliners", text: "Pages that moved, and why we think they moved.", href: path, mock: <MockImage id="services/reporting/4" alt="Animated preview: Winners and decliners" />, glow: { hue: "pink", pos: "-left-14 -top-20" } },
+  { title: "Plain-language summary", text: "What changed, why and what we do next.", href: path, mock: <MockImage id="services/reporting/5" alt="Animated preview: Plain-language summary" />, glow: { hue: "yellow", pos: "-right-16 -top-20" } },
+  { title: "AI visibility", text: "Sample questions checked for mentions of your store.", href: path, mock: <MockImage id="services/reporting/6" alt="Animated preview: AI visibility" />, glow: { hue: "pink", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
 ];
 
 export default function ReportingPage() {
@@ -78,9 +78,6 @@ export default function ReportingPage() {
           breadcrumb={breadcrumb}
           lines={["SEO Reporting That", "Follows the Revenue"]}
           lead="See which pages and searches earn orders, what changed this month and what to do next."
-          primaryLabel="Get a reporting review"
-          secondaryLabel="Book a call"
-          secondaryHref={bookCallHref}
           note="Shopify · WooCommerce · BigCommerce · Magento · Headless"
           visual={<HeroVisual />}
         />

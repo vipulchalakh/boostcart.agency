@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { bookCallHref, techSeoFaqs, techSeoGoodFit, techSeoNotFit, techSeoPlatforms, techSeoSteps, techSeoUsps } from "@content/data";
+import { MockImage } from "@/components/mocks/MockImage";
+import { techSeoFaqs, techSeoGoodFit, techSeoNotFit, techSeoPlatforms, techSeoSteps, techSeoUsps } from "@content/data";
 import { Faq } from "@/components/sections/Faq";
 import { Hero } from "@/components/sections/Hero";
 import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
@@ -16,7 +17,6 @@ import { TechFinalCta } from "@/components/tech-seo/TechFinalCta";
 import { TechLeadSection } from "@/components/tech-seo/TechLeadSection";
 import { TechCompare } from "@/components/tech-seo/TechCompare";
 import { TechWorkflow } from "@/components/tech-seo/TechWorkflow";
-import { ArchitectureMock, CanonicalMock, IndexMock, RedirectMock, RenderMock, SchemaMock } from "@/components/tech-seo/TechMocks";
 
 const siteUrl = "https://boostcart.agency";
 const path = "/services/technical-seo";
@@ -24,7 +24,7 @@ const path = "/services/technical-seo";
 /** Drives both the visible breadcrumb and its BreadcrumbList schema. /services has no page yet, so it points at the homepage services section. */
 const breadcrumb = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/#services" },
+  { name: "Services", href: "/" },
   { name: "Technical SEO", href: path },
 ];
 const title = "Ecommerce Technical SEO Services";
@@ -57,14 +57,14 @@ const jsonLd = [
 ];
 
 const row1: Tile[] = [
-  { title: "Crawlability and indexation", text: "Robots, sitemaps and Search Console, so important pages are reachable and indexable.", href: path, mock: <IndexMock />, glow: { hue: "yellow", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
-  { title: "Site architecture", text: "Categories, internal links, depth and pagination that surface the right pages.", href: path, mock: <ArchitectureMock />, glow: { hue: "pink", pos: "-right-16 -top-20" } },
-  { title: "Canonicals and duplicate URLs", text: "Variants, filters and parameters pointed at one preferred URL.", href: path, mock: <CanonicalMock />, glow: { hue: "yellow", pos: "-right-14 -top-20" } },
+  { title: "Crawlability and indexation", text: "Robots, sitemaps and Search Console, so important pages are reachable and indexable.", href: path, mock: <MockImage id="services/technical-seo/1" alt="Animated preview: Crawlability and indexation" />, glow: { hue: "yellow", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
+  { title: "Site architecture", text: "Categories, internal links, depth and pagination that surface the right pages.", href: path, mock: <MockImage id="services/technical-seo/2" alt="Animated preview: Site architecture" />, glow: { hue: "pink", pos: "-right-16 -top-20" } },
+  { title: "Canonicals and duplicate URLs", text: "Variants, filters and parameters pointed at one preferred URL.", href: path, mock: <MockImage id="services/technical-seo/3" alt="Animated preview: Canonicals and duplicate URLs" />, glow: { hue: "yellow", pos: "-right-14 -top-20" } },
 ];
 const row2: Tile[] = [
-  { title: "Rendering and speed", text: "JavaScript content, Core Web Vitals and mobile checked on key templates.", href: path, mock: <RenderMock />, glow: { hue: "pink", pos: "-left-14 -top-20" } },
-  { title: "Structured data", text: "Product, offer and breadcrumb markup validated against the page.", href: path, mock: <SchemaMock />, glow: { hue: "yellow", pos: "-right-16 -top-20" } },
-  { title: "Migrations", text: "URL inventory, redirects and staging safeguards for platform changes.", href: path, mock: <RedirectMock />, glow: { hue: "pink", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
+  { title: "Rendering and speed", text: "JavaScript content, Core Web Vitals and mobile checked on key templates.", href: path, mock: <MockImage id="services/technical-seo/4" alt="Animated preview: Rendering and speed" />, glow: { hue: "pink", pos: "-left-14 -top-20" } },
+  { title: "Structured data", text: "Product, offer and breadcrumb markup validated against the page.", href: path, mock: <MockImage id="services/technical-seo/5" alt="Animated preview: Structured data" />, glow: { hue: "yellow", pos: "-right-16 -top-20" } },
+  { title: "Migrations", text: "URL inventory, redirects and staging safeguards for platform changes.", href: path, mock: <MockImage id="services/technical-seo/6" alt="Animated preview: Migrations" />, glow: { hue: "pink", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
 ];
 
 export default function TechnicalSeoPage() {
@@ -78,9 +78,6 @@ export default function TechnicalSeoPage() {
           breadcrumb={breadcrumb}
           lines={["Technical SEO That", "Gets Pages Indexed"]}
           lead="Find and fix what keeps your product and category pages from being crawled, indexed and found."
-          primaryLabel="Get an audit report"
-          secondaryLabel="Book a call"
-          secondaryHref={bookCallHref}
           note="Shopify · WooCommerce · BigCommerce · Magento · Headless"
           visual={<HeroVisual />}
         />

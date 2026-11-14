@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { bookCallHref, industries, industryFaqs, industryPageBySlug, industryPages } from "@content/data";
+import { industries, industryFaqs, industryPageBySlug, industryPages } from "@content/data";
 import { Faq } from "@/components/sections/Faq";
 import { Hero } from "@/components/sections/Hero";
 import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
@@ -69,7 +69,7 @@ export default async function IndustryPage({ params }: Props) {
   /** Drives both the visible breadcrumb and its BreadcrumbList schema. /industries has no page yet, so it points at the homepage. */
   const breadcrumb = [
     { name: "Home", href: "/" },
-    { name: "Industries", href: "/#industries" },
+    { name: "Industries", href: "/" },
     { name: label, href: path },
   ];
   const jsonLd = [
@@ -101,9 +101,6 @@ export default async function IndustryPage({ params }: Props) {
           breadcrumb={breadcrumb}
           lines={page.hero.lines}
           lead={page.hero.lead}
-          primaryLabel={page.hero.primary}
-          secondaryLabel="Book a call"
-          secondaryHref={bookCallHref}
           note="Shopify · WooCommerce · BigCommerce · Magento · Headless"
           visual={<IndustryHeroVisual page={page} />}
         />

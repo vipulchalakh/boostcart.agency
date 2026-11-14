@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { bookCallHref, contentFaqs, contentGoodFit, contentNotFit, contentPlatforms, contentSteps, contentUsps } from "@content/data";
+import { MockImage } from "@/components/mocks/MockImage";
+import { contentFaqs, contentGoodFit, contentNotFit, contentPlatforms, contentSteps, contentUsps } from "@content/data";
 import { Faq } from "@/components/sections/Faq";
 import { Hero } from "@/components/sections/Hero";
 import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
@@ -16,7 +17,6 @@ import { ContentFinalCta } from "@/components/content/ContentFinalCta";
 import { ContentLeadSection } from "@/components/content/ContentLeadSection";
 import { ContentCompare } from "@/components/content/ContentCompare";
 import { ContentWorkflow } from "@/components/content/ContentWorkflow";
-import { QuestionMock, GuideMock, CompareMock, CalendarMock, GuideLinkMock, RefreshMock } from "@/components/content/Mocks";
 
 const siteUrl = "https://boostcart.agency";
 const path = "/services/content";
@@ -24,7 +24,7 @@ const path = "/services/content";
 /** Drives both the visible breadcrumb and its BreadcrumbList schema. /services has no page yet, so it points at the homepage services section. */
 const breadcrumb = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/#services" },
+  { name: "Services", href: "/" },
   { name: "Content & Buying Guides", href: path },
 ];
 const title = "Ecommerce Content and Buying Guides";
@@ -57,14 +57,14 @@ const jsonLd = [
 ];
 
 const row1: Tile[] = [
-  { title: "Topic research", text: "Shopper questions found, grouped and matched to your products.", href: path, mock: <QuestionMock />, glow: { hue: "yellow", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
-  { title: "Buying guides", text: "Researched guides that help people choose and lead to a collection.", href: path, mock: <GuideMock />, glow: { hue: "pink", pos: "-right-16 -top-20" } },
-  { title: "Comparison pages", text: "Side-by-side pages for products shoppers weigh against each other.", href: path, mock: <CompareMock />, glow: { hue: "yellow", pos: "-right-14 -top-20" } },
+  { title: "Topic research", text: "Shopper questions found, grouped and matched to your products.", href: path, mock: <MockImage id="services/content/1" alt="Animated preview: Topic research" />, glow: { hue: "yellow", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
+  { title: "Buying guides", text: "Researched guides that help people choose and lead to a collection.", href: path, mock: <MockImage id="services/content/2" alt="Animated preview: Buying guides" />, glow: { hue: "pink", pos: "-right-16 -top-20" } },
+  { title: "Comparison pages", text: "Side-by-side pages for products shoppers weigh against each other.", href: path, mock: <MockImage id="services/content/3" alt="Animated preview: Comparison pages" />, glow: { hue: "yellow", pos: "-right-14 -top-20" } },
 ];
 const row2: Tile[] = [
-  { title: "Content calendar", text: "A realistic schedule ranked by value, agreed with you.", href: path, mock: <CalendarMock />, glow: { hue: "pink", pos: "-left-14 -top-20" } },
-  { title: "Internal links", text: "Guides linked to the collections and products they support.", href: path, mock: <GuideLinkMock />, glow: { hue: "yellow", pos: "-right-16 -top-20" } },
-  { title: "Refreshes", text: "Older posts updated, merged or removed when they stop helping.", href: path, mock: <RefreshMock />, glow: { hue: "pink", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
+  { title: "Content calendar", text: "A realistic schedule ranked by value, agreed with you.", href: path, mock: <MockImage id="services/content/4" alt="Animated preview: Content calendar" />, glow: { hue: "pink", pos: "-left-14 -top-20" } },
+  { title: "Internal links", text: "Guides linked to the collections and products they support.", href: path, mock: <MockImage id="services/content/5" alt="Animated preview: Internal links" />, glow: { hue: "yellow", pos: "-right-16 -top-20" } },
+  { title: "Refreshes", text: "Older posts updated, merged or removed when they stop helping.", href: path, mock: <MockImage id="services/content/6" alt="Animated preview: Refreshes" />, glow: { hue: "pink", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
 ];
 
 export default function ContentPage() {
@@ -78,9 +78,6 @@ export default function ContentPage() {
           breadcrumb={breadcrumb}
           lines={["Content That Brings", "Shoppers Ready to Buy"]}
           lead="Buying guides and comparisons built around the questions your customers ask, each one leading to a product or collection."
-          primaryLabel="Get a content plan"
-          secondaryLabel="Book a call"
-          secondaryHref={bookCallHref}
           note="Shopify · WooCommerce · BigCommerce · Magento · Headless"
           visual={<HeroVisual />}
         />

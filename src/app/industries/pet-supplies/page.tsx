@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { bookCallHref, petFaqs } from "@content/data";
+import { petFaqs } from "@content/data";
 import { Faq } from "@/components/sections/Faq";
 import { Hero } from "@/components/sections/Hero";
 import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
@@ -24,7 +24,7 @@ const path = "/industries/pet-supplies";
 /** Drives both the visible breadcrumb and its BreadcrumbList schema. /industries has no page yet, so it points at the homepage. */
 const breadcrumb = [
   { name: "Home", href: "/" },
-  { name: "Industries", href: "/#industries" },
+  { name: "Industries", href: "/" },
   { name: "Pet supplies", href: path },
 ];
 const title = "Pet Store Ecommerce SEO";
@@ -86,9 +86,6 @@ export default function PetSuppliesPage() {
           breadcrumb={breadcrumb}
           lines={["Ecommerce SEO for", "Pet Brands"]}
           lead="Grow organic revenue from the owners searching for the right food, litter, treats and gear for their pet."
-          primaryLabel="Get a free pet store audit"
-          secondaryLabel="Book a call"
-          secondaryHref={bookCallHref}
           note="Shopify · WooCommerce · BigCommerce · Magento · Headless"
           visual={<HeroVisual />}
         />

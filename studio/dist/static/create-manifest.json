@@ -1,5 +1,5 @@
 {
-  "createdAt": "2026-10-31T16:38:19.582Z",
+  "createdAt": "2026-11-14T10:56:11.278Z",
   "studioVersion": "6.20.0",
   "version": 3,
   "workspaces": [
@@ -15,7 +15,7 @@
       },
       "name": "default",
       "projectId": "n8t179ul",
-      "schema": "0e624d11.create-schema.json",
+      "schema": "d2d7a498.create-schema.json",
       "title": "BoostCart",
       "tools": "ef87c8fe.create-tools.json"
     }

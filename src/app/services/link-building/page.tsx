@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { bookCallHref, linksFaqs, linksGoodFit, linksNotFit, linksPlatforms, linksSteps, linksUsps } from "@content/data";
+import { MockImage } from "@/components/mocks/MockImage";
+import { linksFaqs, linksGoodFit, linksNotFit, linksPlatforms, linksSteps, linksUsps } from "@content/data";
 import { Faq } from "@/components/sections/Faq";
 import { Hero } from "@/components/sections/Hero";
 import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
@@ -16,7 +17,6 @@ import { LinksFinalCta } from "@/components/link-building/LinksFinalCta";
 import { LinksLeadSection } from "@/components/link-building/LinksLeadSection";
 import { LinksCompare } from "@/components/link-building/LinksCompare";
 import { LinksWorkflow } from "@/components/link-building/LinksWorkflow";
-import { ProfileMock, GapMock, AngleMock, PitchMock, PrMock, PlacementMock } from "@/components/link-building/Mocks";
 
 const siteUrl = "https://boostcart.agency";
 const path = "/services/link-building";
@@ -24,7 +24,7 @@ const path = "/services/link-building";
 /** Drives both the visible breadcrumb and its BreadcrumbList schema. /services has no page yet, so it points at the homepage services section. */
 const breadcrumb = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/#services" },
+  { name: "Services", href: "/" },
   { name: "Link Building", href: path },
 ];
 const title = "Ecommerce Link Building and Digital PR";
@@ -57,14 +57,14 @@ const jsonLd = [
 ];
 
 const row1: Tile[] = [
-  { title: "Link profile review", text: "Your current links sorted by relevance and risk.", href: path, mock: <ProfileMock />, glow: { hue: "yellow", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
-  { title: "Competitor gaps", text: "Sites that link to rivals but not to you.", href: path, mock: <GapMock />, glow: { hue: "pink", pos: "-right-16 -top-20" } },
-  { title: "Link angles", text: "A reason for publishers to cover your brand.", href: path, mock: <AngleMock />, glow: { hue: "yellow", pos: "-right-14 -top-20" } },
+  { title: "Link profile review", text: "Your current links sorted by relevance and risk.", href: path, mock: <MockImage id="services/link-building/1" alt="Animated preview: Link profile review" />, glow: { hue: "yellow", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
+  { title: "Competitor gaps", text: "Sites that link to rivals but not to you.", href: path, mock: <MockImage id="services/link-building/2" alt="Animated preview: Competitor gaps" />, glow: { hue: "pink", pos: "-right-16 -top-20" } },
+  { title: "Link angles", text: "A reason for publishers to cover your brand.", href: path, mock: <MockImage id="services/link-building/3" alt="Animated preview: Link angles" />, glow: { hue: "yellow", pos: "-right-14 -top-20" } },
 ];
 const row2: Tile[] = [
-  { title: "Personal outreach", text: "Pitches written for each site, approved by you.", href: path, mock: <PitchMock />, glow: { hue: "pink", pos: "-left-14 -top-20" } },
-  { title: "Digital PR", text: "Data and stories that earn coverage and links.", href: path, mock: <PrMock />, glow: { hue: "yellow", pos: "-right-16 -top-20" } },
-  { title: "Placement reporting", text: "Every link listed, checked and tied to a target page.", href: path, mock: <PlacementMock />, glow: { hue: "pink", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
+  { title: "Personal outreach", text: "Pitches written for each site, approved by you.", href: path, mock: <MockImage id="services/link-building/4" alt="Animated preview: Personal outreach" />, glow: { hue: "pink", pos: "-left-14 -top-20" } },
+  { title: "Digital PR", text: "Data and stories that earn coverage and links.", href: path, mock: <MockImage id="services/link-building/5" alt="Animated preview: Digital PR" />, glow: { hue: "yellow", pos: "-right-16 -top-20" } },
+  { title: "Placement reporting", text: "Every link listed, checked and tied to a target page.", href: path, mock: <MockImage id="services/link-building/6" alt="Animated preview: Placement reporting" />, glow: { hue: "pink", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
 ];
 
 export default function LinkBuildingPage() {
@@ -78,9 +78,6 @@ export default function LinkBuildingPage() {
           breadcrumb={breadcrumb}
           lines={["Links Earned From", "Sites Shoppers Read"]}
           lead="Editorial links to your key collections and guides, earned through real outreach to relevant sites."
-          primaryLabel="Get a link review"
-          secondaryLabel="Book a call"
-          secondaryHref={bookCallHref}
           note="Shopify · WooCommerce · BigCommerce · Magento · Headless"
           visual={<HeroVisual />}
         />

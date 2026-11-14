@@ -6,12 +6,12 @@ import type { Platform } from "./platforms";
 export type PetProblem = { id: string; title: string; text: string; cost: string };
 
 export const petProblems: PetProblem[] = [
-  { id: "variants", title: "\u201cEvery flavour and bag size has its own page.\u201d", text: "One food comes in several flavours, sizes and life stages. Each combination can spawn a near-identical URL, and they end up competing with each other.", cost: "Rankings split across duplicate pages" },
-  { id: "segments", title: "\u201cOwners search by breed and life stage, not by category.\u201d", text: "\"Senior cat food\" and \"large breed puppy food\" are different searches. A generic collection rarely answers either one well.", cost: "Missing the searches closest to a purchase" },
-  { id: "claims", title: "\u201cWe\u2019re not sure what we can say about health.\u201d", text: "Grain-free, limited ingredient and \"vet recommended\" copy draws scrutiny from shoppers and search engines. Unsupported claims erode trust fast.", cost: "Weak trust, or claims you can\u2019t defend" },
-  { id: "repeat", title: "\u201cSEO reports ignore our repeat customers.\u201d", text: "Pet owners reorder food, litter and treats. A report that only counts first orders undervalues the searches that start that habit.", cost: "Good pages judged by the wrong numbers" },
-  { id: "marketplace", title: "\u201cThe big retailers own every broad search.\u201d", text: "National chains and marketplaces dominate terms like \"dog food\". Competing head-on is expensive and rarely works for a focused store.", cost: "Spend on searches you can\u2019t win" },
-  { id: "season", title: "\u201cOur best pages are out of season or out of stock.\u201d", text: "Flea and tick, cooling mats, holiday gifts and discontinued formulas all change what should be live. Dead ends frustrate shoppers and crawlers.", cost: "Traffic landing on pages that can\u2019t sell" },
+  { id: "variants", title: "Every flavour and bag size has its own page.", text: "One food comes in several flavours, sizes and life stages. Each combination can spawn a near-identical URL, and they end up competing with each other.", cost: "Rankings split across duplicate pages" },
+  { id: "segments", title: "Owners search by breed and life stage, not by category.", text: "\"Senior cat food\" and \"large breed puppy food\" are different searches. A generic collection rarely answers either one well.", cost: "Missing the searches closest to a purchase" },
+  { id: "claims", title: "We\u2019re not sure what we can say about health.", text: "Grain-free, limited ingredient and \"vet recommended\" copy draws scrutiny from shoppers and search engines. Unsupported claims erode trust fast.", cost: "Weak trust, or claims you can\u2019t defend" },
+  { id: "repeat", title: "SEO reports ignore our repeat customers.", text: "Pet owners reorder food, litter and treats. A report that only counts first orders undervalues the searches that start that habit.", cost: "Good pages judged by the wrong numbers" },
+  { id: "marketplace", title: "The big retailers own every broad search.", text: "National chains and marketplaces dominate terms like \"dog food\". Competing head-on is expensive and rarely works for a focused store.", cost: "Spend on searches you can\u2019t win" },
+  { id: "season", title: "Our best pages are out of season or out of stock.", text: "Flea and tick, cooling mats, holiday gifts and discontinued formulas all change what should be live. Dead ends frustrate shoppers and crawlers.", cost: "Traffic landing on pages that can\u2019t sell" },
 ];
 
 export const petPlatforms: Array<Platform & { checks: string[] }> = [

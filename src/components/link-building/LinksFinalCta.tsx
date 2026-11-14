@@ -1,5 +1,5 @@
-import { auditHref, bookCallHref } from "@content/data";
-import { Button } from "@/components/ui/Button";
+import { } from "@content/data";
+import { CtaPair } from "@/components/ui/CtaPair";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { CtaVisual } from "./CtaVisual";
@@ -26,8 +26,7 @@ export function LinksFinalCta() {
               Tell us your store and your key collections. We&rsquo;ll review your link profile and the kinds of sites that could realistically link to you.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button href={auditHref} size="lg" arrow>Get a link review</Button>
-              <Button href={bookCallHref} variant="ghost-dark" size="lg">Book a link building call</Button>
+              <CtaPair dark />
             </div>
           </Reveal>
 

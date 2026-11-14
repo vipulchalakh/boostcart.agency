@@ -3,6 +3,7 @@ import { fontVariables } from "@/lib/fonts";
 import { Footer } from "@/components/layout/Footer";
 import { Navbar } from "@/components/layout/Navbar";
 import { NoJsNav } from "@/components/layout/NoJsNav";
+import { CalLoader } from "@/components/layout/CalLoader";
 import { CookieBanner } from "@/components/layout/CookieBanner";
 import { SpotlightProvider } from "@/components/ui/SpotlightProvider";
 import "@/styles/globals.css";
@@ -22,7 +23,7 @@ export const viewport: Viewport = { themeColor: "#ffffff", width: "device-width"
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={fontVariables}>
+    <html lang="en" className={fontVariables} data-scroll-behavior="smooth">
       {/* Browser extensions (e.g. ColorZilla) inject attributes onto <body> before React hydrates; ignore those mismatches. */}
       <body suppressHydrationWarning>
         <noscript>
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <CookieBanner />
         <SpotlightProvider />
+        <CalLoader />
       </body>
     </html>
   );

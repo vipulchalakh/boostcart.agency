@@ -1,5 +1,5 @@
-import { auditHref, bookCallHref } from "@content/data";
-import { Button } from "@/components/ui/Button";
+import { } from "@content/data";
+import { CtaPair } from "@/components/ui/CtaPair";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { CtaVisual } from "./CtaVisual";
@@ -26,8 +26,7 @@ export function TechFinalCta() {
               Tell us your platform and what you&rsquo;re seeing in Search Console. We&rsquo;ll map the technical barriers and what to fix first.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button href={auditHref} size="lg" arrow>Get an audit report</Button>
-              <Button href={bookCallHref} variant="ghost-dark" size="lg">Book a technical SEO call</Button>
+              <CtaPair dark />
             </div>
           </Reveal>
 

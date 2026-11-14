@@ -4,7 +4,7 @@ import { parseBody } from "next-sanity/webhook";
 
 type WebhookPayload = { tags?: string[] };
 
-/** Called by a Sanity webhook whenever a post, case study, author or category is published. */
+/** Called by a Sanity webhook whenever a post, research piece, case study, author or category is published. */
 export async function POST(req: NextRequest) {
   const secret = process.env.SANITY_REVALIDATE_SECRET;
   if (!secret) return new Response("Missing SANITY_REVALIDATE_SECRET", { status: 500 });

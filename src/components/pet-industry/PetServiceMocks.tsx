@@ -2,6 +2,7 @@ import { Check } from "lucide-react";
 import { CountUp } from "@/components/ui/CountUp";
 import { Avatar } from "@/components/ui/Avatar";
 import { Tag } from "@/components/ui/Tag";
+import { mockStats } from "@/lib/mock-seed";
 
 const sampleCls = "font-mono text-[10px] uppercase tracking-[0.04em] text-ink-68";
 
@@ -9,6 +10,7 @@ const sampleCls = "font-mono text-[10px] uppercase tracking-[0.04em] text-ink-68
 
 /** 1 — Technical SEO: checklist + score gauge. Sample values. */
 export function PetAuditMock() {
+  const { score } = mockStats("pet-supplies");
   const items = ["Variant URLs", "Core Web Vitals", "Product schema", "Filter pages"];
   return (
     <div className="grid grid-cols-[1fr_auto] items-center gap-6 rounded-t-lg border border-b-0 border-ink-05 bg-ink-02 p-5 shadow-xs">
@@ -25,11 +27,11 @@ export function PetAuditMock() {
       <div role="img" aria-label="Sample site health score rising from 54 to 96" className="relative size-28">
         <svg viewBox="0 0 100 100" className="size-full -rotate-90">
           <circle cx="50" cy="50" r="42" fill="none" stroke="var(--ink-05)" strokeWidth="9" />
-          <circle cx="50" cy="50" r="42" fill="none" stroke="var(--accent)" strokeWidth="9" strokeLinecap="round" pathLength={1} strokeDasharray="0.96 1" className="gauge" />
+          <circle cx="50" cy="50" r="42" fill="none" stroke="var(--accent)" strokeWidth="9" strokeLinecap="round" pathLength={1} strokeDasharray={`${score / 100} 1`} className="gauge" />
         </svg>
         <span className="absolute inset-0 grid place-items-center text-center">
           <span>
-            <span className="block font-display text-3xl font-bold leading-none"><CountUp value={96} /></span>
+            <span className="block font-display text-3xl font-bold leading-none"><CountUp value={score} /></span>
             <span className={sampleCls}>Sample</span>
           </span>
         </span>
@@ -112,10 +114,11 @@ export function PetOutreachMock() {
 
 /** 5 — Conversion SEO: funnel bars. */
 export function PetFunnelMock() {
+  const { cart, orders } = mockStats("pet-supplies");
   const bars: Array<[string, string, string]> = [
     ["Sessions", "100%", "var(--ink)"],
-    ["Add to cart", "46%", "var(--accent-strong)"],
-    ["Orders", "21%", "var(--accent)"],
+    ["Add to cart", `${cart}%`, "var(--accent-strong)"],
+    ["Orders", `${orders}%`, "var(--accent)"],
   ];
   return (
     <div className="rounded-t-lg border border-b-0 border-ink-05 bg-ink-02 p-4 shadow-xs">
@@ -136,7 +139,7 @@ export function PetFunnelMock() {
 
 /** 6 — Reporting: big number + self-drawing area chart. */
 export function PetRevenueMock() {
-  const line = "M0 92 C30 88 45 80 70 74 S115 66 140 52 S190 46 215 30 S260 18 280 8";
+  const { line } = mockStats("pet-supplies");
   return (
     <div className="rounded-t-lg border border-b-0 border-ink-05 bg-ink-02 p-4 shadow-xs">
       <div className="flex items-start justify-between">

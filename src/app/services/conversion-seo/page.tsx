@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { bookCallHref, conversionFaqs, conversionGoodFit, conversionNotFit, conversionPlatforms, conversionSteps, conversionUsps } from "@content/data";
+import { MockImage } from "@/components/mocks/MockImage";
+import { conversionFaqs, conversionGoodFit, conversionNotFit, conversionPlatforms, conversionSteps, conversionUsps } from "@content/data";
 import { Faq } from "@/components/sections/Faq";
 import { Hero } from "@/components/sections/Hero";
 import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
@@ -16,7 +17,6 @@ import { ConversionFinalCta } from "@/components/conversion-seo/ConversionFinalC
 import { ConversionLeadSection } from "@/components/conversion-seo/ConversionLeadSection";
 import { ConversionCompare } from "@/components/conversion-seo/ConversionCompare";
 import { ConversionWorkflow } from "@/components/conversion-seo/ConversionWorkflow";
-import { EntryMock, InfoMock, TrustMock, MobileMock, PathMock, SpeedMock } from "@/components/conversion-seo/Mocks";
 
 const siteUrl = "https://boostcart.agency";
 const path = "/services/conversion-seo";
@@ -24,7 +24,7 @@ const path = "/services/conversion-seo";
 /** Drives both the visible breadcrumb and its BreadcrumbList schema. /services has no page yet, so it points at the homepage services section. */
 const breadcrumb = [
   { name: "Home", href: "/" },
-  { name: "Services", href: "/#services" },
+  { name: "Services", href: "/" },
   { name: "Conversion SEO", href: path },
 ];
 const title = "Ecommerce Conversion-Focused SEO";
@@ -57,14 +57,14 @@ const jsonLd = [
 ];
 
 const row1: Tile[] = [
-  { title: "Landing page review", text: "Where organic visitors continue and where they leave.", href: path, mock: <EntryMock />, glow: { hue: "yellow", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
-  { title: "Product information", text: "Photos, sizing, materials and answers buyers need.", href: path, mock: <InfoMock />, glow: { hue: "pink", pos: "-right-16 -top-20" } },
-  { title: "Trust signals", text: "Reviews, policies and proof placed where doubt appears.", href: path, mock: <TrustMock />, glow: { hue: "yellow", pos: "-right-14 -top-20" } },
+  { title: "Landing page review", text: "Where organic visitors continue and where they leave.", href: path, mock: <MockImage id="services/conversion-seo/1" alt="Animated preview: Landing page review" />, glow: { hue: "yellow", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
+  { title: "Product information", text: "Photos, sizing, materials and answers buyers need.", href: path, mock: <MockImage id="services/conversion-seo/2" alt="Animated preview: Product information" />, glow: { hue: "pink", pos: "-right-16 -top-20" } },
+  { title: "Trust signals", text: "Reviews, policies and proof placed where doubt appears.", href: path, mock: <MockImage id="services/conversion-seo/3" alt="Animated preview: Trust signals" />, glow: { hue: "yellow", pos: "-right-14 -top-20" } },
 ];
 const row2: Tile[] = [
-  { title: "Mobile experience", text: "Buttons, layout and speed checked on phones.", href: path, mock: <MobileMock />, glow: { hue: "pink", pos: "-left-14 -top-20" } },
-  { title: "Path to purchase", text: "Calls to action and steps from page to payment.", href: path, mock: <PathMock />, glow: { hue: "yellow", pos: "-right-16 -top-20" } },
-  { title: "Speed and stability", text: "Load and layout issues that cost sales and rankings.", href: path, mock: <SpeedMock />, glow: { hue: "pink", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
+  { title: "Mobile experience", text: "Buttons, layout and speed checked on phones.", href: path, mock: <MockImage id="services/conversion-seo/4" alt="Animated preview: Mobile experience" />, glow: { hue: "pink", pos: "-left-14 -top-20" } },
+  { title: "Path to purchase", text: "Calls to action and steps from page to payment.", href: path, mock: <MockImage id="services/conversion-seo/5" alt="Animated preview: Path to purchase" />, glow: { hue: "yellow", pos: "-right-16 -top-20" } },
+  { title: "Speed and stability", text: "Load and layout issues that cost sales and rankings.", href: path, mock: <MockImage id="services/conversion-seo/6" alt="Animated preview: Speed and stability" />, glow: { hue: "pink", pos: "-left-16 -top-20" }, className: "md:col-span-2 lg:col-span-1" },
 ];
 
 export default function ConversionSeoPage() {
@@ -78,9 +78,6 @@ export default function ConversionSeoPage() {
           breadcrumb={breadcrumb}
           lines={["Turn Organic Visits", "Into Orders"]}
           lead="Find what stops search visitors from buying, and fix it without hurting the rankings that brought them."
-          primaryLabel="Get a conversion review"
-          secondaryLabel="Book a call"
-          secondaryHref={bookCallHref}
           note="Shopify · WooCommerce · BigCommerce · Magento · Headless"
           visual={<HeroVisual />}
         />

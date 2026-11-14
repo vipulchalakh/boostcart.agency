@@ -1,5 +1,5 @@
-import { auditHref, bookCallHref } from "@content/data";
-import { Button } from "@/components/ui/Button";
+import { } from "@content/data";
+import { CtaPair } from "@/components/ui/CtaPair";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 import { CtaVisual } from "./CtaVisual";
@@ -26,8 +26,7 @@ export function ReportingFinalCta() {
               Tell us what you measure today. We&rsquo;ll show how to connect organic traffic to orders and which pages to watch.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button href={auditHref} size="lg" arrow>Get a reporting review</Button>
-              <Button href={bookCallHref} variant="ghost-dark" size="lg">Book a reporting call</Button>
+              <CtaPair dark />
             </div>
           </Reveal>
 

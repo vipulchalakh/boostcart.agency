@@ -37,7 +37,7 @@ export function ResearchIndex({ posts }: { posts: IndexResearch[] }) {
     return (
       <div className="rounded-2xl border border-dashed border-ink-20 bg-ink-02 px-6 py-20 text-center">
         <p className="font-display text-2xl font-bold text-ink">New research is on the way</p>
-        <p className="mt-2 text-ink-68">WeWe&rsquo;re writing our first e-commerce SEO guides. Check back soon.rsquo;re publishing our first e-commerce SEO research. Check back soon.</p>
+        <p className="mt-2 text-ink-68">We&rsquo;re publishing our first e-commerce SEO research. Check back soon.</p>
       </div>
     );
   }

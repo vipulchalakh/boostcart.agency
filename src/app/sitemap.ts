@@ -3,6 +3,9 @@ import { industries } from "@content/data";
 import { client } from "@/sanity/lib/client";
 import { CASE_STUDY_SLUGS_QUERY, POST_SLUGS_QUERY, RESEARCH_SLUGS_QUERY } from "@/sanity/lib/queries";
 
+/** Rebuild hourly so newly published Sanity content is listed. */
+export const revalidate = 3600;
+
 /** Only live pages belong here. Add each route as its page ships. */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [posts, research, caseStudies] = await Promise.all([client.fetch(POST_SLUGS_QUERY), client.fetch(RESEARCH_SLUGS_QUERY), client.fetch(CASE_STUDY_SLUGS_QUERY)]);

@@ -1,5 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { SanityImage, type SanityImg } from "@/components/blog-post/SanityImage";
+import type { SanityImageSource } from "@sanity/image-url";
+import { getCleanLogo } from "./clean-logo";
 import { hostname } from "./format";
 
 type Props = {
@@ -10,7 +12,10 @@ type Props = {
   website: string | null;
 };
 
-export function ClientCard({ name, logo, description, industry, website }: Props) {
+export async function ClientCard({ name, logo, description, industry, website }: Props) {
+  const clean = logo?.asset ? await getCleanLogo(logo as SanityImageSource) : null;
+  const alt = logo?.alt || `${name} logo`;
+
   return (
     <section aria-labelledby="client-title" className="rounded-2xl border border-ink-10 bg-white p-6 shadow-xs">
       <h2 id="client-title" className="eyebrow mb-5 text-ink">
@@ -18,8 +23,13 @@ export function ClientCard({ name, logo, description, industry, website }: Props
       </h2>
 
       <div className="flex items-center gap-3">
-        {/* Logos are shown in grey whatever their colours, so every client looks consistent and quiet. */}
-        {logo?.asset ? <SanityImage image={{ ...logo, alt: logo.alt || `${name} logo` }} width={240} sizes="88px" className="h-6 w-auto max-w-[5.5rem] shrink-0 object-contain grayscale opacity-60" /> : null}
+        {/* Logos keep their true colours. clean-logo.ts removes solid backgrounds and turns white logos black; if that fails the original file is shown. */}
+        {clean ? (
+          // eslint-disable-next-line @next/next/no-img-element -- small inline data URL, nothing for next/image to optimise
+          <img src={clean.src} alt={alt} width={clean.width} height={clean.height} className="h-6 w-auto max-w-[5.5rem] shrink-0 object-contain" />
+        ) : logo?.asset ? (
+          <SanityImage image={{ ...logo, alt }} width={240} sizes="88px" className="h-6 w-auto max-w-[5.5rem] shrink-0 object-contain" />
+        ) : null}
         <p className="font-display text-xl font-bold leading-tight tracking-[-0.015em] text-ink">{name}</p>
       </div>
 

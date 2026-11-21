@@ -14,7 +14,7 @@ export const aboutPlatforms = ["Shopify", "WooCommerce", "BigCommerce", "Magento
 
 export const aboutOffices: Array<{ flag: string; label: string; place: string; address: string }> = [
   { flag: "🇺🇸", label: "USA", place: "Casper, Wyoming", address: "5830 E 2nd St, Casper, WY, United States, 82609" },
-  { flag: "🇮🇳", label: "India", place: "Nagpur, Maharashtra", address: "29, Nagpur, Maharashtra, India - 440034" },
+  { flag: "🇮🇳", label: "India", place: "Nagpur, Maharashtra", address: "12, MD Housing Society, Beltarodi, Nagpur, Maharashtra, India - 440037" },
 ];
 
 export const contactTopics = [

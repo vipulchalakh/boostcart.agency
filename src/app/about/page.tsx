@@ -32,7 +32,7 @@ const jsonLd = [
       areaServed: ["US", "CA"],
       location: [
         { "@type": "Place", address: { "@type": "PostalAddress", streetAddress: "5830 E 2nd St", addressLocality: "Casper", addressRegion: "WY", postalCode: "82609", addressCountry: "US" } },
-        { "@type": "Place", address: { "@type": "PostalAddress", addressLocality: "Nagpur", addressRegion: "Maharashtra", postalCode: "440034", addressCountry: "IN" } },
+        { "@type": "Place", address: { "@type": "PostalAddress", streetAddress: "12, MD Housing Society, Beltarodi", addressLocality: "Nagpur", addressRegion: "Maharashtra", postalCode: "440037", addressCountry: "IN" } },
       ],
     },
   },

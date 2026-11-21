@@ -49,7 +49,7 @@ export function Footer() {
           </p>
           <p className="flex items-start justify-center gap-2">
             <span role="img" aria-label="India" className="text-base leading-[19px]">🇮🇳</span>
-            29, Nagpur, Maharashtra, India - 440034
+            12, MD Housing Society, Beltarodi, Nagpur, Maharashtra, India - 440037
           </p>
         </address>
 

@@ -12,8 +12,9 @@ import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
 import { MetricsStrip } from "@/components/sections/MetricsStrip";
 import { UspSection } from "@/components/sections/UspSection";
 import { HomePlatformsSection } from "@/components/home/HomePlatformsSection";
+import { HomePricing } from "@/components/home/HomePricing";
+import { HomeProcessFunnel } from "@/components/home/HomeProcessFunnel";
 import { Compare } from "@/components/sections/Compare";
-import { Process } from "@/components/sections/Process";
 import { ProofBand } from "@/components/sections/ProofBand";
 import { ResultsShowcase } from "@/components/sections/ResultsShowcase";
 import { ServicesBento, type Tile } from "@/components/sections/ServicesBento";
@@ -98,9 +99,10 @@ export default function HomePage() {
       <ServicesBento rows={[row1, row2]} eyebrow="SEO + AI SEO program" />
       <MetricsStrip />
       <Industries />
-      <Process />
+      <HomeProcessFunnel />
       <ProofBand />
       <Compare />
+      <HomePricing />
       <Guides />
       <Faq />
       <FinalCta />

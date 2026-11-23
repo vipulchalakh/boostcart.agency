@@ -26,3 +26,5 @@ export * from "./pet-industry";
 export * from "./industry-pages";
 export * from "./seo-checklist";
 export * from "./company";
+export * from "./pricing";
+export * from "./home-process";

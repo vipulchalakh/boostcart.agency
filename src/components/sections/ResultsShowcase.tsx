@@ -71,10 +71,10 @@ function CaseCard({ c }: { c: Card }) {
       <BrowserMock backdrop={c.backdrop} image={c.image} />
       <div className="relative mt-2 flex flex-1 flex-col rounded-lg bg-white p-4">
         <div className="flex items-center justify-between gap-3">
-          <h3 className="flex min-w-0 items-center gap-2.5 font-display text-lg font-bold tracking-[-0.03em]">
+          <p className="flex min-w-0 items-center gap-2.5 font-display text-lg font-bold tracking-[-0.03em]">
             <PlatformLogo platform={c.platform} size={18} />
             <span className="truncate">{c.client}</span>
-          </h3>
+          </p>
           {c.industry && <p className="shrink-0 font-mono text-[11px] uppercase leading-[18px] tracking-[0.04em] text-ink-68">{c.industry}</p>}
         </div>
         {(c.traffic || c.result || c.months) && (

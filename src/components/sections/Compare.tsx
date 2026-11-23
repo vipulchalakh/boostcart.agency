@@ -3,7 +3,6 @@ import { Check, Minus, X } from "lucide-react";
 import { criteria as homeCriteria, type Cell, type Criterion, type Verdict } from "@content/data";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { LogoMark } from "@/components/ui/Logo";
 import { Reveal } from "@/components/ui/Reveal";
 import { Tag } from "@/components/ui/Tag";
 import { cn } from "@/lib/cn";
@@ -55,7 +54,6 @@ function Column({ col, i, criteria }: { col: Col; i: number; criteria: Criterion
       )}
       <header className="flex flex-col justify-center gap-1 px-6 py-6">
         <div className="flex items-center gap-2.5">
-          {hero && <LogoMark size={28} />}
           <h3 className="font-display text-xl font-bold tracking-[-0.03em]">{col.title}</h3>
           {hero && <Tag tone="accent" className="ml-auto">Best fit</Tag>}
         </div>

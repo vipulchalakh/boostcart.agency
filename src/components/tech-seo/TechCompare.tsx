@@ -2,7 +2,6 @@ import { Check, X } from "lucide-react";
 import { techSeoCompare } from "@content/data";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
-import { LogoMark } from "@/components/ui/Logo";
 import { Reveal } from "@/components/ui/Reveal";
 import { Tag } from "@/components/ui/Tag";
 
@@ -45,7 +44,6 @@ export function TechCompare() {
             <div className="flex items-start justify-between gap-3">
               <div>
                 <div className="flex items-center gap-2.5">
-                  <LogoMark size={28} />
                   <h3 className="font-display text-xl font-bold tracking-[-0.03em]">{boost.title}</h3>
                 </div>
                 <p className="mt-1 text-sm text-ink-68">{boost.sub}</p>

@@ -1,63 +1,67 @@
-import { Check } from "lucide-react";
-import { homePlan } from "@content/data";
+import { Check, FileSearch, TrendingUp } from "lucide-react";
+import { homePlan, showMetrics } from "@content/data";
+import { HomePricingStats } from "@/components/home/HomePricingStats";
 import { Button } from "@/components/ui/Button";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Reveal } from "@/components/ui/Reveal";
 
-/** Homepage pricing: one plan, shown as a single dark card. Price and terms come from `homePlan`. */
+const cardCls = "rounded-[var(--r-xl)] border border-ink-05 bg-ink-02 p-6 sm:p-7";
+const titleCls = "font-display text-xl font-bold tracking-[-0.02em]";
+
+/** Homepage pricing: the plan beside the case study totals. Price and terms come from `homePlan`. */
 export function HomePricing() {
   return (
     <section id="pricing" aria-labelledby="pricing-title" className="section-y">
       <div className="container-x">
-        <div className="grid grid-cols-[minmax(0,1fr)] items-stretch gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-16">
-          {/* Copy */}
-          <Reveal className="flex flex-col justify-center">
-            <Eyebrow>Pricing</Eyebrow>
-            <h2 id="pricing-title" className="h2 mt-4">One plan. Everything included.</h2>
-            <p className="lead mt-6 max-w-[520px]">No tiers, no page limits and no task quotas. One monthly price for SEO and AI SEO, based on your store size, category and competition.</p>
-            <p className="mt-4 max-w-[520px] text-base leading-[1.65] text-ink-68">{homePlan.note}</p>
+        <Reveal className="mx-auto max-w-[720px] text-center">
+          <Eyebrow>Pricing</Eyebrow>
+          <h2 id="pricing-title" className="h2 mt-4">One plan. Everything included.</h2>
+          <p className="lead mt-4">No tiers, no page limits and no task quotas. One monthly price for SEO and AI SEO.</p>
+        </Reveal>
 
-            <p className="mt-8 font-mono text-xs uppercase tracking-[0.04em] text-ink-50">What shapes your price</p>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {homePlan.factors.map((f) => (
-                <li key={f} className="rounded-full bg-white px-3.5 py-1.5 text-sm font-medium text-ink shadow-xs ring-1 ring-ink-10">{f}</li>
-              ))}
-            </ul>
+        <div className={`mt-12 grid grid-cols-[minmax(0,1fr)] gap-6 lg:gap-8 ${showMetrics ? "lg:grid-cols-2" : "mx-auto max-w-[640px]"}`}>
+          <Reveal className="flex flex-col gap-3">
+            {/* The plan */}
+            <div className={`${cardCls} flex-1`}>
+              <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3">
+                <h3 className={titleCls}>SEO + AI SEO program</h3>
+                <p className="font-display text-[clamp(1.5rem,1.1rem+1.2vw,2rem)] font-bold leading-none tracking-[-0.03em] text-accent-strong">
+                  {homePlan.priceFrom}–{homePlan.priceTo.replace("$", "")}
+                  <span className="ml-1 text-sm font-semibold tracking-normal">{homePlan.cadence}</span>
+                </p>
+              </div>
+              <p className="mt-2 max-w-[460px] whitespace-pre-line text-sm leading-[21px] text-ink-68">{homePlan.note}</p>
 
-            <div className="mt-9">
-              <Button href="/free-audit" size="lg" arrow sheen className="!py-2.5 !text-base">Get my price</Button>
-            </div>
-          </Reveal>
+              <ul className="mt-7 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+                {homePlan.included.map((f) => (
+                  <li key={f} className="flex items-start gap-2.5 text-sm leading-[21px] text-ink">
+                    <Check aria-hidden className="mt-0.5 size-4 shrink-0 text-accent-strong" strokeWidth={2.5} />
+                    {f}
+                  </li>
+                ))}
+              </ul>
 
-          {/* Plan card */}
-          <Reveal delay={80} className="h-full">
-            <div className="relative h-full overflow-hidden rounded-[24px] shadow-[0_40px_80px_-32px_rgb(2_6_23/.35)] ring-1 ring-ink-10">
-              <span aria-hidden className="absolute inset-x-0 top-0 z-20 h-[3px] bg-[linear-gradient(90deg,var(--accent),var(--yellow))]" />
-              <div className="on-dark relative isolate flex h-full flex-col overflow-hidden bg-panel-navy p-7 text-white sm:p-10">
-                <span aria-hidden className="absolute inset-0 -z-10 [background:radial-gradient(rgb(255_255_255/.12)_1px,transparent_1.3px)_0_0/22px_22px] [mask-image:radial-gradient(ellipse_90%_80%_at_70%_100%,#000_20%,transparent_80%)]" />
-                <span aria-hidden className="pointer-events-none absolute -bottom-24 -right-16 -z-10 h-[340px] w-[380px] bg-[radial-gradient(closest-side,rgb(223_55_167/.42),transparent)] blur-2xl" />
-                <span aria-hidden className="pointer-events-none absolute -left-16 -top-24 -z-10 size-[260px] rounded-full bg-[radial-gradient(closest-side,rgb(249_249_6/.1),transparent)] blur-2xl" />
-                <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-white/55">BoostCart · SEO + AI SEO program</p>
-                <p className="mt-5 font-display text-2xl font-bold leading-[1.2] tracking-[-0.03em] [text-wrap:balance]">One plan.<br />Nothing capped.</p>
-                <ul className="mb-10 mt-6 grid gap-3">
-                  {homePlan.included.map((f) => (
-                    <li key={f} className="flex items-start gap-3 text-[15px] leading-[22px] text-white/90">
-                      <span aria-hidden className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-accent text-white"><Check className="size-3" strokeWidth={3} /></span>
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-auto border-t border-white/15 pt-2">
-                  <p className="mt-6 font-display text-[clamp(2rem,1.5rem+1.4vw,2.5rem)] font-bold leading-none tracking-[-0.04em]">
-                    {homePlan.priceFrom}<span className="mx-0.5 text-white/40">–</span>{homePlan.priceTo.replace("$", "")}
-                    <span className="ml-1 text-base font-semibold tracking-[-0.01em] text-white/55">{homePlan.cadence}</span>
-                  </p>
-                  <p className="mt-2 text-[13px] leading-[19px] text-white/60">Based on your store size, category and competition.</p>
-                </div>
+              <div className="mt-8 flex flex-wrap items-center justify-between gap-4">
+                <p className="flex items-center gap-2 text-sm text-ink-68">
+                  <FileSearch aria-hidden className="size-4 shrink-0" />
+                  Price confirmed after a free audit
+                </p>
+                <Button href="/free-audit" arrow sheen className="max-sm:w-full">Get my price</Button>
               </div>
             </div>
           </Reveal>
+
+          {showMetrics && (
+            <Reveal delay={80} className="flex flex-col">
+              <HomePricingStats />
+            </Reveal>
+          )}
         </div>
+
+        <p className="mt-10 flex items-center justify-center gap-2.5 text-center font-display text-lg font-bold tracking-[-0.02em] text-ink [text-wrap:balance] md:text-xl">
+          <TrendingUp aria-hidden className="size-5 shrink-0 text-accent-strong max-sm:hidden" />
+          We&rsquo;re the most affordable and result-driven agency in the market.
+        </p>
       </div>
     </section>
   );

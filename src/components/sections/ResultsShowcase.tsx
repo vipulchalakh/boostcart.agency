@@ -44,8 +44,8 @@ function BrowserMock({ backdrop, image }: { backdrop: string; image: SanityImg |
           <span className="ml-2 h-2.5 w-24 rounded-full bg-ink-05" />
         </div>
         {real ? (
-          /* Shown at its natural proportions, never cropped. The frame grows to fit. */
-          <SanityImage image={image} width={1000} sizes="(min-width: 1024px) 400px, 340px" className="block h-auto w-full" />
+          /* One fixed shape so every card is the same height. Taller screenshots are trimmed top and bottom (their blank margins). */
+          <SanityImage image={image} width={1000} sizes="(min-width: 1024px) 400px, 340px" className="block aspect-[1000/418] h-auto w-full object-cover object-[center_58%]" />
         ) : (
           <div className="p-3">
             <div className="h-16 rounded-sm" style={{ background: backdrop, opacity: 0.85 }} />

@@ -3,7 +3,7 @@ export const homePlan = {
   priceFrom: "$1,000",
   priceTo: "$1,500",
   cadence: "/month",
-  note: "Your exact price depends on your store size, category and competition. We confirm it after a free audit.",
+  note: "Your exact price depends on your store size,\ncategory and competition.",
   factors: ["Store size", "Category", "Competition"],
   included: [
     "Unlimited pages, optimized and rewritten as needed",

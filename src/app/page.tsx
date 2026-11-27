@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { MockImage } from "@/components/mocks/MockImage";
-import { WhoItsFor } from "@/components/sections/WhoItsFor";
+import { HomeWhoItsFor } from "@/components/home/HomeWhoItsFor";
 import { Guides } from "@/components/sections/Guides";
 import { Industries } from "@/components/sections/Industries";
 import { Faq } from "@/components/sections/Faq";
@@ -9,11 +9,10 @@ import { AppLink } from "@/components/ui/AppLink";
 import { SearchShift } from "@/components/home/SearchShift";
 import { Hero } from "@/components/sections/Hero";
 import { HeroBackdrop } from "@/components/sections/HeroBackdrop";
-import { MetricsStrip } from "@/components/sections/MetricsStrip";
 import { UspSection } from "@/components/sections/UspSection";
 import { HomePlatformsSection } from "@/components/home/HomePlatformsSection";
 import { HomePricing } from "@/components/home/HomePricing";
-import { HomeProcessFunnel } from "@/components/home/HomeProcessFunnel";
+import { HomeProcess } from "@/components/home/HomeProcess";
 import { Compare } from "@/components/sections/Compare";
 import { ProofBand } from "@/components/sections/ProofBand";
 import { ResultsShowcase } from "@/components/sections/ResultsShowcase";
@@ -93,13 +92,12 @@ export default function HomePage() {
         <ResultsShowcase />
       </div>
       <SearchShift />
-      <WhoItsFor title={<>Who is e&#8209;commerce SEO and AI SEO for?</>} eyebrow="Built for online stores" lead="We work with online stores that already sell and want organic revenue and AI visibility. Here is who we help most, and who is better served elsewhere." />
+      <HomeWhoItsFor />
       <HomePlatformsSection lead="Every platform has its own quirks. We know them well, from theme code and plugins to URLs, faceted navigation, rendering and the structured data that search engines and AI tools read." />
       <UspSection />
       <ServicesBento rows={[row1, row2]} eyebrow="SEO + AI SEO program" />
-      <MetricsStrip />
       <Industries />
-      <HomeProcessFunnel />
+      <HomeProcess />
       <ProofBand />
       <Compare />
       <HomePricing />

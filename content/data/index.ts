@@ -24,6 +24,7 @@ export * from "./conversion-seo";
 export * from "./reporting";
 export * from "./pet-industry";
 export * from "./industry-pages";
+export * from "./platform-pages";
 export * from "./seo-checklist";
 export * from "./company";
 export * from "./pricing";

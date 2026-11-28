@@ -26,7 +26,7 @@ export type LeadRow = {
 /* ---------- Which forms exist ---------- */
 const SERVICE_FORMS = ["technical-seo", "category-product-pages", "content", "link-building", "conversion-seo", "reporting"].map((s) => `service-${s}`);
 /** Form ids: "free-audit", "contact", "service-<page>" or "industry-<slug>". */
-export const isKnownForm = (form: string) => form === "free-audit" || form === "contact" || SERVICE_FORMS.includes(form) || /^industry-[a-z0-9-]{1,60}$/.test(form);
+export const isKnownForm = (form: string) => form === "free-audit" || form === "contact" || SERVICE_FORMS.includes(form) || /^(industry|platform)-[a-z0-9-]{1,60}$/.test(form);
 
 /* ---------- Validation helpers ---------- */
 export const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

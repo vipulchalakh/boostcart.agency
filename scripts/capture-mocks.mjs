@@ -23,11 +23,13 @@ const HOLD_MS = 3500; // last frame stays this long before the loop restarts
 const RECORD_MS = 4200;
 
 const industries = ["fashion-apparel", "beauty-skincare", "health-supplements", "home-furniture", "electronics-gadgets", "jewelry-accessories", "food-beverage", "sports-outdoors", "baby-kids", "pet-supplies"];
+const platforms = ["shopify", "woocommerce", "bigcommerce", "magento", "headless"];
 const services = ["technical-seo", "category-product-pages", "content", "link-building", "conversion-seo", "reporting"];
 const ALL = [
   ["home", "/"],
   ...services.map((s) => [`services/${s}`, `/services/${s}`]),
   ...industries.map((s) => [`industries/${s}`, `/industries/${s}`]),
+  ...platforms.map((s) => [`platforms/${s}`, `/platforms/${s}`]),
 ];
 
 const only = process.argv.slice(2);

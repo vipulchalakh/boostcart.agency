@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { industries } from "@content/data";
+import { industries, platformPages } from "@content/data";
 import { client } from "@/sanity/lib/client";
 import { CASE_STUDY_SLUGS_QUERY, POST_SLUGS_QUERY, RESEARCH_SLUGS_QUERY } from "@/sanity/lib/queries";
 
@@ -30,5 +30,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: "https://boostcart.agency/case-studies", changeFrequency: "weekly", priority: 0.7 },
     ...caseStudies.flatMap((c) => (c.slug ? [{ url: `https://boostcart.agency/case-studies/${c.slug}`, changeFrequency: "monthly" as const, priority: 0.6 }] : [])),
     ...industries.map((i) => ({ url: `https://boostcart.agency/industries/${i.slug}`, changeFrequency: "monthly" as const, priority: 0.7 })),
+    ...platformPages.map((p) => ({ url: `https://boostcart.agency/platforms/${p.slug}`, changeFrequency: "monthly" as const, priority: 0.7 })),
   ];
 }
